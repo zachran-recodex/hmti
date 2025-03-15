@@ -44,22 +44,36 @@ class UsersRolesAndPermissionsSeeder extends Seeder
         // Create users by role
         $superAdminUser = User::create([
             'name' => 'Super Admin',
-            'email' => 'superadmin@mail.com',
+            'email' => 'superadmin@hmtitelkomuniversity.id',
             'password' => bcrypt('admin123'),
         ]);
         $superAdminUser->assignRole($superAdminRole);
 
+        $superAdminUser2 = User::create([
+            'name' => 'Ketua Himpunan',
+            'email' => 'kahim@hmtitelkomuniversity.id',
+            'password' => bcrypt('admin123'),
+        ]);
+        $superAdminUser2->assignRole($superAdminRole);
+
+        $superAdminUser3 = User::create([
+            'name' => 'Kepala Departemen Kominfo',
+            'email' => 'kadepkominfo@hmtitelkomuniversity.id',
+            'password' => bcrypt('admin123'),
+        ]);
+        $superAdminUser3->assignRole($superAdminRole);
+
         $adminUser = User::create([
-            'name' => 'Admin',
-            'email' => 'admin@mail.com',
+            'name' => 'Kominfo',
+            'email' => 'kominfo@hmtitelkomuniversity.id',
             'password' => bcrypt('admin123'),
         ]);
         $adminUser->assignRole($adminRole);
 
         // Create a regular user without any role
         User::create([
-            'name' => 'Regular User',
-            'email' => 'user@mail.com',
+            'name' => 'Mahasiswa Biasa',
+            'email' => 'mahasiswa@hmtitelkomuniversity.id',
             'password' => bcrypt('user123'),
         ]);
     }
