@@ -19,9 +19,9 @@
         <!-- Sidebar -->
         @include('partials.sidebar')
 
-        <flux:main>
+        <main>
             {{ $slot }}
-        </flux:main>
+        </main>
 
         <!-- Footer -->
         @include('partials.footer')

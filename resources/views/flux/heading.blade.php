@@ -10,9 +10,13 @@ $classes = Flux::classes()
     ->add(match ($accent) {
         true => 'text-[var(--color-accent-content)]',
         default => 'text-zinc-800 dark:text-white',
+        'disableDarkMode' => 'text-white dark:text-white',
     })
     ->add(match ($size) {
-        'xl' => 'text-2xl [&:has(+[data-flux-subheading])]:mb-2 [[data-flux-subheading]+&]:mt-2',
+        '4xl' => 'text-4xl [&:has(+[data-flux-subheading])]:mb-2 [[data-flux-subheading]+&]:mt-2',
+        '3xl' => 'text-3xl [&:has(+[data-flux-subheading])]:mb-2 [[data-flux-subheading]+&]:mt-2',
+        '2xl' => 'text-2xl [&:has(+[data-flux-subheading])]:mb-2 [[data-flux-subheading]+&]:mt-2',
+        'xl' => 'text-1xl [&:has(+[data-flux-subheading])]:mb-2 [[data-flux-subheading]+&]:mt-2',
         'lg' => 'text-base [&:has(+[data-flux-subheading])]:mb-2 [[data-flux-subheading]+&]:mt-2',
         'base' => 'text-sm [&:has(+[data-flux-subheading])]:mb-2 [[data-flux-subheading]+&]:mt-2',
     })

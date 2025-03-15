@@ -4,7 +4,7 @@
     activeSlide: 0,
     slides: [
         {
-            image: 'https://picsum.photos/id/1/1920/1080',
+            image: '{{ asset('images/gedung.jpg') }}',
             title: 'Industrial Engineering Student Association',
             subtitle: 'Building the future engineers of tomorrow'
         },
@@ -26,7 +26,7 @@
     }
 }"
          x-init="loop()"
-         class="relative overflow-hidden bg-zinc-900 h-[70vh] rounded-4xl">
+         class="relative overflow-hidden bg-zinc-900 h-[70vh] rounded-b-4xl">
         <!-- Slides -->
         <template x-for="(slide, index) in slides" :key="index">
             <div x-show="activeSlide === index"
@@ -79,27 +79,27 @@
     </div>
 
     <!-- Cards section below the carousel (moved outside as a separate section) -->
-    <div class="relative z-10 -mt-24 px-4 sm:px-6 lg:px-8">
+    <div class="relative -mt-24 px-4 sm:px-6 lg:px-8">
         <div class="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
-            <a href="" class="overflow-hidden rounded-lg bg-zinc-50 shadow-lg transition-all duration-300 hover:shadow-xl hover:scale-105 border border-zinc-900">
+            <a href="" class="overflow-hidden rounded-lg bg-zinc-50 shadow-lg transition-all duration-300 hover:shadow-xl hover:scale-105 border border-zinc-900 dark:border-zinc-200">
                 <div class="w-full h-44 overflow-hidden">
                     <img src="{{ asset('images/surat_edaran.png') }}" alt="Surat Edaran" class="h-full w-full object-cover">
                 </div>
             </a>
 
-            <a href="" class="overflow-hidden rounded-lg bg-zinc-50 shadow-lg transition-all duration-300 hover:shadow-xl hover:scale-105 border border-zinc-900">
+            <a href="" class="overflow-hidden rounded-lg bg-zinc-50 shadow-lg transition-all duration-300 hover:shadow-xl hover:scale-105 border border-zinc-900 dark:border-zinc-200">
                 <div class="w-full h-44 overflow-hidden">
                     <img src="{{ asset('images/surat_kegiatan.png') }}" alt="Surat Kegiatan" class="h-full w-full object-cover">
                 </div>
             </a>
 
-            <a href="" class="overflow-hidden rounded-lg bg-zinc-50 shadow-lg transition-all duration-300 hover:shadow-xl hover:scale-105 border border-zinc-900">
+            <a href="" class="overflow-hidden rounded-lg bg-zinc-50 shadow-lg transition-all duration-300 hover:shadow-xl hover:scale-105 border border-zinc-900 dark:border-zinc-200">
                 <div class="w-full h-44 overflow-hidden">
                     <img src="{{ asset('images/informasi_lomba.png') }}" alt="Informasi Lomba" class="h-full w-full object-cover">
                 </div>
             </a>
 
-            <a href="" class="overflow-hidden rounded-lg bg-zinc-50 shadow-lg transition-all duration-300 hover:shadow-xl hover:scale-105 border border-zinc-900">
+            <a href="" class="overflow-hidden rounded-lg bg-zinc-50 shadow-lg transition-all duration-300 hover:shadow-xl hover:scale-105 border border-zinc-900 dark:border-zinc-200">
                 <div class="w-full h-44 overflow-hidden">
                     <img src="{{ asset('images/berita.png') }}" alt="Berita" class="h-full w-full object-cover">
                 </div>
@@ -107,17 +107,18 @@
         </div>
     </div>
 
-    <!-- Banner Section with Association Head (Only Background Image) -->
+    <!-- Banner Section -->
     <section class="py-16">
-        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="relative py-64 bg-cover bg-center bg-no-repeat rounded-lg border border-zinc-900" style="background-image: url('https://picsum.photos/id/201/1920/1080');">
-                <!-- No overlay, text, or other elements as requested -->
+        <div class="px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-center">
+                <img src="{{ asset('images/banner.png') }}" alt="Banner" class="w-[1440px] h-[440px] object-cover rounded-2xl border border-zinc-900 dark:border-zinc-200">
             </div>
         </div>
     </section>
 
+    <!-- Counter Section -->
     <section class="py-16 bg-zinc-900">
-        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-4 gap-8">
                 <div class="h-fit py-4 bg-gradient-to-r from-secondary to-primary rounded-lg flex flex-col justify-center items-center">
                     <span class="text-4xl font-semibold text-[#ffae00]">1300+</span>
@@ -140,14 +141,14 @@
     </section>
 
     <!-- Articles Bento Grid -->
-    <section class="py-16 bg-zinc-50">
-        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+    <section class="py-16">
+        <div class="px-4 sm:px-6 lg:px-8">
             <div class="mb-12 text-center">
-                <h2 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">Featured Articles</h2>
-                <p class="mt-4 text-lg text-gray-500">Explore the latest industrial engineering trends, research, and insights.</p>
+                <flux:heading size="4xl" level="2">Featured Articles</flux:heading>
+                <flux:subheading size="2xl">Explore the latest industrial engineering trends, research, and insights.</flux:subheading>
             </div>
 
-            <div class="grid grid-cols-4 grid-rows-4 gap-6 h-[800px]">
+            <div class="grid grid-cols-4 grid-rows-4 gap-6 h-[800px] w-full">
                 <!-- Article 1 -->
                 <a href="" class="col-span-2 row-span-1 bg-zinc-50 rounded-lg shadow overflow-hidden">
                     <div class="h-full relative">
@@ -277,13 +278,13 @@
 
     <!-- Video Profile Section -->
     <section class="bg-zinc-900 py-16">
-        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center">
-                <h2 class="text-3xl font-bold tracking-tight text-zinc-50 sm:text-4xl">Watch Our Video</h2>
-                <p class="mt-4 text-lg text-zinc-300">Learn about our association's history, mission, and impact on industrial engineering students.</p>
+        <div class="px-4 sm:px-6 lg:px-8">
+            <div class="mb-12 text-center">
+                <flux:heading size="4xl" level="2" accent="disableDarkMode">Watch Our Video</flux:heading>
+                <flux:subheading size="2xl" accent="disableDarkMode">Learn about our association's history, mission, and impact on industrial engineering students.</flux:subheading>
             </div>
 
-            <div class="mt-12 mx-auto max-w-7xl">
+            <div class="max-w-7xl mx-auto">
                 <div class="relative overflow-hidden rounded-lg shadow-2xl aspect-video">
                     <!-- YouTube embed with responsive iframe -->
                     <iframe
@@ -322,10 +323,10 @@
             </svg>
         </div>
 
-        <div class="relative container mx-auto px-4 py-12 sm:px-6 lg:px-8 lg:py-16">
+        <div class="relative px-4 sm:px-6 lg:px-8">
             <div class="md:flex md:items-center md:justify-between">
                 <h2 class="text-3xl font-bold tracking-tight text-zinc-50 sm:text-4xl">
-                    <span class="block">Ready to join our community?</span>
+                    <span class="block">Ready to join maroon army?</span>
                     <span class="block text-tertiary">Become a member today!</span>
                 </h2>
                 <div class="mt-8 flex md:mt-0">
