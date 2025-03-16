@@ -26,7 +26,7 @@
     }
 }"
          x-init="loop()"
-         class="relative overflow-hidden bg-zinc-900 h-[70vh] rounded-b-4xl">
+         class="relative overflow-hidden bg-zinc-900 h-[70vh]">
         <!-- Slides -->
         <template x-for="(slide, index) in slides" :key="index">
             <div x-show="activeSlide === index"
