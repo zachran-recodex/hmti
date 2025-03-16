@@ -1,9 +1,9 @@
 <flux:sidebar stashable sticky class="lg:hidden bg-zinc-50 dark:bg-zinc-900 border-r border-zinc-200 dark:border-zinc-700">
     <flux:sidebar.toggle class="lg:hidden" icon="x-mark" />
 
-    <div class="flex items-center">
+    <a href="{{ route('home') }}" class="w-full flex items-center justify-center">
         <img class="w-auto h-20" src="{{ asset('images/logo_hmti.jpg') }}" alt="HMTI Logo">
-    </div>
+    </a>
 
     <flux:navlist variant="outline">
         <flux:navlist.group heading="Profile" expandable expanded="false">

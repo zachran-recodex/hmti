@@ -3,9 +3,9 @@
     <flux:sidebar.toggle class="xl:hidden" icon="bars-2" inset="left" />
 
     <!-- Logo - smaller on mobile -->
-    <div class="flex items-center">
-        <img class="h-12 w-auto sm:h-16 lg:h-20" src="{{ asset('images/logo_hmti.jpg') }}" alt="HMTI Logo">
-    </div>
+    <a href="{{  route('home') }}" class="flex items-center">
+        <img class="sm:ms-4 w-auto h-20" src="{{ asset('images/logo_hmti.jpg') }}" alt="HMTI Logo">
+    </a>
 
     <flux:spacer />
 
