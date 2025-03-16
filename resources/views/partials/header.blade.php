@@ -15,94 +15,101 @@
             <flux:navbar.item icon-trailing="chevron-down">Profile</flux:navbar.item>
 
             <flux:navmenu>
-                <flux:navmenu.item href="#">Tentang Kami</flux:navmenu.item>
-                <flux:navmenu.item href="#">Visi Misi</flux:navmenu.item>
-                <flux:navmenu.item href="#">Struktur HMTI</flux:navmenu.item>
-                <flux:navmenu.item href="#">Inti dan Kepala Depbir</flux:navmenu.item>
-                <flux:navmenu.item href="#">AD/ART</flux:navmenu.item>
-                <flux:navmenu.item href="#">Panduan Logo HMTI</flux:navmenu.item>
-                <flux:navmenu.item href="#">Grand Design HMTI 2025</flux:navmenu.item>
-                <flux:navmenu.item href="#">HUT HMTI</flux:navmenu.item>
-                <flux:navmenu.item href="#">Profil HMTI</flux:navmenu.item>
-                <flux:navmenu.item href="#">Sejarah HMTI</flux:navmenu.item>
+                <flux:navmenu.item href="{{ route('profile.tentang-kami') }}">Tentang Kami</flux:navmenu.item>
+                <flux:navmenu.item href="{{ route('profile.visi-misi') }}">Visi Misi</flux:navmenu.item>
+                <flux:navmenu.item href="{{ route('profile.struktur') }}">Struktur HMTI</flux:navmenu.item>
+                <flux:navmenu.item href="{{ route('profile.inti-kepala') }}">Inti dan Kepala Depbir</flux:navmenu.item>
+                <flux:navmenu.item href="{{ route('profile.ad-art') }}">AD/ART</flux:navmenu.item>
+                <flux:navmenu.item href="{{ route('profile.panduan-logo') }}">Panduan Logo HMTI</flux:navmenu.item>
+                <flux:navmenu.item href="{{ route('profile.grand-design') }}">Grand Design HMTI 2025</flux:navmenu.item>
+                <flux:navmenu.item href="{{ route('profile.hut') }}">HUT HMTI</flux:navmenu.item>
+                <flux:navmenu.item href="{{ route('profile.profil') }}">Profil HMTI</flux:navmenu.item>
+                <flux:navmenu.item href="{{ route('profile.sejarah') }}">Sejarah HMTI</flux:navmenu.item>
             </flux:navmenu>
         </flux:dropdown>
         <flux:dropdown class="max-xl:hidden">
-            <flux:navbar.item icon-trailing="chevron-down">Department/Beureu</flux:navbar.item>
+            <flux:navbar.item icon-trailing="chevron-down">Department/Bureau</flux:navbar.item>
 
             <flux:navmenu>
                 <flux:navlist.group heading="Internal" expandable expanded="false">
-                    <flux:navlist.item href="#">Human Resource Department</flux:navlist.item>
-                    <flux:navlist.item href="#">Departemen Kaderisasi</flux:navlist.item>
-                    <flux:navlist.item href="#">Departemen Kemahasiswaan</flux:navlist.item>
+                    <flux:navlist.item href="{{ route('department-bureau.internal.hrd') }}">Human Resource Department</flux:navlist.item>
+                    <flux:navlist.item href="{{ route('department-bureau.internal.kaderisasi') }}">Departemen Kaderisasi</flux:navlist.item>
+                    <flux:navlist.item href="{{ route('department-bureau.internal.kemahasiswaan') }}">Departemen Kemahasiswaan</flux:navlist.item>
                 </flux:navlist.group>
+
                 <flux:navlist.group heading="PSTI" expandable expanded="false">
-                    <flux:navlist.item href="#">Departemen Akademik</flux:navlist.item>
-                    <flux:navlist.item href="#">Departemen Generasi Bisnis</flux:navlist.item>
-                    <flux:navlist.item href="#">Departemen Riset & Kompetisi</flux:navlist.item>
+                    <flux:navlist.item href="{{ route('department-bureau.psti.akademik') }}">Departemen Akademik</flux:navlist.item>
+                    <flux:navlist.item href="{{ route('department-bureau.psti.generasi-bisnis') }}">Departemen Generasi Bisnis</flux:navlist.item>
+                    <flux:navlist.item href="{{ route('department-bureau.psti.riset-kompetisi') }}">Departemen Riset & Kompetisi</flux:navlist.item>
                 </flux:navlist.group>
+
                 <flux:navlist.group heading="External" expandable expanded="false">
-                    <flux:navlist.item href="#">Departemen Komunikasi Dan Informasi</flux:navlist.item>
-                    <flux:navlist.item href="#">Biro Dedikasi Masyarakat</flux:navlist.item>
-                    <flux:navlist.item href="#">Bureau Public Relation</flux:navlist.item>
+                    <flux:navlist.item href="{{ route('department-bureau.external.kominfo') }}">Departemen Komunikasi Dan Informasi</flux:navlist.item>
+                    <flux:navlist.item href="{{ route('department-bureau.external.dedikasi-masyarakat') }}">Biro Dedikasi Masyarakat</flux:navlist.item>
+                    <flux:navlist.item href="{{ route('department-bureau.external.public-relation') }}">Bureau Public Relation</flux:navlist.item>
                 </flux:navlist.group>
             </flux:navmenu>
+
         </flux:dropdown>
         <flux:dropdown class="max-xl:hidden">
-            <flux:navbar.item icon-trailing="chevron-down">Community & Commite</flux:navbar.item>
+            <flux:navbar.item icon-trailing="chevron-down">Community & Committee</flux:navbar.item>
 
             <flux:navmenu>
                 <flux:navlist.group heading="Community" expandable expanded="false">
-                    <flux:navlist.item href="#">Incoustic</flux:navlist.item>
-                    <flux:navlist.item href="#">Industrial Competition Community</flux:navlist.item>
-                    <flux:navlist.item href="#">Koma Creative</flux:navlist.item>
-                    <flux:navlist.item href="#">Maroon Army</flux:navlist.item>
-                    <flux:navlist.item href="#">Community Motor Telkom University</flux:navlist.item>
-                    <flux:navlist.item href="#">Community of Tentor</flux:navlist.item>
-                    <flux:navlist.item href="#">Society</flux:navlist.item>
+                    <flux:navlist.item href="{{ route('community-committee.community.incoustic') }}">Incoustic</flux:navlist.item>
+                    <flux:navlist.item href="{{ route('community-committee.community.industrial-competition') }}">Industrial Competition Community</flux:navlist.item>
+                    <flux:navlist.item href="{{ route('community-committee.community.koma-creative') }}">Koma Creative</flux:navlist.item>
+                    <flux:navlist.item href="{{ route('community-committee.community.maroon-army') }}">Maroon Army</flux:navlist.item>
+                    <flux:navlist.item href="{{ route('community-committee.community.motor-telkom') }}">Community Motor Telkom University</flux:navlist.item>
+                    <flux:navlist.item href="{{ route('community-committee.community.tentor') }}">Community of Tentor</flux:navlist.item>
+                    <flux:navlist.item href="{{ route('community-committee.community.society') }}">Society</flux:navlist.item>
                 </flux:navlist.group>
-                <flux:navlist.group heading="Commite" expandable expanded="false">
-                    <flux:navlist.item href="#">Invention</flux:navlist.item>
-                    <flux:navlist.item href="#">SEHATI</flux:navlist.item>
-                    <flux:navlist.item href="#">LEGION</flux:navlist.item>
-                    <flux:navlist.item href="#">Increase</flux:navlist.item>
-                    <flux:navlist.item href="#">Inaugurasi</flux:navlist.item>
-                    <flux:navlist.item href="#">ORATIONS</flux:navlist.item>
-                    <flux:navlist.item href="#">INFADE</flux:navlist.item>
+
+                <flux:navlist.group heading="Committee" expandable expanded="false">
+                    <flux:navlist.item href="{{ route('community-committee.committee.invention') }}">Invention</flux:navlist.item>
+                    <flux:navlist.item href="{{ route('community-committee.committee.sehati') }}">SEHATI</flux:navlist.item>
+                    <flux:navlist.item href="{{ route('community-committee.committee.legion') }}">LEGION</flux:navlist.item>
+                    <flux:navlist.item href="{{ route('community-committee.committee.increase') }}">Increase</flux:navlist.item>
+                    <flux:navlist.item href="{{ route('community-committee.committee.inaugurasi') }}">Inaugurasi</flux:navlist.item>
+                    <flux:navlist.item href="{{ route('community-committee.committee.orations') }}">ORATIONS</flux:navlist.item>
+                    <flux:navlist.item href="{{ route('community-committee.committee.infade') }}">INFADE</flux:navlist.item>
                 </flux:navlist.group>
             </flux:navmenu>
+
         </flux:dropdown>
         <flux:dropdown class="max-xl:hidden">
             <flux:navbar.item icon-trailing="chevron-down">Sensecurrency</flux:navbar.item>
 
             <flux:navmenu>
                 <flux:navlist.group heading="Produk" expandable expanded="false">
-                    <flux:navlist.item href="#">Maroon Merchandise</flux:navlist.item>
-                    <flux:navlist.item href="#">Jacket</flux:navlist.item>
-                    <flux:navlist.item href="#">Shirt</flux:navlist.item>
+                    <flux:navlist.item href="{{ route('sensecurrency.produk.merchandise') }}">Maroon Merchandise</flux:navlist.item>
+                    <flux:navlist.item href="{{ route('sensecurrency.produk.jacket') }}">Jacket</flux:navlist.item>
+                    <flux:navlist.item href="{{ route('sensecurrency.produk.shirt') }}">Shirt</flux:navlist.item>
                 </flux:navlist.group>
                 <flux:navlist.group heading="Officially Maroon" expandable expanded="false">
-                    <flux:navlist.item href="#">Order & Pre-Order</flux:navlist.item>
+                    <flux:navlist.item href="{{ route('sensecurrency.officially-maroon.order') }}">Order & Pre-Order</flux:navlist.item>
                 </flux:navlist.group>
             </flux:navmenu>
         </flux:dropdown>
+
         <flux:dropdown class="max-xl:hidden">
             <flux:navbar.item icon-trailing="chevron-down">Partnership</flux:navbar.item>
 
             <flux:navmenu>
-                <flux:navmenu.item href="#">Benchmark</flux:navmenu.item>
-                <flux:navmenu.item href="#">Media Partner</flux:navmenu.item>
-                <flux:navmenu.item href="#">MC & Moderator</flux:navmenu.item>
+                <flux:navmenu.item href="{{ route('partnership.benchmark') }}">Benchmark</flux:navmenu.item>
+                <flux:navmenu.item href="{{ route('partnership.media-partner') }}">Media Partner</flux:navmenu.item>
+                <flux:navmenu.item href="{{ route('partnership.mc-moderator') }}">MC & Moderator</flux:navmenu.item>
             </flux:navmenu>
         </flux:dropdown>
+
         <flux:dropdown class="max-xl:hidden">
             <flux:navbar.item icon-trailing="chevron-down">MPM</flux:navbar.item>
 
             <flux:navmenu>
-                <flux:navmenu.item href="#">Komisi A</flux:navmenu.item>
-                <flux:navmenu.item href="#">Komisi B</flux:navmenu.item>
-                <flux:navmenu.item href="#">Komisi C</flux:navmenu.item>
-                <flux:navmenu.item href="#">BURT</flux:navmenu.item>
+                <flux:navmenu.item href="{{ route('mpm.komisi-a') }}">Komisi A</flux:navmenu.item>
+                <flux:navmenu.item href="{{ route('mpm.komisi-b') }}">Komisi B</flux:navmenu.item>
+                <flux:navmenu.item href="{{ route('mpm.komisi-c') }}">Komisi C</flux:navmenu.item>
+                <flux:navmenu.item href="{{ route('mpm.burt') }}">BURT</flux:navmenu.item>
             </flux:navmenu>
         </flux:dropdown>
     </flux:navbar>

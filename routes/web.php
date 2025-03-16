@@ -1,109 +1,105 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
 use Livewire\Volt\Volt;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\MainController;
 
-Route::get('/', function () {
-    return view('main.index');
-})->name('home');
+Route::controller(MainController::class)->group(function () {
 
-// Basic Routes
-Route::view('about', 'main.about')->name('about');
-Route::view('activities', 'main.activities')->name('activities');
-Route::view('news', 'main.news')->name('news');
-Route::view('articles', 'main.articles')->name('articles');
-Route::view('contact', 'main.contact')->name('contact');
+    Route::get('/', 'index')->name('home');
 
-// Profile Routes
-Route::prefix('profile')->group(function () {
-    Route::view('about', 'profile.about')->name('profile.about');
-    Route::view('visi-misi', 'profile.visi-misi')->name('profile.visi-misi');
-    Route::view('tagline', 'profile.tagline')->name('profile.tagline');
-    Route::view('struktur', 'profile.struktur')->name('profile.struktur');
-    Route::view('inti-kepala', 'profile.inti-kepala')->name('profile.inti-kepala');
-    Route::view('adart', 'profile.adart')->name('profile.adart');
-    Route::view('panduan-logo', 'profile.panduan-logo')->name('profile.panduan-logo');
-    Route::view('grand-design', 'profile.grand-design')->name('profile.grand-design');
-    Route::view('hut', 'profile.hut')->name('profile.hut');
-    Route::view('profil', 'profile.profil')->name('profile.profil');
-    Route::view('sejarah', 'profile.sejarah')->name('profile.sejarah');
-    Route::view('mpm', 'profile.mpm')->name('profile.mpm');
-});
-
-// Department Routes
-Route::prefix('department')->group(function () {
-    // Internal Department
-    Route::prefix('internal')->group(function () {
-        Route::view('hrd', 'department.internal.hrd')->name('department.internal.hrd');
-        Route::view('kaderisasi', 'department.internal.kaderisasi')->name('department.internal.kaderisasi');
-        Route::view('kemahasiswaan', 'department.internal.kemahasiswaan')->name('department.internal.kemahasiswaan');
+    // Profile Routes
+    Route::prefix('profile')->name('profile.')->group(function () {
+        Route::get('tentang-kami', 'tentangKami')->name('tentang-kami');
+        Route::get('visi-misi', 'visiMisi')->name('visi-misi');
+        Route::get('struktur-hmti', 'struktur')->name('struktur');
+        Route::get('inti-dan-kepala-depbir', 'intiKepala')->name('inti-kepala');
+        Route::get('ad-art', 'adArt')->name('ad-art');
+        Route::get('panduan-logo-hmti', 'panduanLogo')->name('panduan-logo');
+        Route::get('grand-design-hmti-2025', 'grandDesign')->name('grand-design');
+        Route::get('hut-hmti', 'hut')->name('hut');
+        Route::get('profil-hmti', 'profil')->name('profil');
+        Route::get('sejarah-hmti', 'sejarah')->name('sejarah');
     });
 
-    // PSTI Department
-    Route::prefix('psti')->group(function () {
-        Route::view('akademik', 'department.psti.akademik')->name('department.psti.akademik');
-        Route::view('generasi-bisnis', 'department.psti.generasi-bisnis')->name('department.psti.generasi-bisnis');
-        Route::view('riset-kompetisi', 'department.psti.riset-kompetisi')->name('department.psti.riset-kompetisi');
+    // Department Routes
+    Route::prefix('department-bureau')->name('department-bureau.')->group(function () {
+        // Internal Department
+        Route::prefix('internal')->name('internal.')->group(function () {
+            Route::get('human-resource-department', 'hrd')->name('hrd');
+            Route::get('departemen-kaderisasi', 'kaderisasi')->name('kaderisasi');
+            Route::get('departemen-kemahasiswaan', 'kemahasiswaan')->name('kemahasiswaan');
+        });
+
+        // PSTI Department
+        Route::prefix('psti')->name('psti.')->group(function () {
+            Route::get('departemen-akademik', 'akademik')->name('akademik');
+            Route::get('departemen-generasi-bisnis', 'generasiBisnis')->name('generasi-bisnis');
+            Route::get('departemen-riset-kompetisi', 'risetKompetisi')->name('riset-kompetisi');
+        });
+
+        // External Department
+        Route::prefix('external')->name('external.')->group(function () {
+            Route::get('departemen-komunikasi-informasi', 'kominfo')->name('kominfo');
+            Route::get('biro-dedikasi-masyarakat', 'dedikasiMasyarakat')->name('dedikasi-masyarakat');
+            Route::get('bureau-public-relation', 'publicRelation')->name('public-relation');
+        });
     });
 
-    // External Department
-    Route::prefix('external')->group(function () {
-        Route::view('kominfo', 'department.external.kominfo')->name('department.external.kominfo');
-        Route::view('dedikasi-masyarakat', 'department.external.dedikasi-masyarakat')->name('department.external.dedikasi-masyarakat');
-        Route::view('public-relation', 'department.external.public-relation')->name('department.external.public-relation');
-    });
-});
+    Route::prefix('community-committee')->name('community-committee.')->group(function () {
+        // Community Routes
+        Route::prefix('community')->name('community.')->group(function () {
+            Route::get('incoustic', 'incoustic')->name('incoustic');
+            Route::get('industrial-competition-community', 'industrialCompetition')->name('industrial-competition');
+            Route::get('koma-creative', 'komaCreative')->name('koma-creative');
+            Route::get('maroon-army', 'maroonArmy')->name('maroon-army');
+            Route::get('community-motor-telkom-university', 'motorTelkom')->name('motor-telkom');
+            Route::get('community-of-tentor', 'tentor')->name('tentor');
+            Route::get('society', 'society')->name('society');
+        });
 
-// Community Routes
-Route::prefix('community')->group(function () {
-    Route::view('incoustic', 'community.incoustic')->name('community.incoustic');
-    Route::view('icc', 'community.icc')->name('community.icc');
-    Route::view('koma-creative', 'community.koma-creative')->name('community.koma-creative');
-    Route::view('maroon-army', 'community.maroon-army')->name('community.maroon-army');
-    Route::view('cmt', 'community.cmt')->name('community.cmt');
-    Route::view('cot', 'community.cot')->name('community.cot');
-    Route::view('society', 'community.society')->name('community.society');
-});
-
-// Committee Routes
-Route::prefix('committee')->group(function () {
-    Route::view('invention', 'committee.invention')->name('committee.invention');
-    Route::view('sehati', 'committee.sehati')->name('committee.sehati');
-    Route::view('legion', 'committee.legion')->name('committee.legion');
-    Route::view('increase', 'committee.increase')->name('committee.increase');
-    Route::view('inaugurasi', 'committee.inaugurasi')->name('committee.inaugurasi');
-    Route::view('orations', 'committee.orations')->name('committee.orations');
-    Route::view('infade', 'committee.infade')->name('committee.infade');
-});
-
-// Sensecurrency Routes
-Route::prefix('sensecurrency')->group(function () {
-    // Produk
-    Route::prefix('produk')->group(function () {
-        Route::view('merchandise', 'sensecurrency.produk.merchandise')->name('sensecurrency.produk.merchandise');
-        Route::view('jacket', 'sensecurrency.produk.jacket')->name('sensecurrency.produk.jacket');
-        Route::view('shirt', 'sensecurrency.produk.shirt')->name('sensecurrency.produk.shirt');
+        // Committee Routes
+        Route::prefix('committee')->name('committee.')->group(function () {
+            Route::get('invention', 'invention')->name('invention');
+            Route::get('sehati', 'sehati')->name('sehati');
+            Route::get('legion', 'legion')->name('legion');
+            Route::get('increase', 'increase')->name('increase');
+            Route::get('inaugurasi', 'inaugurasi')->name('inaugurasi');
+            Route::get('orations', 'orations')->name('orations');
+            Route::get('infade', 'infade')->name('infade');
+        });
     });
 
-    // Officially Maroon
-    Route::prefix('officially')->group(function () {
-        Route::view('order', 'sensecurrency.officially.order')->name('sensecurrency.officially.order');
+    // Sensecurrency Routes
+    Route::prefix('sensecurrency')->name('sensecurrency.')->group(function () {
+        // Produk Routes
+        Route::prefix('produk')->name('produk.')->group(function () {
+            Route::get('maroon-merchandise', 'merchandise')->name('merchandise');
+            Route::get('jacket', 'jacket')->name('jacket');
+            Route::get('shirt', 'shirt')->name('shirt');
+        });
+
+        // Officially Maroon Routes
+        Route::prefix('officially-maroon')->name('officially-maroon.')->group(function () {
+            Route::get('order-preoder', 'order')->name('order');
+        });
     });
-});
 
-// Partnership Routes
-Route::prefix('partnership')->group(function () {
-    Route::view('benchmark', 'partnership.benchmark')->name('partnership.benchmark');
-    Route::view('media-partner', 'partnership.media-partner')->name('partnership.media-partner');
-    Route::view('mc-moderator', 'partnership.mc-moderator')->name('partnership.mc-moderator');
-});
+    // Partnership Routes
+    Route::prefix('partnership')->name('partnership.')->group(function () {
+        Route::get('benchmark', 'benchmark')->name('benchmark');
+        Route::get('media-partner', 'mediaPartner')->name('media-partner');
+        Route::get('mc-moderator', 'mcModerator')->name('mc-moderator');
+    });
 
-// MPM Routes
-Route::prefix('mpm')->group(function () {
-    Route::view('komisi-a', 'mpm.komisi-a')->name('mpm.komisi-a');
-    Route::view('komisi-b', 'mpm.komisi-b')->name('mpm.komisi-b');
-    Route::view('komisi-c', 'mpm.komisi-c')->name('mpm.komisi-c');
-    Route::view('burt', 'mpm.burt')->name('mpm.burt');
+    // MPM Routes
+    Route::prefix('mpm')->name('mpm.')->group(function () {
+        Route::get('komisi-a', 'komisiA')->name('komisi-a');
+        Route::get('komisi-b', 'komisiB')->name('komisi-b');
+        Route::get('komisi-c', 'komisiC')->name('komisi-c');
+        Route::get('burt', 'burt')->name('burt');
+    });
+
 });
 
 Route::view('dashboard', 'dashboard')

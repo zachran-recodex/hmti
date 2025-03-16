@@ -3,6 +3,7 @@
     'iconVariant' => 'mini',
     'icon' => null,
     'href' => null,
+    'disableDarkMode' => false, // Added option to disable dark mode styling
 ])
 
 @php
@@ -13,15 +14,18 @@ $classes = Flux::classes()
     ;
 
 $linkClasses = Flux::classes()
-    ->add('text-zinc-800 dark:text-white')
+    ->add('text-zinc-800')
+    ->add($disableDarkMode ? 'text-white' : 'text-white')
     ->add('hover:underline decoration-zinc-800/20 underline-offset-4');
 
 $staticTextClasses = Flux::classes()
-    ->add('text-gray-500 dark:text-white/80')
+    ->add('text-gray-500')
+    ->add($disableDarkMode ? 'text-white/80' : 'text-white/80')
     ;
 
 $separatorClasses = Flux::classes()
-    ->add('mx-1 text-zinc-300 dark:text-white/80')
+    ->add('mx-1 text-zinc-300')
+    ->add($disableDarkMode ? 'text-white/80' : 'text-white/80')
     ->add('group-last/breadcrumb:hidden')
     ;
 

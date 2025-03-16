@@ -387,7 +387,7 @@
             </div>
 
             <div class="mt-8 md:mt-12 text-center">
-                <a href="{{ route('articles') }}" class="inline-flex items-center rounded-md border border-primary bg-zinc-50 px-4 py-2 md:px-6 md:py-3 text-sm md:text-base font-medium text-primary hover:bg-primary hover:text-zinc-50 transition">
+                <a href="" class="inline-flex items-center rounded-md border border-primary bg-zinc-50 px-4 py-2 md:px-6 md:py-3 text-sm md:text-base font-medium text-primary hover:bg-primary hover:text-zinc-50 transition">
                     View all articles
                     <svg class="ml-2 h-4 w-4 md:h-5 md:w-5" viewBox="0 0 20 20" fill="currentColor">
                         <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />

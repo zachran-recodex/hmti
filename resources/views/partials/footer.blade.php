@@ -35,10 +35,10 @@
         <div>
             <h3 class="text-sm font-semibold uppercase tracking-wider text-zinc-50">Quick Links</h3>
             <ul class="mt-4 space-y-2">
-                <li><a href="{{ route('home') }}" class="text-zinc-400 hover:text-zinc-50">Home</a></li>
-                <li><a href="{{ route('about') }}" class="text-zinc-400 hover:text-zinc-50">About Us</a></li>
-                <li><a href="{{ route('activities') }}" class="text-zinc-400 hover:text-zinc-50">Activities</a></li>
-                <li><a href="{{ route('news') }}" class="text-zinc-400 hover:text-zinc-50">News & Events</a></li>
+                <li><a href="#" class="text-zinc-400 hover:text-zinc-50">Home</a></li>
+                <li><a href="#" class="text-zinc-400 hover:text-zinc-50">About Us</a></li>
+                <li><a href="#" class="text-zinc-400 hover:text-zinc-50">Activities</a></li>
+                <li><a href="#" class="text-zinc-400 hover:text-zinc-50">News & Events</a></li>
             </ul>
         </div>
 
