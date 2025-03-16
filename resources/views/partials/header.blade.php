@@ -1,12 +1,17 @@
-<flux:header sticky class="bg-zinc-50 dark:bg-zinc-900 border-b border-zinc-200 dark:border-zinc-700 h-[100px]">
-    <flux:sidebar.toggle class="lg:hidden" icon="bars-2" inset="left" />
+<flux:header sticky class="px-4 sm:px-6 lg:px-8 bg-zinc-50 dark:bg-zinc-900 border-b border-zinc-200 dark:border-zinc-700 min-h-26 flex items-center">
+    <!-- Mobile sidebar toggle - This will control your existing sidebar -->
+    <flux:sidebar.toggle class="xl:hidden" icon="bars-2" inset="left" />
 
-    <img class="h-20 w-auto" src="{{ asset('images/logo_hmti.jpg') }}" alt="HMTI Logo">
+    <!-- Logo - smaller on mobile -->
+    <div class="flex items-center">
+        <img class="h-12 w-auto sm:h-16 lg:h-20" src="{{ asset('images/logo_hmti.jpg') }}" alt="HMTI Logo">
+    </div>
 
     <flux:spacer />
 
-    <flux:navbar class="-mb-px max-lg:hidden">
-        <flux:dropdown class="max-lg:hidden">
+    <!-- Desktop Navigation -->
+    <flux:navbar class="-mb-px max-xl:hidden">
+        <flux:dropdown class="max-xl:hidden">
             <flux:navbar.item icon-trailing="chevron-down">Profile</flux:navbar.item>
 
             <flux:navmenu>
@@ -22,32 +27,66 @@
                 <flux:navmenu.item href="#">Sejarah HMTI</flux:navmenu.item>
             </flux:navmenu>
         </flux:dropdown>
-        <flux:dropdown class="max-lg:hidden">
+        <flux:dropdown class="max-xl:hidden">
             <flux:navbar.item icon-trailing="chevron-down">Department/Beureu</flux:navbar.item>
 
             <flux:navmenu>
-                <flux:navmenu.item href="#">Internal</flux:navmenu.item>
-                <flux:navmenu.item href="#">PSTI</flux:navmenu.item>
-                <flux:navmenu.item href="#">External</flux:navmenu.item>
+                <flux:navlist.group heading="Internal" expandable expanded="false">
+                    <flux:navlist.item href="#">Human Resource Department</flux:navlist.item>
+                    <flux:navlist.item href="#">Departemen Kaderisasi</flux:navlist.item>
+                    <flux:navlist.item href="#">Departemen Kemahasiswaan</flux:navlist.item>
+                </flux:navlist.group>
+                <flux:navlist.group heading="PSTI" expandable expanded="false">
+                    <flux:navlist.item href="#">Departemen Akademik</flux:navlist.item>
+                    <flux:navlist.item href="#">Departemen Generasi Bisnis</flux:navlist.item>
+                    <flux:navlist.item href="#">Departemen Riset & Kompetisi</flux:navlist.item>
+                </flux:navlist.group>
+                <flux:navlist.group heading="External" expandable expanded="false">
+                    <flux:navlist.item href="#">Departemen Komunikasi Dan Informasi</flux:navlist.item>
+                    <flux:navlist.item href="#">Biro Dedikasi Masyarakat</flux:navlist.item>
+                    <flux:navlist.item href="#">Bureau Public Relation</flux:navlist.item>
+                </flux:navlist.group>
             </flux:navmenu>
         </flux:dropdown>
-        <flux:dropdown class="max-lg:hidden">
+        <flux:dropdown class="max-xl:hidden">
             <flux:navbar.item icon-trailing="chevron-down">Community & Commite</flux:navbar.item>
 
             <flux:navmenu>
-                <flux:navmenu.item href="#">Community</flux:navmenu.item>
-                <flux:navmenu.item href="#">Commite</flux:navmenu.item>
+                <flux:navlist.group heading="Community" expandable expanded="false">
+                    <flux:navlist.item href="#">Incoustic</flux:navlist.item>
+                    <flux:navlist.item href="#">Industrial Competition Community</flux:navlist.item>
+                    <flux:navlist.item href="#">Koma Creative</flux:navlist.item>
+                    <flux:navlist.item href="#">Maroon Army</flux:navlist.item>
+                    <flux:navlist.item href="#">Community Motor Telkom University</flux:navlist.item>
+                    <flux:navlist.item href="#">Community of Tentor</flux:navlist.item>
+                    <flux:navlist.item href="#">Society</flux:navlist.item>
+                </flux:navlist.group>
+                <flux:navlist.group heading="Commite" expandable expanded="false">
+                    <flux:navlist.item href="#">Invention</flux:navlist.item>
+                    <flux:navlist.item href="#">SEHATI</flux:navlist.item>
+                    <flux:navlist.item href="#">LEGION</flux:navlist.item>
+                    <flux:navlist.item href="#">Increase</flux:navlist.item>
+                    <flux:navlist.item href="#">Inaugurasi</flux:navlist.item>
+                    <flux:navlist.item href="#">ORATIONS</flux:navlist.item>
+                    <flux:navlist.item href="#">INFADE</flux:navlist.item>
+                </flux:navlist.group>
             </flux:navmenu>
         </flux:dropdown>
-        <flux:dropdown class="max-lg:hidden">
+        <flux:dropdown class="max-xl:hidden">
             <flux:navbar.item icon-trailing="chevron-down">Sensecurrency</flux:navbar.item>
 
             <flux:navmenu>
-                <flux:navmenu.item href="#">Produk</flux:navmenu.item>
-                <flux:navmenu.item href="#">Officially Maroon</flux:navmenu.item>
+                <flux:navlist.group heading="Produk" expandable expanded="false">
+                    <flux:navlist.item href="#">Maroon Merchandise</flux:navlist.item>
+                    <flux:navlist.item href="#">Jacket</flux:navlist.item>
+                    <flux:navlist.item href="#">Shirt</flux:navlist.item>
+                </flux:navlist.group>
+                <flux:navlist.group heading="Officially Maroon" expandable expanded="false">
+                    <flux:navlist.item href="#">Order & Pre-Order</flux:navlist.item>
+                </flux:navlist.group>
             </flux:navmenu>
         </flux:dropdown>
-        <flux:dropdown class="max-lg:hidden">
+        <flux:dropdown class="max-xl:hidden">
             <flux:navbar.item icon-trailing="chevron-down">Partnership</flux:navbar.item>
 
             <flux:navmenu>
@@ -56,7 +95,7 @@
                 <flux:navmenu.item href="#">MC & Moderator</flux:navmenu.item>
             </flux:navmenu>
         </flux:dropdown>
-        <flux:dropdown class="max-lg:hidden">
+        <flux:dropdown class="max-xl:hidden">
             <flux:navbar.item icon-trailing="chevron-down">MPM</flux:navbar.item>
 
             <flux:navmenu>
@@ -70,21 +109,23 @@
 
     <flux:spacer />
 
-    <flux:radio.group x-data variant="segmented" x-model="$flux.appearance" class="me-4">
-        <flux:radio value="light" icon="sun"></flux:radio>
-        <flux:radio value="dark" icon="moon"></flux:radio>
+    <!-- Theme toggle -->
+    <flux:radio.group x-data variant="segmented" x-model="$flux.appearance" class="hidden mx-2 sm:mx-4 md:flex">
+        <flux:radio value="light" icon="sun" class="cursor-pointer!"></flux:radio>
+        <flux:radio value="dark" icon="moon" class="cursor-pointer!"></flux:radio>
     </flux:radio.group>
 
-    <flux:separator vertical variant="subtle" class="my-2 me-4"/>
+    <flux:separator vertical variant="subtle" class="my-2 mx-2 sm:mx-4 hidden sm:block"/>
 
+    <!-- User profile section -->
     @auth
         <flux:dropdown position="top" align="end">
             <flux:profile
                 :avatar="Storage::url(auth()->user()->photo)"
                 :name="auth()->user()->name"
+                class="border border-zinc-200 dark:border-zinc-700"
                 :role="Str::title(str_replace('-', ' ', auth()->user()->roles->first()?->name))"
                 icon-trailing="chevron-down"
-                class="border! border-zinc-200! dark:border-zinc-700!"
             />
 
             <flux:menu>
@@ -122,6 +163,7 @@
             </flux:menu>
         </flux:dropdown>
     @else
+        <!-- Responsive login button -->
         <flux:button variant="primary" href="{{ route('login') }}" icon="arrow-right-end-on-rectangle">
             Login
         </flux:button>

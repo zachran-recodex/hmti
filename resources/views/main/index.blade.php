@@ -108,47 +108,167 @@
     </div>
 
     <!-- Banner Section -->
-    <section class="py-16">
+    <section class="py-8 md:py-12 lg:py-16">
         <div class="px-4 sm:px-6 lg:px-8">
             <div class="flex justify-center">
-                <img src="{{ asset('images/banner.png') }}" alt="Banner" class="w-[1440px] h-[440px] object-cover rounded-2xl border border-zinc-900 dark:border-zinc-200">
+                <img
+                    src="{{ asset('images/banner.png') }}"
+                    alt="Banner"
+                    class="w-full max-w-[1440px] h-auto aspect-[1440/440] object-cover rounded-lg border border-zinc-900"
+                >
             </div>
         </div>
     </section>
 
     <!-- Counter Section -->
-    <section class="py-16 bg-zinc-900">
+    <section class="py-8 md:py-12 lg:py-16 bg-zinc-900">
         <div class="px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-4 gap-8">
-                <div class="h-fit py-4 bg-gradient-to-r from-secondary to-primary rounded-lg flex flex-col justify-center items-center">
-                    <span class="text-4xl font-semibold text-[#ffae00]">1300+</span>
-                    <h3 class="text-2xl text-zinc-50">Mahasiswa/i</h3>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 lg:gap-8">
+                <div class="h-fit py-4 px-2 bg-gradient-to-r from-secondary to-primary rounded-lg flex flex-col justify-center items-center">
+                    <span class="text-3xl md:text-4xl font-semibold text-quarternary">1300+</span>
+                    <h3 class="text-xl md:text-2xl text-zinc-50">Mahasiswa/i</h3>
                 </div>
-                <div class="h-fit py-4 bg-gradient-to-r from-secondary to-primary rounded-lg flex flex-col justify-center items-center">
-                    <span class="text-4xl font-semibold text-[#ffae00]">8627+</span>
-                    <h3 class="text-2xl text-zinc-50">Penghargaan</h3>
+                <div class="h-fit py-4 px-2 bg-gradient-to-r from-secondary to-primary rounded-lg flex flex-col justify-center items-center">
+                    <span class="text-3xl md:text-4xl font-semibold text-quarternary">8627+</span>
+                    <h3 class="text-xl md:text-2xl text-zinc-50">Penghargaan</h3>
                 </div>
-                <div class="h-fit py-4 bg-gradient-to-r from-secondary to-primary rounded-lg flex flex-col justify-center items-center">
-                    <span class="text-4xl font-semibold text-[#ffae00]">723+</span>
-                    <h3 class="text-2xl text-zinc-50">Proyek</h3>
+                <div class="h-fit py-4 px-2 bg-gradient-to-r from-secondary to-primary rounded-lg flex flex-col justify-center items-center">
+                    <span class="text-3xl md:text-4xl font-semibold text-quarternary">723+</span>
+                    <h3 class="text-xl md:text-2xl text-zinc-50">Proyek</h3>
                 </div>
-                <div class="h-fit py-4 bg-gradient-to-r from-secondary to-primary rounded-lg flex flex-col justify-center items-center">
-                    <span class="text-4xl font-semibold text-[#ffae00]">1300+</span>
-                    <h3 class="text-2xl text-zinc-50">Mahasiswa/i</h3>
+                <div class="h-fit py-4 px-2 bg-gradient-to-r from-secondary to-primary rounded-lg flex flex-col justify-center items-center">
+                    <span class="text-3xl md:text-4xl font-semibold text-quarternary">1300+</span>
+                    <h3 class="text-xl md:text-2xl text-zinc-50">Mahasiswa/i</h3>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Articles Bento Grid -->
-    <section class="py-16">
+    <section class="py-8 md:py-12 lg:py-16">
         <div class="px-4 sm:px-6 lg:px-8">
-            <div class="mb-12 text-center">
+            <div class="mb-8 md:mb-12 text-center">
                 <flux:heading size="4xl" level="2">Featured Articles</flux:heading>
                 <flux:subheading size="2xl">Explore the latest industrial engineering trends, research, and insights.</flux:subheading>
             </div>
 
-            <div class="grid grid-cols-4 grid-rows-4 gap-6 h-[800px] w-full">
+            <!-- Mobile view (1 column) visible only on smallest screens -->
+            <div class="grid grid-cols-1 gap-4 md:hidden">
+                <!-- Article 1 -->
+                <a href="" class="bg-zinc-50 rounded-lg shadow overflow-hidden">
+                    <div class="relative">
+                        <img src="https://picsum.photos/id/76/800/400" alt="Industry 4.0" class="w-full h-48 object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-b from-transparent to-zinc-900/70"></div>
+                        <div class="absolute bottom-0 left-0 right-0 p-4 text-zinc-50">
+                            <span class="bg-primary text-zinc-50 text-xs font-semibold px-2 py-1 rounded">INDUSTRY 4.0</span>
+                            <h3 class="mt-2 text-lg font-bold">How Industry 4.0 is Transforming Manufacturing Processes</h3>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Article 2 -->
+                <div class="bg-gradient-to-r from-secondary to-primary rounded-lg shadow overflow-hidden">
+                    <div class="p-4 flex flex-col justify-between">
+                        <div>
+                            <span class="bg-zinc-50 text-primary text-xs font-semibold px-2 py-1 rounded">EVENT</span>
+                            <h3 class="mt-2 text-lg font-bold text-zinc-50">Industrial Engineering National Conference 2023</h3>
+                            <p class="mt-1 text-sm text-zinc-50/80">Join us for the biggest IE conference of the year</p>
+                        </div>
+                        <div class="flex justify-between items-center mt-4">
+                            <a href="" class="px-3 py-1 bg-zinc-50 text-primary rounded font-medium text-sm">Register Now</a>
+                            <div class="text-right text-zinc-50">
+                                <div class="text-xl font-bold">15-17 June</div>
+                                <div class="text-sm">2023</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Additional articles truncated for mobile -->
+                <a href="" class="bg-quarternary rounded-lg shadow overflow-hidden">
+                    <div class="flex flex-col">
+                        <div class="h-48 overflow-hidden">
+                            <img src="https://picsum.photos/id/237/400/400" alt="Research Methods" class="w-full h-full object-cover">
+                        </div>
+                        <div class="p-4 flex flex-col">
+                            <span class="w-fit bg-zinc-50 text-quarternary text-xs font-semibold px-2 py-1 rounded">RESEARCH</span>
+                            <h3 class="mt-2 text-base font-bold">Innovative Research Methods in Industrial Engineering</h3>
+                            <div class="mt-4 pt-2 flex items-center">
+                                <img class="w-6 h-6 rounded-full" src="https://picsum.photos/id/65/100" alt="Author">
+                                <span class="ml-2 text-xs text-gray-600">Prof. Budi Santoso</span>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <!-- Tablet view (2 columns) visible on medium screens -->
+            <div class="hidden md:grid lg:hidden grid-cols-2 grid-rows-auto gap-4 md:gap-6">
+                <!-- Article 1 -->
+                <a href="" class="col-span-2 bg-zinc-50 rounded-lg shadow overflow-hidden">
+                    <div class="relative">
+                        <img src="https://picsum.photos/id/76/800/400" alt="Industry 4.0" class="w-full h-60 object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-b from-transparent to-zinc-900/70"></div>
+                        <div class="absolute bottom-0 left-0 right-0 p-4 text-zinc-50">
+                            <span class="bg-primary text-zinc-50 text-xs font-semibold px-2 py-1 rounded">INDUSTRY 4.0</span>
+                            <h3 class="mt-2 text-lg font-bold">How Industry 4.0 is Transforming Manufacturing Processes</h3>
+                            <p class="mt-1 text-sm text-zinc-50/80 line-clamp-2">An in-depth look at how automation and data exchange are revolutionizing production systems</p>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Article 2 -->
+                <div class="bg-gradient-to-r from-secondary to-primary rounded-lg shadow overflow-hidden">
+                    <div class="h-full p-4 flex flex-col justify-between">
+                        <div>
+                            <span class="bg-zinc-50 text-primary text-xs font-semibold px-2 py-1 rounded">EVENT</span>
+                            <h3 class="mt-2 text-lg font-bold text-zinc-50">Industrial Engineering National Conference 2023</h3>
+                            <p class="mt-1 text-sm text-zinc-50/80">Join us for the biggest IE conference of the year</p>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <a href="" class="px-3 py-1 bg-zinc-50 text-primary rounded font-medium text-sm">Register Now</a>
+                            <div class="text-right text-zinc-50">
+                                <div class="text-xl font-bold">15-17 June</div>
+                                <div class="text-sm">2023</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Article 3 -->
+                <a href="" class="bg-quarternary rounded-lg shadow overflow-hidden">
+                    <div class="flex flex-col">
+                        <div class="h-48 overflow-hidden">
+                            <img src="https://picsum.photos/id/237/400/400" alt="Research Methods" class="w-full h-full object-cover">
+                        </div>
+                        <div class="p-4 flex flex-col">
+                            <span class="w-fit bg-zinc-50 text-quarternary text-xs font-semibold px-2 py-1 rounded">RESEARCH</span>
+                            <h3 class="mt-2 text-base font-bold">Innovative Research Methods in Industrial Engineering</h3>
+                            <div class="mt-4 pt-2 flex items-center">
+                                <img class="w-6 h-6 rounded-full" src="https://picsum.photos/id/65/100" alt="Author">
+                                <span class="ml-2 text-xs text-gray-600">Prof. Budi Santoso</span>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- YouTube Video -->
+                <div class="bg-zinc-50 rounded-lg shadow overflow-hidden">
+                    <div class="relative overflow-hidden rounded-lg shadow-2xl aspect-video">
+                        <iframe
+                            class="absolute inset-0 w-full h-full"
+                            src="https://www.youtube.com/embed/MkOS0xYa5qY?si=_ZNVQDB72NI-rK0I"
+                            title="THIRTY TWO WONDER YEARS"
+                            frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen>
+                        </iframe>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Desktop view (original layout) only visible on large screens -->
+            <div class="hidden lg:grid grid-cols-4 grid-rows-4 gap-6 h-[940px] w-full">
                 <!-- Article 1 -->
                 <a href="" class="col-span-2 row-span-1 bg-zinc-50 rounded-lg shadow overflow-hidden">
                     <div class="h-full relative">
@@ -181,13 +301,13 @@
                 </div>
 
                 <!-- Article 3 -->
-                <a href="" class="col-span-1 row-span-4 bg-[#ffae00] rounded-lg shadow overflow-hidden">
+                <a href="" class="col-span-1 row-span-4 bg-quarternary rounded-lg shadow overflow-hidden">
                     <div class="h-full flex flex-col">
                         <div class="h-1/2 overflow-hidden">
                             <img src="https://picsum.photos/id/237/400/400" alt="Research Methods" class="w-full h-full object-cover">
                         </div>
                         <div class="h-1/2 p-4 flex flex-col">
-                            <span class="w-fit bg-zinc-50 text-[#ffae00] text-xs font-semibold px-2 py-1 rounded">RESEARCH</span>
+                            <span class="w-fit bg-zinc-50 text-quarternary text-xs font-semibold px-2 py-1 rounded">RESEARCH</span>
                             <h3 class="mt-2 text-base font-bold">Innovative Research Methods in Industrial Engineering</h3>
                             <p class="mt-1 text-sm text-gray-600 line-clamp-3">Exploring new approaches to research that are changing how we solve complex industrial problems</p>
                             <div class="mt-auto pt-2 flex items-center">
@@ -232,13 +352,14 @@
 
                 <!-- Article 6 -->
                 <div class="col-span-3 row-span-2 bg-zinc-50 rounded-lg shadow overflow-hidden">
-                    <div class="h-full flex">
-                        <div class="w-2/3 p-4 flex flex-col">
+                    <div class="h-full flex flex-col md:flex-row">
+                        <div class="w-full md:w-2/3 p-4 flex flex-col">
                             <span class="w-fit bg-gray-200 text-gray-800 text-xs font-semibold px-2 py-1 rounded">INDUSTRY INSIGHTS</span>
                             <h3 class="mt-2 text-xl font-bold">The State of Industrial Engineering in Indonesia 2023</h3>
                             <p class="mt-1 text-sm text-gray-600 line-clamp-2">A comprehensive analysis of trends, challenges, and opportunities in the Indonesian industrial engineering landscape</p>
 
                             <div class="mt-4 grid grid-cols-3 gap-3">
+                                <!-- Articles Bento Grid (continued) -->
                                 <div class="text-center p-2 bg-gray-100 rounded">
                                     <div class="text-lg font-bold text-primary">27%</div>
                                     <div class="text-xs text-gray-600">Growth in Job Market</div>
@@ -258,17 +379,17 @@
                                 <a href="#" class="text-primary text-sm font-medium">Download Report →</a>
                             </div>
                         </div>
-                        <div class="w-1/3 overflow-hidden">
+                        <div class="w-full md:w-1/3 h-48 md:h-auto overflow-hidden">
                             <img src="https://picsum.photos/id/180/300/400" alt="Industry Report" class="w-full h-full object-cover">
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div class="mt-12 text-center">
-                <a href="{{ route('articles') }}" class="inline-flex items-center rounded-md border border-primary bg-zinc-50 px-6 py-3 text-base font-medium text-primary hover:bg-primary hover:text-zinc-50 transition">
+            <div class="mt-8 md:mt-12 text-center">
+                <a href="{{ route('articles') }}" class="inline-flex items-center rounded-md border border-primary bg-zinc-50 px-4 py-2 md:px-6 md:py-3 text-sm md:text-base font-medium text-primary hover:bg-primary hover:text-zinc-50 transition">
                     View all articles
-                    <svg class="ml-2 h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                    <svg class="ml-2 h-4 w-4 md:h-5 md:w-5" viewBox="0 0 20 20" fill="currentColor">
                         <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
                     </svg>
                 </a>
@@ -277,7 +398,7 @@
     </section>
 
     <!-- Video Profile Section -->
-    <section class="bg-zinc-900 py-16">
+    <section class="py-8 md:py-12 lg:py-16 bg-zinc-900">
         <div class="px-4 sm:px-6 lg:px-8">
             <div class="mb-12 text-center">
                 <flux:heading size="4xl" level="2" accent="disableDarkMode">Watch Our Video</flux:heading>
@@ -297,12 +418,13 @@
                     </iframe>
                 </div>
 
-                <div class="mt-8 flex justify-center">
-                    <a href="https://www.youtube.com/@HMTITelkomUniversity" target="_blank" rel="noopener noreferrer" class="inline-flex items-center space-x-2 rounded-full bg-secondary px-6 py-3 text-zinc-50 hover:bg-primary transition">
-                        <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                <div class="mt-6 md:mt-8 flex justify-center">
+                    <a href="https://www.youtube.com/@HMTITelkomUniversity" target="_blank" rel="noopener noreferrer"
+                        class="inline-flex items-center space-x-1 md:space-x-2 rounded-full bg-secondary px-4 py-2 md:px-6 md:py-3 text-sm md:text-base text-zinc-50 hover:bg-primary transition">
+                        <svg class="h-4 w-4 md:h-5 md:w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
                             <path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"/>
                         </svg>
-                        <span>Subscribe to our YouTube channel</span>
+                        <span class="whitespace-nowrap">Subscribe to our YouTube channel</span>
                     </a>
                 </div>
             </div>
@@ -310,7 +432,7 @@
     </section>
 
     <!-- Call to Action Section -->
-    <section class="bg-primary py-16 relative overflow-hidden">
+    <section class="bg-primary py-8 sm:py-12 md:py-16 relative overflow-hidden">
         <!-- Decorative pattern -->
         <div class="absolute inset-0 overflow-hidden opacity-10">
             <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
@@ -324,19 +446,21 @@
         </div>
 
         <div class="relative px-4 sm:px-6 lg:px-8">
-            <div class="md:flex md:items-center md:justify-between">
-                <h2 class="text-3xl font-bold tracking-tight text-zinc-50 sm:text-4xl">
-                    <span class="block">Ready to join maroon army?</span>
-                    <span class="block text-tertiary">Become a member today!</span>
-                </h2>
-                <div class="mt-8 flex md:mt-0">
-                    <div class="rounded-md shadow">
-                        <a href="#" class="flex items-center justify-center rounded-md bg-zinc-50 px-8 py-3 text-base font-medium text-primary hover:bg-zinc-100 md:py-4 md:px-10">
+            <div class="flex flex-col md:flex-row md:items-center md:justify-between">
+                <div class="text-center md:text-left max-w-lg mx-auto md:mx-0">
+                    <h2 class="text-2xl sm:text-3xl font-bold tracking-tight text-zinc-50 md:text-4xl">
+                        <span class="block">Ready to join maroon army?</span>
+                        <span class="block text-tertiary mt-1">Become a member today!</span>
+                    </h2>
+                </div>
+                <div class="mt-6 md:mt-0 flex flex-col sm:flex-row justify-center md:justify-end space-y-3 sm:space-y-0 sm:space-x-3">
+                    <div class="rounded-md shadow w-full sm:w-auto">
+                        <a href="#" class="flex items-center justify-center rounded-md bg-zinc-50 px-6 py-3 text-sm sm:text-base font-medium text-primary hover:bg-zinc-100 md:py-3 md:px-8 lg:py-4 lg:px-10 w-full sm:w-auto">
                             Apply for Membership
                         </a>
                     </div>
-                    <div class="ml-3 rounded-md shadow">
-                        <a href="#" class="flex items-center justify-center rounded-md bg-quarternary/90 px-8 py-3 text-base font-medium text-zinc-50 hover:bg-quarternary md:py-4 md:px-10">
+                    <div class="rounded-md shadow w-full sm:w-auto">
+                        <a href="#" class="flex items-center justify-center rounded-md bg-quarternary/90 px-6 py-3 text-sm sm:text-base font-medium text-zinc-50 hover:bg-quarternary md:py-3 md:px-8 lg:py-4 lg:px-10 w-full sm:w-auto">
                             Learn More
                         </a>
                     </div>
