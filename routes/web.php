@@ -6,6 +6,7 @@ use App\Http\Controllers\MainController;
 
 Route::controller(MainController::class)->group(function () {
 
+    // Home Route
     Route::get('/', 'index')->name('home');
 
     // Profile Routes
@@ -22,23 +23,23 @@ Route::controller(MainController::class)->group(function () {
         Route::get('sejarah-hmti', 'sejarah')->name('sejarah');
     });
 
-    // Department Routes
+    // Department/Bureau Routes
     Route::prefix('department-bureau')->name('department-bureau.')->group(function () {
-        // Internal Department
+        // Internal Routes
         Route::prefix('internal')->name('internal.')->group(function () {
             Route::get('human-resource-department', 'hrd')->name('hrd');
             Route::get('departemen-kaderisasi', 'kaderisasi')->name('kaderisasi');
             Route::get('departemen-kemahasiswaan', 'kemahasiswaan')->name('kemahasiswaan');
         });
 
-        // PSTI Department
+        // PSTI Routes
         Route::prefix('psti')->name('psti.')->group(function () {
             Route::get('departemen-akademik', 'akademik')->name('akademik');
             Route::get('departemen-generasi-bisnis', 'generasiBisnis')->name('generasi-bisnis');
             Route::get('departemen-riset-kompetisi', 'risetKompetisi')->name('riset-kompetisi');
         });
 
-        // External Department
+        // External Routes
         Route::prefix('external')->name('external.')->group(function () {
             Route::get('departemen-komunikasi-informasi', 'kominfo')->name('kominfo');
             Route::get('biro-dedikasi-masyarakat', 'dedikasiMasyarakat')->name('dedikasi-masyarakat');
@@ -46,6 +47,7 @@ Route::controller(MainController::class)->group(function () {
         });
     });
 
+    // Community & Committee Routes
     Route::prefix('community-committee')->name('community-committee.')->group(function () {
         // Community Routes
         Route::prefix('community')->name('community.')->group(function () {
@@ -102,11 +104,10 @@ Route::controller(MainController::class)->group(function () {
 
 });
 
-Route::view('dashboard', 'dashboard')
-    ->middleware(['auth', 'verified'])
-    ->name('dashboard');
-
 Route::middleware(['auth', 'can:access dashboard'])->group(function () {
+
+    Route::view('/dashboard', 'dashboard.index')->name('dashboard');
+
     Route::redirect('settings', 'settings/profile');
 
     Volt::route('settings/profile', 'settings.profile')->name('settings.profile');
