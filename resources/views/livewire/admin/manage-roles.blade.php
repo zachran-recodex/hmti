@@ -90,7 +90,11 @@
                 <flux:fieldset>
                     <div class="space-y-6">
                         {{-- Input nama role --}}
-                        <flux:input label="Name" wire:model="name" />
+                        <flux:input
+                            label="Name"
+                            wire:model="name"
+                            :disabled="in_array($name, ['admin', 'super-admin'])"
+                        />
 
                         {{-- Input permissions --}}
                         <div>

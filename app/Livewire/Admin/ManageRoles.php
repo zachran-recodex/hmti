@@ -120,9 +120,12 @@ class ManageRoles extends Component
             if ($this->isEditing) {
                 $role = Role::findOrFail($this->roleId);
 
-                $role->update([
-                    'name' => $this->name,
-                ]);
+                // Prevent name changes for admin and super-admin roles
+                if (!in_array($role->name, ['admin', 'super-admin'])) {
+                    $role->update([
+                        'name' => $this->name,
+                    ]);
+                }
 
                 $role->syncPermissions($permissions);
 
@@ -141,7 +144,7 @@ class ManageRoles extends Component
             $this->resetForm();
             $this->modal('form')->close();
 
-        } catch  (\Illuminate\Database\QueryException $e) {
+        } catch (\Illuminate\Database\QueryException $e) {
             DB::rollBack();
             $this->notifyError('Database error occurred: ' . $e->getMessage());
         } catch (\Exception $e) {
