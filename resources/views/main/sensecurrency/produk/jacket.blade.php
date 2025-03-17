@@ -51,9 +51,33 @@
         </div>
     </section>
 
-    <!-- Section -->
-    <section class="py-8 md:py-12 lg:py-16">
-        <div class="px-4 sm:px-6 lg:px-8">
+    <!-- Main Section -->
+    <section class="flex flex-row">
+
+        @include('main.partials.sidebar')
+
+        <div class="mx-auto py-8 sm:py-12 md:py-16">
+            <div class="px-4 sm:px-6 lg:px-8">
+                <div class="flex flex-col space-y-6">
+                    <flux:heading size="4xl" level="2">Tentang Kami</flux:heading>
+
+                    <div>
+                        <flux:subheading size="3xl">
+                            Profil Himpunan Mahasiswa Teknik Industri Telkom University
+                        </flux:subheading>
+
+                        <p class="text-lg text-gray-500">Himpunan Mahasiswa Teknik Informatika (HMTI) adalah organisasi mahasiswa yang bergerak di bidang teknologi informasi dan komunikasi. HMTI merupakan organisasi mahasiswa yang berada di bawah naungan Departemen Teknik Informatika Fakultas Teknik Universitas Telkom.</p>
+                    </div>
+
+                    <div>
+                        <flux:subheading size="3xl">
+                            Sejarah Himpunan Mahasiswa Teknik Industri Telkom University
+                        </flux:subheading>
+
+                        <p class="text-lg text-gray-500">Himpunan Mahasiswa Teknik Informatika (HMTI) adalah organisasi mahasiswa yang bergerak di bidang teknologi informasi dan komunikasi. HMTI merupakan organisasi mahasiswa yang berada di bawah naungan Departemen Teknik Informatika Fakultas Teknik Universitas Telkom.</p>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 </x-layouts.main>
