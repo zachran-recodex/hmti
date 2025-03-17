@@ -199,7 +199,16 @@ class ManageUsers extends Component
         if ($this->sortField === 'role') {
             $users->leftJoin('model_has_roles', 'users.id', '=', 'model_has_roles.model_id')
                 ->leftJoin('roles', 'model_has_roles.role_id', '=', 'roles.id')
-                ->groupBy('users.id', 'users.name', 'users.email', 'users.created_at') // Add all necessary user fields
+                ->groupBy(
+                    'users.id',
+                    'users.name',
+                    'users.email',
+                    'users.email_verified_at',
+                    'users.password',
+                    'users.remember_token',
+                    'users.created_at',
+                    'users.updated_at'
+                )
                 ->orderBy(DB::raw('MIN(roles.name)'), $this->sortDirection)
                 ->select('users.*');
         } else {
