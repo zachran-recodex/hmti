@@ -30,6 +30,10 @@ class ManageUsers extends Component
     public $isEditing = false;   // Status mode edit
     public $searchTerm = '';     // Kata kunci pencarian
 
+    // Add these new properties for sorting
+    public $sortField = 'created_at';
+    public $sortDirection = 'desc';
+
     /**
      * Mendefinisikan aturan validasi untuk form
      */
@@ -171,20 +175,38 @@ class ManageUsers extends Component
         }
     }
 
+    public function sortBy($field)
+    {
+        if ($this->sortField === $field) {
+            $this->sortDirection = $this->sortDirection === 'asc' ? 'desc' : 'asc';
+        } else {
+            $this->sortField = $field;
+            $this->sortDirection = 'asc';
+        }
+    }
+
     /**
      * Render tampilan komponen
      */
     public function render()
     {
-        // Ambil daftar pengguna dengan filter pencarian
         $users = User::when($this->searchTerm, function($query) {
                 $query->where('name', 'like', '%' . $this->searchTerm . '%')
                     ->orWhere('email', 'like', '%' . $this->searchTerm . '%');
-            })
-            ->orderBy('created_at', 'desc')
-            ->paginate(10);
+            });
 
-        // Ambil semua role yang tersedia
+        // Handle role sorting separately
+        if ($this->sortField === 'role') {
+            $users->leftJoin('model_has_roles', 'users.id', '=', 'model_has_roles.model_id')
+                ->leftJoin('roles', 'model_has_roles.role_id', '=', 'roles.id')
+                ->groupBy('users.id', 'users.name', 'users.email', 'users.created_at') // Add all necessary user fields
+                ->orderBy(DB::raw('MIN(roles.name)'), $this->sortDirection)
+                ->select('users.*');
+        } else {
+            $users->orderBy($this->sortField, $this->sortDirection);
+        }
+
+        $users = $users->paginate(10);
         $roles = Role::all();
 
         return view('livewire.admin.manage-users', [

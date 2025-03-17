@@ -2,20 +2,15 @@
 <flux:card>
     {{-- Header kartu dengan judul dan fitur pencarian --}}
     <flux:card.header class="flex justify-between items-center">
-        <flux:heading size="lg" class="font-semibold">List User</flux:heading>
+        {{-- Input pencarian dengan debounce 300ms untuk mengurangi request --}}
+        <flux:input class="w-64!" icon="magnifying-glass" wire:model.live.debounce.300ms="searchTerm" placeholder="Search users..." />
 
-        {{-- Bagian kanan header dengan pencarian dan tombol tambah --}}
-        <div class="flex items-center gap-4">
-            {{-- Input pencarian dengan debounce 300ms untuk mengurangi request --}}
-            <flux:input icon="magnifying-glass" wire:model.live.debounce.300ms="searchTerm" placeholder="Search users..." />
-
-            {{-- Tombol untuk membuka modal form tambah user --}}
-            <flux:modal.trigger name="form">
-                <flux:button type="button" variant="primary" class="w-fit" icon="plus">
-                    Add New
-                </flux:button>
-            </flux:modal.trigger>
-        </div>
+        {{-- Tombol untuk membuka modal form tambah user --}}
+        <flux:modal.trigger name="form">
+            <flux:button type="button" variant="primary" class="w-fit" icon="plus">
+                Add New
+            </flux:button>
+        </flux:modal.trigger>
     </flux:card.header>
 
     {{-- Badan kartu berisi tabel data pengguna --}}
@@ -25,9 +20,15 @@
             <flux:table hover striped>
                 {{-- Definisi kolom tabel --}}
                 <flux:table.columns>
-                    <flux:table.column>Name</flux:table.column>
-                    <flux:table.column>Email</flux:table.column>
-                    <flux:table.column>Role</flux:table.column>
+                    <flux:table.column sortable wire:click="sortBy('name')" :direction="$sortField === 'name' ? $sortDirection : null">
+                        Name
+                    </flux:table.column>
+                    <flux:table.column sortable wire:click="sortBy('email')" :direction="$sortField === 'email' ? $sortDirection : null">
+                        Email
+                    </flux:table.column>
+                    <flux:table.column sortable wire:click="sortBy('role')" :direction="$sortField === 'role' ? $sortDirection : null">
+                        Role
+                    </flux:table.column>
                     <flux:table.column>Actions</flux:table.column>
                 </flux:table.columns>
 

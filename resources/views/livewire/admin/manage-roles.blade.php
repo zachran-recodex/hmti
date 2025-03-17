@@ -2,20 +2,15 @@
 <flux:card>
     {{-- Header kartu dengan judul dan fitur pencarian --}}
     <flux:card.header class="flex justify-between items-center">
-        <flux:heading size="lg" class="font-semibold">List Role</flux:heading>
+        {{-- Input pencarian dengan debounce 300ms untuk mengurangi request --}}
+        <flux:input class="w-64!" icon="magnifying-glass" wire:model.live.debounce.300ms="searchTerm" placeholder="Search roles..." />
 
-        {{-- Bagian kanan header dengan pencarian dan tombol tambah --}}
-        <div class="flex items-center gap-4">
-            {{-- Input pencarian dengan debounce 300ms untuk mengurangi request --}}
-            <flux:input icon="magnifying-glass" wire:model.live.debounce.300ms="searchTerm" placeholder="Search roles..." />
-
-            {{-- Tombol untuk membuka modal form tambah role --}}
-            <flux:modal.trigger name="form">
-                <flux:button type="button" variant="primary" class="w-fit" icon="plus">
-                    Add New
-                </flux:button>
-            </flux:modal.trigger>
-        </div>
+        {{-- Tombol untuk membuka modal form tambah role --}}
+        <flux:modal.trigger name="form">
+            <flux:button type="button" variant="primary" class="w-fit" icon="plus">
+                Add New
+            </flux:button>
+        </flux:modal.trigger>
     </flux:card.header>
 
     {{-- Badan kartu berisi tabel data role --}}
