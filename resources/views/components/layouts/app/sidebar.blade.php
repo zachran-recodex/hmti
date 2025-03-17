@@ -30,10 +30,6 @@
                         @can('manage roles')
                         <flux:navlist.item icon="shield-check" :href="route('admin.role')" :current="request()->routeIs('admin.role')" wire:navigate>Manage Role</flux:navlist.item>
                         @endcan
-
-                        @can('manage permissions')
-                        <flux:navlist.item icon="key" :href="route('admin.permission')" :current="request()->routeIs('admin.permission')" wire:navigate>Manage Permission</flux:navlist.item>
-                        @endcan
                     </flux:navlist.group>
                 @endif
 

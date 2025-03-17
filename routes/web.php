@@ -116,10 +116,6 @@ Route::middleware(['auth', 'can:access dashboard'])->group(function () {
         Route::view('manage-role', 'dashboard.admin.role')
             ->name('role')
             ->middleware('can:manage roles');
-
-        Route::view('manage-permission', 'dashboard.admin.permission')
-            ->name('permission')
-            ->middleware('can:manage permissions');
     });
 
     Route::redirect('settings', 'settings/profile');
