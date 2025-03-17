@@ -21,6 +21,9 @@ class UsersRolesAndPermissionsSeeder extends Seeder
         // Create permissions
         $permissions = [
             'access dashboard',
+            'manage users',
+            'manage roles',
+            'manage permissions',
         ];
 
         // Create permissions in the database
@@ -38,6 +41,9 @@ class UsersRolesAndPermissionsSeeder extends Seeder
         // Assign a subset of permissions to admin
         $adminPermissions = [
             'access dashboard',
+            'manage users',
+            'create users',
+            'edit users',
         ];
         $adminRole->givePermissionTo($adminPermissions);
 
@@ -69,12 +75,5 @@ class UsersRolesAndPermissionsSeeder extends Seeder
             'password' => bcrypt('admin123'),
         ]);
         $adminUser->assignRole($adminRole);
-
-        // Create a regular user without any role
-        User::create([
-            'name' => 'Mahasiswa Biasa',
-            'email' => 'mahasiswa@hmtitelkomuniversity.id',
-            'password' => bcrypt('user123'),
-        ]);
     }
 }

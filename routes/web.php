@@ -101,12 +101,26 @@ Route::controller(MainController::class)->group(function () {
         Route::get('komisi-c', 'komisiC')->name('komisi-c');
         Route::get('burt', 'burt')->name('burt');
     });
-
 });
 
 Route::middleware(['auth', 'can:access dashboard'])->group(function () {
 
-    Route::view('/dashboard', 'dashboard.index')->name('dashboard');
+    Route::view('dashboard', 'dashboard.index')->name('dashboard');
+
+    Route::prefix('dashboard/admin')->name('admin.')->group(function (){
+
+        Route::view('manage-user', 'dashboard.admin.user')
+            ->name('user')
+            ->middleware('can:manage users');
+
+        Route::view('manage-role', 'dashboard.admin.role')
+            ->name('role')
+            ->middleware('can:manage roles');
+
+        Route::view('manage-permission', 'dashboard.admin.permission')
+            ->name('permission')
+            ->middleware('can:manage permissions');
+    });
 
     Route::redirect('settings', 'settings/profile');
 

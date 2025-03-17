@@ -12,9 +12,31 @@
             </a>
 
             <flux:navlist variant="outline">
-                <flux:navlist.group heading="Platform" class="grid">
-                    <flux:navlist.item icon="home" :href="route('dashboard')" :current="request()->routeIs('dashboard')" wire:navigate>{{ __('Dashboard') }}</flux:navlist.item>
-                </flux:navlist.group>
+
+                <!-- Theme Switcher -->
+                <flux:radio.group variant="segmented" x-model="$flux.appearance" class="mx-4 mb-4">
+                    <flux:radio value="light" icon="sun" />
+                    <flux:radio value="dark" icon="moon" />
+                    <flux:radio value="system" icon="computer-desktop" />
+                </flux:radio.group>
+
+                <flux:navlist.item icon="home" :href="route('dashboard')" :current="request()->routeIs('dashboard')" wire:navigate>Dashboard</flux:navlist.item>
+
+                @if(auth()->user()->hasRole(['admin', 'super-admin']))
+                    <flux:navlist.group expandable heading="Admin">
+                        @can('manage users')
+                        <flux:navlist.item icon="users" :href="route('admin.user')" :current="request()->routeIs('admin.user')" wire:navigate>Manage User</flux:navlist.item>
+                        @endcan
+
+                        @can('manage roles')
+                        <flux:navlist.item icon="shield-check" :href="route('admin.role')" :current="request()->routeIs('admin.role')" wire:navigate>Manage Role</flux:navlist.item>
+                        @endcan
+
+                        @can('manage permissions')
+                        <flux:navlist.item icon="key" :href="route('admin.permission')" :current="request()->routeIs('admin.permission')" wire:navigate>Manage Permission</flux:navlist.item>
+                        @endcan
+                    </flux:navlist.group>
+                @endif
             </flux:navlist>
 
             <flux:spacer />
@@ -126,6 +148,8 @@
         </flux:header>
 
         {{ $slot }}
+
+        <livewire:notification />
 
         @fluxScripts
     </body>
