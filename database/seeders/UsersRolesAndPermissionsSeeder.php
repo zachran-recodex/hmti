@@ -42,8 +42,6 @@ class UsersRolesAndPermissionsSeeder extends Seeder
         $adminPermissions = [
             'access dashboard',
             'manage users',
-            'create users',
-            'edit users',
         ];
         $adminRole->givePermissionTo($adminPermissions);
 
