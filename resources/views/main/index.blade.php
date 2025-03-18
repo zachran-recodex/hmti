@@ -420,7 +420,7 @@
         </div>
     </section>
 
-    <!-- Video Profile Section -->
+    <!-- Video Profil Section -->
     <section class="py-8 md:py-12 lg:py-16 bg-zinc-900">
         <div class="px-4 sm:px-6 lg:px-8">
             <div class="mb-12 text-center">

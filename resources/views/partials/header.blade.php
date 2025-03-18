@@ -12,41 +12,37 @@
     <!-- Desktop Navigation -->
     <flux:navbar class="-mb-px max-xl:hidden">
         <flux:dropdown class="max-xl:hidden">
-            <flux:navbar.item icon-trailing="chevron-down">Profile</flux:navbar.item>
+            <flux:navbar.item icon-trailing="chevron-down">Profil</flux:navbar.item>
 
             <flux:navmenu>
-                <flux:navmenu.item href="{{ route('profile.tentang-kami') }}">Tentang Kami</flux:navmenu.item>
-                <flux:navmenu.item href="{{ route('profile.visi-misi') }}">Visi Misi</flux:navmenu.item>
-                <flux:navmenu.item href="{{ route('profile.struktur') }}">Struktur HMTI</flux:navmenu.item>
-                <flux:navmenu.item href="{{ route('profile.inti-kepala') }}">Inti dan Kepala Depbir</flux:navmenu.item>
-                <flux:navmenu.item href="{{ route('profile.ad-art') }}">AD/ART</flux:navmenu.item>
-                <flux:navmenu.item href="{{ route('profile.panduan-logo') }}">Panduan Logo HMTI</flux:navmenu.item>
-                <flux:navmenu.item href="{{ route('profile.grand-design') }}">Grand Design HMTI 2025</flux:navmenu.item>
-                <flux:navmenu.item href="{{ route('profile.hut') }}">HUT HMTI</flux:navmenu.item>
-                <flux:navmenu.item href="{{ route('profile.profil') }}">Profil HMTI</flux:navmenu.item>
-                <flux:navmenu.item href="{{ route('profile.sejarah') }}">Sejarah HMTI</flux:navmenu.item>
+                <flux:navmenu.item href="{{ route('profil.tentang-kami') }}">Tentang Kami</flux:navmenu.item>
+                <flux:navmenu.item href="{{ route('profil.ad-art') }}">AD/ART</flux:navmenu.item>
+                <flux:navmenu.item href="{{ route('profil.panduan-logo') }}">Panduan Logo HMTI</flux:navmenu.item>
+                <flux:navmenu.item href="{{ route('profil.grand-design') }}">Grand Design HMTI 2025</flux:navmenu.item>
+                <flux:navmenu.item href="{{ route('profil.hut') }}">HUT HMTI</flux:navmenu.item>
+                <flux:navmenu.item href="{{ route('profil.sejarah') }}">Sejarah HMTI</flux:navmenu.item>
             </flux:navmenu>
         </flux:dropdown>
         <flux:dropdown class="max-xl:hidden">
-            <flux:navbar.item icon-trailing="chevron-down">Department/Bureau</flux:navbar.item>
+            <flux:navbar.item icon-trailing="chevron-down">Departemen & Biro</flux:navbar.item>
 
             <flux:navmenu>
                 <flux:navlist.group heading="Internal" expandable expanded="false">
-                    <flux:navlist.item href="{{ route('department-bureau.internal.hrd') }}">Human Resource Department</flux:navlist.item>
-                    <flux:navlist.item href="{{ route('department-bureau.internal.kaderisasi') }}">Departemen Kaderisasi</flux:navlist.item>
-                    <flux:navlist.item href="{{ route('department-bureau.internal.kemahasiswaan') }}">Departemen Kemahasiswaan</flux:navlist.item>
+                    <flux:navlist.item href="{{ route('departemen-biro.internal.hrd') }}">Human Resource Department</flux:navlist.item>
+                    <flux:navlist.item href="{{ route('departemen-biro.internal.kaderisasi') }}">Departemen Kaderisasi</flux:navlist.item>
+                    <flux:navlist.item href="{{ route('departemen-biro.internal.kemahasiswaan') }}">Departemen Kemahasiswaan</flux:navlist.item>
                 </flux:navlist.group>
 
                 <flux:navlist.group heading="PSTI" expandable expanded="false">
-                    <flux:navlist.item href="{{ route('department-bureau.psti.akademik') }}">Departemen Akademik</flux:navlist.item>
-                    <flux:navlist.item href="{{ route('department-bureau.psti.generasi-bisnis') }}">Departemen Generasi Bisnis</flux:navlist.item>
-                    <flux:navlist.item href="{{ route('department-bureau.psti.riset-kompetisi') }}">Departemen Riset & Kompetisi</flux:navlist.item>
+                    <flux:navlist.item href="{{ route('departemen-biro.psti.akademik') }}">Departemen Akademik</flux:navlist.item>
+                    <flux:navlist.item href="{{ route('departemen-biro.psti.generasi-bisnis') }}">Departemen Generasi Bisnis</flux:navlist.item>
+                    <flux:navlist.item href="{{ route('departemen-biro.psti.riset-kompetisi') }}">Departemen Riset & Kompetisi</flux:navlist.item>
                 </flux:navlist.group>
 
                 <flux:navlist.group heading="External" expandable expanded="false">
-                    <flux:navlist.item href="{{ route('department-bureau.external.kominfo') }}">Departemen Komunikasi Dan Informasi</flux:navlist.item>
-                    <flux:navlist.item href="{{ route('department-bureau.external.dedikasi-masyarakat') }}">Biro Dedikasi Masyarakat</flux:navlist.item>
-                    <flux:navlist.item href="{{ route('department-bureau.external.public-relation') }}">Bureau Public Relation</flux:navlist.item>
+                    <flux:navlist.item href="{{ route('departemen-biro.external.kominfo') }}">Departemen Komunikasi Dan Informasi</flux:navlist.item>
+                    <flux:navlist.item href="{{ route('departemen-biro.external.dedikasi-masyarakat') }}">Biro Dedikasi Masyarakat</flux:navlist.item>
+                    <flux:navlist.item href="{{ route('departemen-biro.external.public-relation') }}">Bureau Public Relation</flux:navlist.item>
                 </flux:navlist.group>
             </flux:navmenu>
 
@@ -124,7 +120,7 @@
 
     <flux:separator vertical variant="subtle" class="my-2 mx-2 sm:mx-4 hidden sm:block"/>
 
-    <!-- User profile section -->
+    <!-- User profil section -->
     @auth
         <flux:dropdown position="top" align="end">
             <flux:profile
@@ -156,7 +152,7 @@
                 <flux:menu.separator />
 
                 <flux:menu.radio.group>
-                    <flux:menu.item href="/settings/profile" icon="cog" wire:navigate>Settings</flux:menu.item>
+                    <flux:menu.item href="/settings/profil" icon="cog" wire:navigate>Settings</flux:menu.item>
                 </flux:menu.radio.group>
 
                 <flux:menu.separator />

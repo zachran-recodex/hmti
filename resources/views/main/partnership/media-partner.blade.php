@@ -51,9 +51,7 @@
     </section>
 
     <!-- Main Section -->
-    <section class="flex flex-row">
-
-        @include('main.partials.sidebar')
+    <section>
 
         <div class="mx-auto py-8 sm:py-12 md:py-16">
             <div class="px-4 sm:px-6 lg:px-8">

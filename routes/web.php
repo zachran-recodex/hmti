@@ -9,25 +9,21 @@ Route::controller(MainController::class)->group(function () {
     // Home Route
     Route::get('/', 'index')->name('home');
 
-    // Profile Routes
-    Route::prefix('profile')->name('profile.')->group(function () {
+    // Profil Routes
+    Route::prefix('profil')->name('profil.')->group(function () {
         Route::get('tentang-kami', 'tentangKami')->name('tentang-kami');
-        Route::get('visi-misi', 'visiMisi')->name('visi-misi');
-        Route::get('struktur-hmti', 'struktur')->name('struktur');
-        Route::get('inti-dan-kepala-depbir', 'intiKepala')->name('inti-kepala');
         Route::get('ad-art', 'adArt')->name('ad-art');
         Route::get('panduan-logo-hmti', 'panduanLogo')->name('panduan-logo');
         Route::get('grand-design-hmti-2025', 'grandDesign')->name('grand-design');
         Route::get('hut-hmti', 'hut')->name('hut');
-        Route::get('profil-hmti', 'profil')->name('profil');
         Route::get('sejarah-hmti', 'sejarah')->name('sejarah');
     });
 
-    // Department/Bureau Routes
-    Route::prefix('department-bureau')->name('department-bureau.')->group(function () {
+    // Departemen & Biro Routes
+    Route::prefix('departemen-biro')->name('departemen-biro.')->group(function () {
         // Internal Routes
         Route::prefix('internal')->name('internal.')->group(function () {
-            Route::get('human-resource-department', 'hrd')->name('hrd');
+            Route::get('departemen-human-resource', 'hrd')->name('hrd');
             Route::get('departemen-kaderisasi', 'kaderisasi')->name('kaderisasi');
             Route::get('departemen-kemahasiswaan', 'kemahasiswaan')->name('kemahasiswaan');
         });
@@ -43,7 +39,7 @@ Route::controller(MainController::class)->group(function () {
         Route::prefix('external')->name('external.')->group(function () {
             Route::get('departemen-komunikasi-informasi', 'kominfo')->name('kominfo');
             Route::get('biro-dedikasi-masyarakat', 'dedikasiMasyarakat')->name('dedikasi-masyarakat');
-            Route::get('bureau-public-relation', 'publicRelation')->name('public-relation');
+            Route::get('biro-public-relation', 'publicRelation')->name('public-relation');
         });
     });
 
@@ -118,9 +114,9 @@ Route::middleware(['auth', 'can:access dashboard'])->group(function () {
             ->middleware('can:manage roles');
     });
 
-    Route::redirect('settings', 'settings/profile');
+    Route::redirect('settings', 'settings/profil');
 
-    Volt::route('settings/profile', 'settings.profile')->name('settings.profile');
+    Volt::route('settings/profil', 'settings.profil')->name('settings.profil');
     Volt::route('settings/password', 'settings.password')->name('settings.password');
     Volt::route('settings/appearance', 'settings.appearance')->name('settings.appearance');
 });

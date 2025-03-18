@@ -11,101 +11,81 @@ class MainController extends Controller
         return view('main.index');
     }
 
-    ## Profile
+    ## Profil
     public function tentangKami()
     {
-        return view('main.profile.tentang-kami');
-    }
-
-    public function visiMisi()
-    {
-        return view('main.profile.visi-misi');
-    }
-
-    public function struktur()
-    {
-        return view('main.profile.struktur');
-    }
-
-    public function intiKepala()
-    {
-        return view('main.profile.inti-kepala');
+        return view('main.profil.tentang-kami');
     }
 
     public function adArt()
     {
-        return view('main.profile.ad-art');
+        return view('main.profil.ad-art');
     }
 
     public function panduanLogo()
     {
-        return view('main.profile.panduan-logo');
+        return view('main.profil.panduan-logo');
     }
 
     public function grandDesign()
     {
-        return view('main.profile.grand-design');
+        return view('main.profil.grand-design');
     }
 
     public function hut()
     {
-        return view('main.profile.hut');
-    }
-
-    public function profil()
-    {
-        return view('main.profile.profil');
+        return view('main.profil.hut');
     }
 
     public function sejarah()
     {
-        return view('main.profile.sejarah');
+        return view('main.profil.sejarah');
     }
 
-    ## Department & Bureau
+    ## Departemen & Biro
     public function hrd()
     {
-        return view('main.department-bureau.internal.hrd');
+        return view('main.departemen-biro.internal.hrd');
     }
 
     public function kaderisasi()
     {
-        return view('main.department-bureau.internal.kaderisasi');
+        return view('main.departemen-biro.internal.kaderisasi');
     }
 
     public function kemahasiswaan()
     {
-        return view('main.department-bureau.internal.kemahasiswaan');
+        return view('main.departemen-biro.internal.kemahasiswaan');
     }
 
     public function akademik()
     {
-        return view('main.department-bureau.psti.akademik');
+        return view('main.departemen-biro.psti.akademik');
     }
 
     public function generasiBisnis()
     {
-        return view('main.department-bureau.psti.generasi-bisnis');
+        return view('main.departemen-biro.psti.generasi-bisnis');
     }
 
     public function risetKompetisi()
     {
-        return view('main.department-bureau.psti.riset-kompetisi');
+        return view('main.departemen-biro.psti.riset-kompetisi');
     }
 
     public function kominfo()
     {
-        return view('main.department-bureau.external.kominfo');
+        return view('main.departemen-biro.external.kominfo');
     }
 
     public function dedikasiMasyarakat()
     {
-        return view('main.department-bureau.external.dedikasi-masyarakat');
+        return view('main.departemen-biro.external.dedikasi-masyarakat');
     }
 
     public function publicRelation()
     {
-        return view('main.department-bureau.external.public-relation');
+        return view('main.departemen-biro.external.public-relation');
     }
 
     ## Community & Committee

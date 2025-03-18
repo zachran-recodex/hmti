@@ -43,7 +43,7 @@
                 </div>
                 <flux:breadcrumbs>
                     <flux:breadcrumbs.item disableDarkMode="true" href="{{ route('home') }}">Home</flux:breadcrumbs.item>
-                    <flux:breadcrumbs.item disableDarkMode="true">Department/Bureau</flux:breadcrumbs.item>
+                    <flux:breadcrumbs.item disableDarkMode="true">Departemen & Biro</flux:breadcrumbs.item>
                     <flux:breadcrumbs.item disableDarkMode="true">External</flux:breadcrumbs.item>
                     <flux:breadcrumbs.item disableDarkMode="true">Biro Dedikasi Masyarakat</flux:breadcrumbs.item>
                 </flux:breadcrumbs>
@@ -52,9 +52,7 @@
     </section>
 
     <!-- Main Section -->
-    <section class="flex flex-row">
-
-        @include('main.partials.sidebar')
+    <section>
 
         <div class="mx-auto py-8 sm:py-12 md:py-16">
             <div class="px-4 sm:px-6 lg:px-8">

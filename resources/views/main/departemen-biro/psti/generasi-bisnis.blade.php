@@ -18,7 +18,7 @@
 
     <link rel="canonical" href="{{ url()->current() }}">
 
-    <title>Tentang Kami | HMTI Telkom University</title>
+    <title>Departemen Generasi Bisnis | HMTI Telkom University</title>
 @endsection
 
 <x-layouts.main>
@@ -39,26 +39,27 @@
         <div class="relative px-4 sm:px-6 lg:px-8">
             <div class="flex flex-col items-center">
                 <div class="mb-6 text-center">
-                    <flux:heading size="4xl" level="2" accent="disableDarkMode">Tentang Kami</flux:heading>
+                    <flux:heading size="4xl" level="2" accent="disableDarkMode">Departemen Generasi Bisnis</flux:heading>
                 </div>
                 <flux:breadcrumbs>
                     <flux:breadcrumbs.item disableDarkMode="true" href="{{ route('home') }}">Home</flux:breadcrumbs.item>
-                    <flux:breadcrumbs.item disableDarkMode="true">Profile</flux:breadcrumbs.item>
-                    <flux:breadcrumbs.item disableDarkMode="true">Tentang Kami</flux:breadcrumbs.item>
+                    <flux:breadcrumbs.item disableDarkMode="true">Departemen & Biro</flux:breadcrumbs.item>
+                    <flux:breadcrumbs.item disableDarkMode="true">PSTI</flux:breadcrumbs.item>
+                    <flux:breadcrumbs.item disableDarkMode="true">Departemen Generasi Bisnis</flux:breadcrumbs.item>
                 </flux:breadcrumbs>
             </div>
         </div>
     </section>
 
     <!-- Main Section -->
-    <section class="flex flex-row">
-
-        @include('main.partials.sidebar')
+    <section>
 
         <div class="mx-auto py-8 sm:py-12 md:py-16">
             <div class="px-4 sm:px-6 lg:px-8">
-                <div class="flex flex-col space-y-6">
-                    <flux:heading size="4xl" level="2">Tentang Kami</flux:heading>
+                <div class="flex flex-col items-center space-y-6">
+                    <img class="h-24 w-fit" src="{{ asset('images/hrd.png') }}" alt="">
+
+                    <flux:heading size="4xl" level="2">Departemen Kaderisasi</flux:heading>
 
                     <div>
                         <flux:subheading size="3xl">
