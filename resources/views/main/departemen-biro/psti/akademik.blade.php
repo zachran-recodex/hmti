@@ -18,7 +18,7 @@
 
     <link rel="canonical" href="{{ url()->current() }}">
 
-    <title>Departemen Akademik | HMTI Telkom University</title>
+    <title>{{ $departemen->title }} | HMTI Telkom University</title>
 @endsection
 
 <x-layouts.main>
@@ -51,31 +51,100 @@
         </div>
     </section>
 
-    <!-- Main Section -->
-    <section>
+    <!-- Departemen -->
+    <section class="py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- Departemen Overview -->
+            <div class="text-center mb-16">
+                @if($departemen->logo)
+                    <img class="h-32 w-auto mx-auto mb-8" src="{{ Storage::url($departemen->logo) }}" alt="HRD Logo">
+                @else
+                    <img class="h-32 w-auto mx-auto mb-8" src="{{ asset('images/hrd.png') }}" alt="HRD Logo">
+                @endif
+                <p class="text-lg text-gray-600 max-w-3xl mx-auto">
+                    {{ $departemen->description }}
+                </p>
+            </div>
 
-        <div class="mx-auto py-8 sm:py-12 md:py-16">
-            <div class="px-4 sm:px-6 lg:px-8">
-                <div class="flex flex-col items-center space-y-6">
-                    <img class="h-24 w-fit" src="{{ asset('images/hrd.png') }}" alt="">
+            <!-- Fungsi -->
+            <div class="mb-16">
+                <flux:heading size="2xl" level="3" class="text-center mb-12">Fungsi</flux:heading>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    @forelse($departemen->fungsis as $fungsi)
+                        <div class="bg-white border border-zinc-200 p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow">
+                            <h4 class="text-xl font-semibold mb-4">{{ $fungsi->title }}</h4>
+                            <p class="text-gray-600">{{ $fungsi->description }}</p>
+                        </div>
+                    @empty
+                        <div class="col-span-2 text-center text-gray-500">
+                            No functions available
+                        </div>
+                    @endforelse
+                </div>
+            </div>
 
-                    <flux:heading size="4xl" level="2">Departemen Kaderisasi</flux:heading>
+            <!-- Programs -->
+            <div class="mb-16">
+                <flux:heading size="2xl" level="3" class="text-center mb-12">Program Kerja</flux:heading>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    @forelse($departemen->programKerjas as $program)
+                        <div class="bg-white border border-zinc-200 p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow">
+                            <h4 class="text-xl font-semibold mb-4">{{ $program->title }}</h4>
+                            <p class="text-gray-600">{{ $program->description }}</p>
+                        </div>
+                    @empty
+                        <div class="col-span-2 text-center text-gray-500">
+                            No programs available
+                        </div>
+                    @endforelse
+                </div>
+            </div>
 
-                    <div>
-                        <flux:subheading size="3xl">
-                            Profil Himpunan Mahasiswa Teknik Industri Telkom University
-                        </flux:subheading>
+            <!-- Agenda -->
+            <div class="mb-16">
+                <flux:heading size="2xl" level="3" class="text-center mb-12">Agenda</flux:heading>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    @forelse($departemen->agendas as $agenda)
+                        <div class="bg-white border border-zinc-200 p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow">
+                            <h4 class="text-xl font-semibold mb-4">{{ $agenda->title }}</h4>
+                            <p class="text-gray-600">{{ $agenda->description }}</p>
+                        </div>
+                    @empty
+                        <div class="col-span-2 text-center text-gray-500">
+                            No agendas available
+                        </div>
+                    @endforelse
+                </div>
+            </div>
 
-                        <p class="text-lg text-gray-500">Himpunan Mahasiswa Teknik Informatika (HMTI) adalah organisasi mahasiswa yang bergerak di bidang teknologi informasi dan komunikasi. HMTI merupakan organisasi mahasiswa yang berada di bawah naungan Departemen Teknik Informatika Fakultas Teknik Universitas Telkom.</p>
-                    </div>
+            <!-- Departemen Structure -->
+            <div class="bg-white border border-zinc-200 rounded-lg shadow-lg p-8">
+                <flux:heading size="2xl" level="3" class="text-center mb-12">Struktur Departemen</flux:heading>
 
-                    <div>
-                        <flux:subheading size="3xl">
-                            Sejarah Himpunan Mahasiswa Teknik Industri Telkom University
-                        </flux:subheading>
+                @php
+                    $kepala = $departemen->members->where('position', 'Kepala')->first();
+                @endphp
 
-                        <p class="text-lg text-gray-500">Himpunan Mahasiswa Teknik Informatika (HMTI) adalah organisasi mahasiswa yang bergerak di bidang teknologi informasi dan komunikasi. HMTI merupakan organisasi mahasiswa yang berada di bawah naungan Departemen Teknik Informatika Fakultas Teknik Universitas Telkom.</p>
-                    </div>
+                @if($kepala)
+                <div class="text-center mb-6">
+                    <img src="{{ asset('images/avatar.png') }}" alt="{{ $kepala->name }}" class="w-32 h-32 rounded-full mx-auto mb-4 object-cover">
+                    <h4 class="text-lg font-semibold">{{ $kepala->name }}</h4>
+                    <p class="text-gray-600">{{ $kepala->position }}</p>
+                </div>
+                @endif
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    @forelse($departemen->members->where('position', '!=', 'Kepala') as $member)
+                        <div class="text-center">
+                            <img src="{{ asset('images/avatar.png') }}" alt="{{ $member->name }}" class="w-32 h-32 rounded-full mx-auto mb-4 object-cover">
+                            <h4 class="text-lg font-semibold">{{ $member->name }}</h4>
+                            <p class="text-gray-600">{{ $member->position }}</p>
+                        </div>
+                    @empty
+                        <div class="col-span-4 text-center text-gray-500">
+                            No members available
+                        </div>
+                    @endforelse
                 </div>
             </div>
         </div>

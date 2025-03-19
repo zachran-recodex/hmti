@@ -18,7 +18,7 @@
 
     <link rel="canonical" href="{{ url()->current() }}">
 
-    <title>Human Resource | HMTI Telkom University</title>
+    <title>{{ $departemen->title }} | HMTI Telkom University</title>
 @endsection
 
 <x-layouts.main>
@@ -39,30 +39,30 @@
         <div class="relative px-4 sm:px-6 lg:px-8">
             <div class="flex flex-col items-center">
                 <div class="mb-6 text-center">
-                    <flux:heading size="4xl" level="2" accent="disableDarkMode">Human Resource</flux:heading>
+                    <flux:heading size="4xl" level="2" accent="disableDarkMode">{{ $departemen->title }}</flux:heading>
                 </div>
                 <flux:breadcrumbs>
                     <flux:breadcrumbs.item disableDarkMode="true" href="{{ route('home') }}">Home</flux:breadcrumbs.item>
                     <flux:breadcrumbs.item disableDarkMode="true">Departemen & Biro</flux:breadcrumbs.item>
                     <flux:breadcrumbs.item disableDarkMode="true">Internal</flux:breadcrumbs.item>
-                    <flux:breadcrumbs.item disableDarkMode="true">Human Resource</flux:breadcrumbs.item>
+                    <flux:breadcrumbs.item disableDarkMode="true">{{ $departemen->title }}</flux:breadcrumbs.item>
                 </flux:breadcrumbs>
             </div>
         </div>
     </section>
 
-    <!-- Human Resource Departemen -->
+    <!-- Departemen -->
     <section class="py-12">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <!-- Departemen Overview -->
             <div class="text-center mb-16">
-                @if($humanResource->logo)
-                    <img class="h-32 w-auto mx-auto mb-8" src="{{ Storage::url($humanResource->logo) }}" alt="HRD Logo">
+                @if($departemen->logo)
+                    <img class="h-32 w-auto mx-auto mb-8" src="{{ Storage::url($departemen->logo) }}" alt="HRD Logo">
                 @else
                     <img class="h-32 w-auto mx-auto mb-8" src="{{ asset('images/hrd.png') }}" alt="HRD Logo">
                 @endif
                 <p class="text-lg text-gray-600 max-w-3xl mx-auto">
-                    {{ $humanResource->description }}
+                    {{ $departemen->description }}
                 </p>
             </div>
 
@@ -70,7 +70,7 @@
             <div class="mb-16">
                 <flux:heading size="2xl" level="3" class="text-center mb-12">Fungsi</flux:heading>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    @forelse($humanResource->fungsis as $fungsi)
+                    @forelse($departemen->fungsis as $fungsi)
                         <div class="bg-white border border-zinc-200 p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow">
                             <h4 class="text-xl font-semibold mb-4">{{ $fungsi->title }}</h4>
                             <p class="text-gray-600">{{ $fungsi->description }}</p>
@@ -87,7 +87,7 @@
             <div class="mb-16">
                 <flux:heading size="2xl" level="3" class="text-center mb-12">Program Kerja</flux:heading>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    @forelse($humanResource->programKerjas as $program)
+                    @forelse($departemen->programKerjas as $program)
                         <div class="bg-white border border-zinc-200 p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow">
                             <h4 class="text-xl font-semibold mb-4">{{ $program->title }}</h4>
                             <p class="text-gray-600">{{ $program->description }}</p>
@@ -104,7 +104,7 @@
             <div class="mb-16">
                 <flux:heading size="2xl" level="3" class="text-center mb-12">Agenda</flux:heading>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    @forelse($humanResource->agendas as $agenda)
+                    @forelse($departemen->agendas as $agenda)
                         <div class="bg-white border border-zinc-200 p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow">
                             <h4 class="text-xl font-semibold mb-4">{{ $agenda->title }}</h4>
                             <p class="text-gray-600">{{ $agenda->description }}</p>
@@ -120,24 +120,31 @@
             <!-- Departemen Structure -->
             <div class="bg-white border border-zinc-200 rounded-lg shadow-lg p-8">
                 <flux:heading size="2xl" level="3" class="text-center mb-12">Struktur Departemen</flux:heading>
+
+                @php
+                    $kepala = $departemen->members->where('position', 'Kepala')->first();
+                @endphp
+
+                @if($kepala)
                 <div class="text-center mb-6">
-                    <img src="https://picsum.photos/200" alt="Kepala" class="w-32 h-32 rounded-full mx-auto mb-4 object-cover">
-                    <h4 class="text-lg font-semibold">Nama Kepala</h4>
-                    <p class="text-gray-600">Kepala Departemen</p>
+                    <img src="{{ asset('images/avatar.png') }}" alt="{{ $kepala->name }}" class="w-32 h-32 rounded-full mx-auto mb-4 object-cover">
+                    <h4 class="text-lg font-semibold">{{ $kepala->name }}</h4>
+                    <p class="text-gray-600">{{ $kepala->position }}</p>
                 </div>
+                @endif
+
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                    @foreach ([
-                        ['position' => 'Kepala Departemen', 'name' => 'John Doe', 'image' => 'https://picsum.photos/200'],
-                        ['position' => 'Wakil Kepala Departemen', 'name' => 'Jane Smith', 'image' => 'https://picsum.photos/201'],
-                        ['position' => 'Sekretaris', 'name' => 'Alice Johnson', 'image' => 'https://picsum.photos/202'],
-                        ['position' => 'Staff', 'name' => 'Bob Wilson', 'image' => 'https://picsum.photos/203']
-                    ] as $member)
+                    @forelse($departemen->members->where('position', '!=', 'Kepala') as $member)
                         <div class="text-center">
-                            <img src="{{ $member['image'] }}" alt="{{ $member['name'] }}" class="w-32 h-32 rounded-full mx-auto mb-4 object-cover">
-                            <h4 class="text-lg font-semibold">{{ $member['name'] }}</h4>
-                            <p class="text-gray-600">{{ $member['position'] }}</p>
+                            <img src="{{ asset('images/avatar.png') }}" alt="{{ $member->name }}" class="w-32 h-32 rounded-full mx-auto mb-4 object-cover">
+                            <h4 class="text-lg font-semibold">{{ $member->name }}</h4>
+                            <p class="text-gray-600">{{ $member->position }}</p>
                         </div>
-                    @endforeach
+                    @empty
+                        <div class="col-span-4 text-center text-gray-500">
+                            No members available
+                        </div>
+                    @endforelse
                 </div>
             </div>
         </div>

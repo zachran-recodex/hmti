@@ -2,8 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Models\HumanResource;
+use App\Models\DepartemenBiro;
 
 class MainController extends Controller
 {
@@ -46,51 +45,101 @@ class MainController extends Controller
     ## Departemen & Biro
     public function hrd()
     {
-        $humanResource = HumanResource::with(['fungsis', 'programKerjas', 'agendas'])->first();
+        $departemen = DepartemenBiro::with(['fungsis', 'programKerjas', 'agendas', 'members'])
+            ->where('title', 'Departemen Human Resource')
+            ->firstOrFail();
 
         return view('main.departemen-biro.internal.hrd', [
-            'humanResource' => $humanResource
+            'departemen' => $departemen
         ]);
     }
 
     public function kaderisasi()
     {
-        return view('main.departemen-biro.internal.kaderisasi');
+        $departemen = DepartemenBiro::with(['fungsis', 'programKerjas', 'agendas', 'members'])
+            ->where('title', 'Departemen Kaderisasi')
+            ->firstOrFail();
+
+        return view('main.departemen-biro.internal.kaderisasi', [
+            'departemen' => $departemen
+        ]);
     }
 
     public function kemahasiswaan()
     {
-        return view('main.departemen-biro.internal.kemahasiswaan');
+        $departemen = DepartemenBiro::with(['fungsis', 'programKerjas', 'agendas', 'members'])
+            ->where('title', 'Departemen Kemahasiswaan')
+            ->firstOrFail();
+
+        return view('main.departemen-biro.internal.kemahasiswaan', [
+            'departemen' => $departemen
+        ]);
     }
 
     public function akademik()
     {
-        return view('main.departemen-biro.psti.akademik');
+        $departemen = DepartemenBiro::with(['fungsis', 'programKerjas', 'agendas', 'members'])
+            ->where('title', 'Departemen Akademik')
+            ->firstOrFail();
+
+        return view('main.departemen-biro.psti.akademik', [
+            'departemen' => $departemen
+        ]);
     }
 
     public function generasiBisnis()
     {
-        return view('main.departemen-biro.psti.generasi-bisnis');
+        $departemen = DepartemenBiro::with(['fungsis', 'programKerjas', 'agendas', 'members'])
+            ->where('title', 'Departemen Generasi Bisnis')
+            ->firstOrFail();
+
+        return view('main.departemen-biro.psti.generasi-bisnis', [
+            'departemen' => $departemen
+        ]);
     }
 
     public function risetKompetisi()
     {
-        return view('main.departemen-biro.psti.riset-kompetisi');
+        $departemen = DepartemenBiro::with(['fungsis', 'programKerjas', 'agendas', 'members'])
+            ->where('title', 'Departemen Riset & Kompetisi')
+            ->firstOrFail();
+
+        return view('main.departemen-biro.psti.riset-kompetisi', [
+            'departemen' => $departemen
+        ]);
     }
 
     public function kominfo()
     {
-        return view('main.departemen-biro.external.kominfo');
+        $departemen = DepartemenBiro::with(['fungsis', 'programKerjas', 'agendas', 'members'])
+            ->where('title', 'Departemen Komunikasi & Informasi')
+            ->firstOrFail();
+
+        return view('main.departemen-biro.external.kominfo', [
+            'departemen' => $departemen
+        ]);
     }
 
     public function dedikasiMasyarakat()
     {
-        return view('main.departemen-biro.external.dedikasi-masyarakat');
+        $departemen = DepartemenBiro::with(['fungsis', 'programKerjas', 'agendas', 'members'])
+            ->where('title', 'Biro Dedikasi Masyarakat')
+            ->firstOrFail();
+
+        return view('main.departemen-biro.external.dedikasi-masyarakat', [
+            'departemen' => $departemen
+        ]);
     }
 
     public function publicRelation()
     {
-        return view('main.departemen-biro.external.public-relation');
+        $departemen = DepartemenBiro::with(['fungsis', 'programKerjas', 'agendas', 'members'])
+            ->where('title', 'Biro Public Relation')
+            ->firstOrFail();
+
+        return view('main.departemen-biro.external.public-relation', [
+            'departemen' => $departemen
+        ]);
     }
 
     ## Community & Committee
