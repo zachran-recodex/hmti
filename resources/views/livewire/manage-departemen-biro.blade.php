@@ -61,7 +61,7 @@
     <flux:modal wire:model="showFormModal" title="form" class="w-7xl">
         <div class="space-y-6">
             <flux:heading size="lg" class="font-semibold mb-6">
-                {{ $isEditing ? 'Edit Departemen & Biro' : 'Add New Departemen & Biro' }}
+                Edit Departemen & Biro
             </flux:heading>
 
             <form wire:submit.prevent="save" class="flex flex-col space-y-6">
@@ -197,7 +197,7 @@
                     <flux:spacer />
 
                     <flux:button type="submit" variant="primary" class="w-fit">
-                        {{ $isEditing ? 'Update' : 'Create' }}
+                        Update
                     </flux:button>
                 </div>
             </form>

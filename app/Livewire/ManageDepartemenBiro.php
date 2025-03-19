@@ -156,13 +156,6 @@ class ManageDepartemenBiro extends Component
         $this->validateOnly($propertyName);
     }
 
-    public function create()
-    {
-        $this->resetForm();
-        $this->isEditing = false;
-        $this->showFormModal = true;
-    }
-
     public function confirmDelete($id)
     {
         $this->departemenbiroId = $id;
@@ -229,33 +222,23 @@ class ManageDepartemenBiro extends Component
             DB::beginTransaction();
 
             $logoPath = $this->handleLogoUpload();
+            $departemenBiro = DepartemenBiro::findOrFail($this->departemenbiroId);
 
-            if ($this->isEditing) {
-                $departemenBiro = DepartemenBiro::findOrFail($this->departemenbiroId);
-
-                if ($this->temp_logo) {
-                    $this->deleteOldLogo($departemenBiro);
-                }
-
-                $departemenBiro->update([
-                    'title' => $this->title,
-                    'description' => $this->description,
-                    'logo' => $logoPath ?? $this->logo,
-                ]);
-
-                // Delete existing relationships
-                $departemenBiro->fungsis()->delete();
-                $departemenBiro->programKerjas()->delete();
-                $departemenBiro->agendas()->delete();
-                $departemenBiro->members()->delete();
-
-            } else {
-                $departemenBiro = DepartemenBiro::create([
-                    'title' => $this->title,
-                    'description' => $this->description,
-                    'logo' => $logoPath,
-                ]);
+            if ($this->temp_logo) {
+                $this->deleteOldLogo($departemenBiro);
             }
+
+            $departemenBiro->update([
+                'title' => $this->title,
+                'description' => $this->description,
+                'logo' => $logoPath ?? $this->logo,
+            ]);
+
+            // Delete existing relationships
+            $departemenBiro->fungsis()->delete();
+            $departemenBiro->programKerjas()->delete();
+            $departemenBiro->agendas()->delete();
+            $departemenBiro->members()->delete();
 
             // Create Fungsis
             foreach ($this->fungsis as $fungsi) {
@@ -291,7 +274,7 @@ class ManageDepartemenBiro extends Component
 
             DB::commit();
 
-            $this->notifySuccess(($this->isEditing ? 'Updated' : 'Created') . ' successfully');
+            $this->notifySuccess('Updated successfully');
             $this->resetForm();
             $this->showFormModal = false;
 
