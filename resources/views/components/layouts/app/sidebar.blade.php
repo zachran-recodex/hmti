@@ -35,6 +35,8 @@
 
                 <flux:navlist.item href="{{ route('dashboard.departemen-biro') }}" textWrap="true">Departemen & Biro</flux:navlist.item>
 
+                <flux:navlist.item href="{{ route('dashboard.community-committee') }}" textWrap="true">Community & Committee</flux:navlist.item>
+
             </flux:navlist>
         </flux:sidebar>
 

@@ -117,6 +117,8 @@ Route::middleware(['auth', 'can:access dashboard'])->group(function () {
         });
 
         Route::view('departemen-biro', 'dashboard.departemen-biro')->name('departemen-biro');
+
+        Route::view('community-committee', 'dashboard.community-committee')->name('community-committee');
     });
 
     Route::redirect('settings', 'settings/profil');
