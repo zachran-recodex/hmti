@@ -116,10 +116,7 @@ Route::middleware(['auth', 'can:access dashboard'])->group(function () {
                 ->middleware('can:manage roles');
         });
 
-        Route::prefix('departemen-biro')->name('departemen-biro.')->group(function (){
-
-            Route::view('internal', 'dashboard.departemen-biro.internal')->name('internal');
-        });
+        Route::view('departemen-biro', 'dashboard.departemen-biro')->name('departemen-biro');
     });
 
     Route::redirect('settings', 'settings/profil');
