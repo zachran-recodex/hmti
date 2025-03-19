@@ -28,7 +28,7 @@
 
             <flux:navmenu>
                 <flux:navlist.group heading="Internal" expandable expanded="false">
-                    <flux:navlist.item href="{{ route('departemen-biro.internal.hrd') }}">Human Resource Department</flux:navlist.item>
+                    <flux:navlist.item href="{{ route('departemen-biro.internal.hrd') }}">Departemen Human Resource</flux:navlist.item>
                     <flux:navlist.item href="{{ route('departemen-biro.internal.kaderisasi') }}">Departemen Kaderisasi</flux:navlist.item>
                     <flux:navlist.item href="{{ route('departemen-biro.internal.kemahasiswaan') }}">Departemen Kemahasiswaan</flux:navlist.item>
                 </flux:navlist.group>
@@ -40,7 +40,7 @@
                 </flux:navlist.group>
 
                 <flux:navlist.group heading="External" expandable expanded="false">
-                    <flux:navlist.item href="{{ route('departemen-biro.external.kominfo') }}">Departemen Komunikasi Dan Informasi</flux:navlist.item>
+                    <flux:navlist.item href="{{ route('departemen-biro.external.kominfo') }}">Departemen Komunikasi & Informasi</flux:navlist.item>
                     <flux:navlist.item href="{{ route('departemen-biro.external.dedikasi-masyarakat') }}">Biro Dedikasi Masyarakat</flux:navlist.item>
                     <flux:navlist.item href="{{ route('departemen-biro.external.public-relation') }}">Bureau Public Relation</flux:navlist.item>
                 </flux:navlist.group>

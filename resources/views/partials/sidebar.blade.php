@@ -15,9 +15,9 @@
             <flux:navlist.item href="{{ route('profil.sejarah') }}">Sejarah HMTI</flux:navlist.item>
         </flux:navlist.group>
 
-        <flux:navlist.group heading="Department & Biro" expandable expanded="false">
+        <flux:navlist.group heading="Departemen & Biro" expandable expanded="false">
             <flux:navlist.group heading="Internal" expandable expanded="false">
-                <flux:navlist.item href="{{ route('departemen-biro.internal.hrd') }}" textWrap="true">Human Resource Department</flux:navlist.item>
+                <flux:navlist.item href="{{ route('departemen-biro.internal.hrd') }}" textWrap="true">Departemen Human Resource</flux:navlist.item>
                 <flux:navlist.item href="{{ route('departemen-biro.internal.kaderisasi') }}" textWrap="true">Departemen Kaderisasi</flux:navlist.item>
                 <flux:navlist.item href="{{ route('departemen-biro.internal.kemahasiswaan') }}" textWrap="true">Departemen Kemahasiswaan</flux:navlist.item>
             </flux:navlist.group>
@@ -29,9 +29,9 @@
             </flux:navlist.group>
 
             <flux:navlist.group heading="External" expandable expanded="false">
-                <flux:navlist.item href="{{ route('departemen-biro.external.kominfo') }}" textWrap="true">Departemen Komunikasi Dan Informasi</flux:navlist.item>
+                <flux:navlist.item href="{{ route('departemen-biro.external.kominfo') }}" textWrap="true">Departemen Komunikasi & Informasi</flux:navlist.item>
                 <flux:navlist.item href="{{ route('departemen-biro.external.dedikasi-masyarakat') }}" textWrap="true">Biro Dedikasi Masyarakat</flux:navlist.item>
-                <flux:navlist.item href="{{ route('departemen-biro.external.public-relation') }}" textWrap="true">Bureau Public Relation</flux:navlist.item>
+                <flux:navlist.item href="{{ route('departemen-biro.external.public-relation') }}" textWrap="true">Biro Public Relation</flux:navlist.item>
             </flux:navlist.group>
         </flux:navlist.group>
 

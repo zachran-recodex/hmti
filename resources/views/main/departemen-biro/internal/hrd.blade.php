@@ -43,7 +43,7 @@
                 </div>
                 <flux:breadcrumbs>
                     <flux:breadcrumbs.item disableDarkMode="true" href="{{ route('home') }}">Home</flux:breadcrumbs.item>
-                    <flux:breadcrumbs.item disableDarkMode="true">Department & Biro</flux:breadcrumbs.item>
+                    <flux:breadcrumbs.item disableDarkMode="true">Departemen & Biro</flux:breadcrumbs.item>
                     <flux:breadcrumbs.item disableDarkMode="true">Internal</flux:breadcrumbs.item>
                     <flux:breadcrumbs.item disableDarkMode="true">Human Resource</flux:breadcrumbs.item>
                 </flux:breadcrumbs>
@@ -51,14 +51,18 @@
         </div>
     </section>
 
-    <!-- Human Resource Department -->
+    <!-- Human Resource Departemen -->
     <section class="py-12">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <!-- Department Overview -->
+            <!-- Departemen Overview -->
             <div class="text-center mb-16">
-                <img class="h-32 w-auto mx-auto mb-8" src="{{ asset('images/hrd.png') }}" alt="HRD Logo">
+                @if($humanResource->logo)
+                    <img class="h-32 w-auto mx-auto mb-8" src="{{ Storage::url($humanResource->logo) }}" alt="HRD Logo">
+                @else
+                    <img class="h-32 w-auto mx-auto mb-8" src="{{ asset('images/hrd.png') }}" alt="HRD Logo">
+                @endif
                 <p class="text-lg text-gray-600 max-w-3xl mx-auto">
-                    Departemen yang bertanggung jawab dalam pengembangan sumber daya manusia HMTI untuk menciptakan kader organisasi yang berkualitas dan profesional.
+                    {{ $humanResource->description }}
                 </p>
             </div>
 
@@ -66,22 +70,16 @@
             <div class="mb-16">
                 <flux:heading size="2xl" level="3" class="text-center mb-12">Fungsi</flux:heading>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    <div class="bg-white border border-zinc-200 p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow">
-                        <h4 class="text-xl font-semibold mb-4">ORATION (Maroon Preparation)</h4>
-                        <p class="text-gray-600">Program pelatihan kepemimpinan untuk membentuk kader organisasi yang berkualitas.</p>
-                    </div>
-                    <div class="bg-white border border-zinc-200 p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow">
-                        <h4 class="text-xl font-semibold mb-4">Sosialisasi Kaderisasi</h4>
-                        <p class="text-gray-600">Pemetaan bakat dan potensi anggota untuk pengembangan yang terarah.</p>
-                    </div>
-                    <div class="bg-white border border-zinc-200 p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow">
-                        <h4 class="text-xl font-semibold mb-4">LEGION (Industrial Engineering Orientation)</h4>
-                        <p class="text-gray-600">Program pengembangan keterampilan teknis dan non-teknis anggota.</p>
-                    </div>
-                    <div class="bg-white border border-zinc-200 p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow">
-                        <h4 class="text-xl font-semibold mb-4">Ekuivalensi</h4>
-                        <p class="text-gray-600">Program pengembangan keterampilan teknis dan non-teknis anggota.</p>
-                    </div>
+                    @forelse($humanResource->fungsis as $fungsi)
+                        <div class="bg-white border border-zinc-200 p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow">
+                            <h4 class="text-xl font-semibold mb-4">{{ $fungsi->title }}</h4>
+                            <p class="text-gray-600">{{ $fungsi->description }}</p>
+                        </div>
+                    @empty
+                        <div class="col-span-2 text-center text-gray-500">
+                            No functions available
+                        </div>
+                    @endforelse
                 </div>
             </div>
 
@@ -89,22 +87,16 @@
             <div class="mb-16">
                 <flux:heading size="2xl" level="3" class="text-center mb-12">Program Kerja</flux:heading>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    <div class="bg-white border border-zinc-200 p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow">
-                        <h4 class="text-xl font-semibold mb-4">ORATION (Maroon Preparation)</h4>
-                        <p class="text-gray-600">Program pelatihan kepemimpinan untuk membentuk kader organisasi yang berkualitas.</p>
-                    </div>
-                    <div class="bg-white border border-zinc-200 p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow">
-                        <h4 class="text-xl font-semibold mb-4">Sosialisasi Kaderisasi</h4>
-                        <p class="text-gray-600">Pemetaan bakat dan potensi anggota untuk pengembangan yang terarah.</p>
-                    </div>
-                    <div class="bg-white border border-zinc-200 p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow">
-                        <h4 class="text-xl font-semibold mb-4">LEGION (Industrial Engineering Orientation)</h4>
-                        <p class="text-gray-600">Program pengembangan keterampilan teknis dan non-teknis anggota.</p>
-                    </div>
-                    <div class="bg-white border border-zinc-200 p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow">
-                        <h4 class="text-xl font-semibold mb-4">Ekuivalensi</h4>
-                        <p class="text-gray-600">Program pengembangan keterampilan teknis dan non-teknis anggota.</p>
-                    </div>
+                    @forelse($humanResource->programKerjas as $program)
+                        <div class="bg-white border border-zinc-200 p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow">
+                            <h4 class="text-xl font-semibold mb-4">{{ $program->title }}</h4>
+                            <p class="text-gray-600">{{ $program->description }}</p>
+                        </div>
+                    @empty
+                        <div class="col-span-2 text-center text-gray-500">
+                            No programs available
+                        </div>
+                    @endforelse
                 </div>
             </div>
 
@@ -112,27 +104,20 @@
             <div class="mb-16">
                 <flux:heading size="2xl" level="3" class="text-center mb-12">Agenda</flux:heading>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    <div class="bg-white border border-zinc-200 p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow">
-                        <h4 class="text-xl font-semibold mb-4">ORATION (Maroon Preparation)</h4>
-                        <p class="text-gray-600">Program pelatihan kepemimpinan untuk membentuk kader organisasi yang berkualitas.</p>
-                    </div>
-                    <div class="bg-white border border-zinc-200 p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow">
-                        <h4 class="text-xl font-semibold mb-4">Sosialisasi Kaderisasi</h4>
-                        <p class="text-gray-600">Pemetaan bakat dan potensi anggota untuk pengembangan yang terarah.</p>
-                    </div>
-                    <div class="bg-white border border-zinc-200 p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow">
-                        <h4 class="text-xl font-semibold mb-4">LEGION (Industrial Engineering Orientation)</h4>
-                        <p class="text-gray-600">Program pengembangan keterampilan teknis dan non-teknis anggota.</p>
-                    </div>
-                    <div class="bg-white border border-zinc-200 p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow">
-                        <h4 class="text-xl font-semibold mb-4">Ekuivalensi</h4>
-                        <p class="text-gray-600">Program pengembangan keterampilan teknis dan non-teknis anggota.</p>
-                    </div>
+                    @forelse($humanResource->agendas as $agenda)
+                        <div class="bg-white border border-zinc-200 p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow">
+                            <h4 class="text-xl font-semibold mb-4">{{ $agenda->title }}</h4>
+                            <p class="text-gray-600">{{ $agenda->description }}</p>
+                        </div>
+                    @empty
+                        <div class="col-span-2 text-center text-gray-500">
+                            No agendas available
+                        </div>
+                    @endforelse
                 </div>
             </div>
 
-
-            <!-- Department Structure -->
+            <!-- Departemen Structure -->
             <div class="bg-white border border-zinc-200 rounded-lg shadow-lg p-8">
                 <flux:heading size="2xl" level="3" class="text-center mb-12">Struktur Departemen</flux:heading>
                 <div class="text-center mb-6">

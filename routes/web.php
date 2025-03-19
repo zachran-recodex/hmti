@@ -103,15 +103,23 @@ Route::middleware(['auth', 'can:access dashboard'])->group(function () {
 
     Route::view('dashboard', 'dashboard.index')->name('dashboard');
 
-    Route::prefix('dashboard/admin')->name('admin.')->group(function (){
+    Route::prefix('dashboard')->name('dashboard.')->group(function (){
 
-        Route::view('manage-user', 'dashboard.admin.user')
-            ->name('user')
-            ->middleware('can:manage users');
+        Route::prefix('admin')->name('admin.')->group(function (){
 
-        Route::view('manage-role', 'dashboard.admin.role')
-            ->name('role')
-            ->middleware('can:manage roles');
+            Route::view('manage-user', 'dashboard.admin.user')
+                ->name('user')
+                ->middleware('can:manage users');
+
+            Route::view('manage-role', 'dashboard.admin.role')
+                ->name('role')
+                ->middleware('can:manage roles');
+        });
+
+        Route::prefix('departemen-biro')->name('departemen-biro.')->group(function (){
+
+            Route::view('internal', 'dashboard.departemen-biro.internal')->name('internal');
+        });
     });
 
     Route::redirect('settings', 'settings/profil');

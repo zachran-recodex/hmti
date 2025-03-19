@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\HumanResource;
 
 class MainController extends Controller
 {
@@ -45,7 +46,11 @@ class MainController extends Controller
     ## Departemen & Biro
     public function hrd()
     {
-        return view('main.departemen-biro.internal.hrd');
+        $humanResource = HumanResource::with(['fungsis', 'programKerjas', 'agendas'])->first();
+
+        return view('main.departemen-biro.internal.hrd', [
+            'humanResource' => $humanResource
+        ]);
     }
 
     public function kaderisasi()
