@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use App\Models\Member;
 use Livewire\Component;
 use App\WithNotification;
 use Livewire\WithFileUploads;
@@ -20,6 +21,15 @@ class ManageDepartemenBiro extends Component
     public $logo;
     public $temp_logo;
     public $logoPreview;
+    public $fungsis = [];
+    public $programKerjas = [];
+    public $agendas = [];
+    public $members = [];
+
+    public $newFungsi = ['title' => '', 'description' => ''];
+    public $newProgramKerja = ['title' => '', 'description' => ''];
+    public $newAgenda = ['title' => '', 'description' => ''];
+    public $newMember = ['name' => '', 'position' => ''];
 
     // UI State Properties
     public $isEditing = false;
@@ -32,18 +42,111 @@ class ManageDepartemenBiro extends Component
             'title' => 'required|string|max:255|unique:departemen_biros,title,' . $this->departemenbiroId,
             'description' => 'required|string',
             'temp_logo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:1024|dimensions:min_width=100,min_height=100',
+            'fungsis.*.title' => 'required|string|max:255',
+            'fungsis.*.description' => 'required|string',
+            'programKerjas.*.title' => 'required|string|max:255',
+            'programKerjas.*.description' => 'required|string',
+            'agendas.*.title' => 'required|string|max:255',
+            'agendas.*.description' => 'required|string',
+            'members.*.name' => 'required|string|max:255',
+            'members.*.position' => 'required|string|in:' . implode(',', Member::getPositions()),
         ];
+    }
+
+    public function addFungsi()
+    {
+        $this->validate([
+            'newFungsi.title' => 'required|string|max:255',
+            'newFungsi.description' => 'required|string',
+        ]);
+
+        $this->fungsis[] = $this->newFungsi;
+        $this->newFungsi = ['title' => '', 'description' => ''];
+    }
+
+    public function addProgramKerja()
+    {
+        $this->validate([
+            'newProgramKerja.title' => 'required|string|max:255',
+            'newProgramKerja.description' => 'required|string',
+        ]);
+
+        $this->programKerjas[] = $this->newProgramKerja;
+        $this->newProgramKerja = ['title' => '', 'description' => ''];
+    }
+
+    public function addAgenda()
+    {
+        $this->validate([
+            'newAgenda.title' => 'required|string|max:255',
+            'newAgenda.description' => 'required|string',
+        ]);
+
+        $this->agendas[] = $this->newAgenda;
+        $this->newAgenda = ['title' => '', 'description' => ''];
+    }
+
+    public function addMember()
+    {
+        $this->validate([
+            'newMember.name' => 'required|string|max:255',
+            'newMember.position' => 'required|string|in:' . implode(',', Member::getPositions()),
+        ]);
+
+        $this->members[] = $this->newMember;
+        $this->newMember = ['name' => '', 'position' => ''];
+    }
+
+    public function removeFungsi($index)
+    {
+        unset($this->fungsis[$index]);
+        $this->fungsis = array_values($this->fungsis);
+    }
+
+    public function removeProgramKerja($index)
+    {
+        unset($this->programKerjas[$index]);
+        $this->programKerjas = array_values($this->programKerjas);
+    }
+
+    public function removeAgenda($index)
+    {
+        unset($this->agendas[$index]);
+        $this->agendas = array_values($this->agendas);
+    }
+
+    public function removeMember($index)
+    {
+        unset($this->members[$index]);
+        $this->members = array_values($this->members);
     }
 
     public function edit($id)
     {
-        $departemenBiro = DepartemenBiro::findOrFail($id);
+        $departemenBiro = DepartemenBiro::with(['fungsis', 'programKerjas', 'agendas', 'members'])
+            ->findOrFail($id);
 
         $this->isEditing = true;
         $this->departemenbiroId = $id;
         $this->title = $departemenBiro->title;
         $this->description = $departemenBiro->description;
         $this->logo = $departemenBiro->logo;
+
+        $this->fungsis = $departemenBiro->fungsis->map(function($fungsi) {
+            return ['title' => $fungsi->title, 'description' => $fungsi->description];
+        })->toArray();
+
+        $this->programKerjas = $departemenBiro->programKerjas->map(function($programKerja) {
+            return ['title' => $programKerja->title, 'description' => $programKerja->description];
+        })->toArray();
+
+        $this->agendas = $departemenBiro->agendas->map(function($agenda) {
+            return ['title' => $agenda->title, 'description' => $agenda->description];
+        })->toArray();
+
+        $this->members = $departemenBiro->members->map(function($member) {
+            return ['name' => $member->name, 'position' => $member->position];
+        })->toArray();
 
         $this->showFormModal = true;
     }
@@ -94,7 +197,11 @@ class ManageDepartemenBiro extends Component
 
     public function resetForm()
     {
-        $this->reset(['departemenbiroId', 'title', 'description', 'temp_logo', 'logoPreview']);
+        $this->reset([
+            'departemenbiroId', 'title', 'description', 'temp_logo', 'logoPreview',
+            'fungsis', 'programKerjas', 'agendas', 'members',
+            'newFungsi', 'newProgramKerja', 'newAgenda', 'newMember'
+        ]);
         $this->resetValidation();
     }
 
@@ -135,26 +242,62 @@ class ManageDepartemenBiro extends Component
                     'description' => $this->description,
                     'logo' => $logoPath ?? $this->logo,
                 ]);
-                $this->notifySuccess('Departemen & Biro updated successfully');
+
+                // Delete existing relationships
+                $departemenBiro->fungsis()->delete();
+                $departemenBiro->programKerjas()->delete();
+                $departemenBiro->agendas()->delete();
+                $departemenBiro->members()->delete();
+
             } else {
-                DepartemenBiro::create([
+                $departemenBiro = DepartemenBiro::create([
                     'title' => $this->title,
                     'description' => $this->description,
                     'logo' => $logoPath,
                 ]);
-                $this->notifySuccess('Departemen & Biro created successfully');
+            }
+
+            // Create Fungsis
+            foreach ($this->fungsis as $fungsi) {
+                $departemenBiro->fungsis()->create([
+                    'title' => $fungsi['title'],
+                    'description' => $fungsi['description']
+                ]);
+            }
+
+            // Create Program Kerjas
+            foreach ($this->programKerjas as $programKerja) {
+                $departemenBiro->programKerjas()->create([
+                    'title' => $programKerja['title'],
+                    'description' => $programKerja['description']
+                ]);
+            }
+
+            // Create Agendas
+            foreach ($this->agendas as $agenda) {
+                $departemenBiro->agendas()->create([
+                    'title' => $agenda['title'],
+                    'description' => $agenda['description']
+                ]);
+            }
+
+            // Create Members
+            foreach ($this->members as $member) {
+                $departemenBiro->members()->create([
+                    'name' => $member['name'],
+                    'position' => $member['position']
+                ]);
             }
 
             DB::commit();
+
+            $this->notifySuccess(($this->isEditing ? 'Updated' : 'Created') . ' successfully');
             $this->resetForm();
             $this->showFormModal = false;
 
-        } catch (\Illuminate\Database\QueryException $e) {
-            DB::rollBack();
-            $this->notifyError('Database error occurred: ' . $e->getMessage());
         } catch (\Exception $e) {
             DB::rollBack();
-            $this->notifyError('Something went wrong: ' . $e->getMessage());
+            $this->notifyError('Error: ' . $e->getMessage());
         }
     }
 

@@ -2,11 +2,6 @@
     <flux:card.header class="flex justify-between items-center">
         <flux:heading size="lg" class="font-semibold">List Departemen & Biro</flux:heading>
 
-        <flux:modal.trigger title="form">
-            <flux:button type="button" variant="primary" class="w-fit" wire:click="create" icon="plus">
-                Add New
-            </flux:button>
-        </flux:modal.trigger>
     </flux:card.header>
 
     <flux:card.body :padding="false">
@@ -14,8 +9,8 @@
             <flux:table hover striped>
                 <flux:table.columns>
                     <flux:table.column>Logo</flux:table.column>
-                    <flux:table.column>Title</flux:table.column>
-                    <flux:table.column>Description</flux:table.column>
+                    <flux:table.column>Nama Departemen & Biro</flux:table.column>
+                    <flux:table.column>Deskripsi</flux:table.column>
                     <flux:table.column>Action</flux:table.column>
                 </flux:table.columns>
 
@@ -40,11 +35,6 @@
                                     <flux:modal.trigger title="form">
                                         <flux:button variant="warning" wire:click="edit({{ $departemenBiro->id }})"
                                             icon="pencil"></flux:button>
-                                    </flux:modal.trigger>
-
-                                    <flux:modal.trigger title="delete">
-                                        <flux:button variant="danger" wire:click="confirmDelete({{ $departemenBiro->id }})"
-                                            icon="trash"></flux:button>
                                     </flux:modal.trigger>
                                 </div>
                             </flux:table.cell>
@@ -96,15 +86,110 @@
                             </div>
                         </flux:field>
 
-                        {{-- Title --}}
-                        <flux:input label="Title" wire:model="title" />
-
                         {{-- Description --}}
                         <flux:textarea
                             label="Description"
                             wire:model="description"
                             rows="4"
                         />
+                    </div>
+                </flux:fieldset>
+
+                <flux:fieldset>
+                    <flux:heading size="lg" class="mb-4">Fungsi</flux:heading>
+
+                    @foreach($fungsis as $index => $fungsi)
+                        <div class="flex gap-4 items-start mb-4">
+                            <div class="flex-1 space-y-4">
+                                <flux:input label="Title" wire:model="fungsis.{{ $index }}.title" />
+                                <flux:textarea label="Description" wire:model="fungsis.{{ $index }}.description" />
+                            </div>
+                            <flux:button type="button" variant="danger" wire:click="removeFungsi({{ $index }})" icon="trash" />
+                        </div>
+                    @endforeach
+
+                    <div class="flex gap-4 items-start mb-4">
+                        <div class="flex-1 space-y-4">
+                            <flux:input label="New Fungsi Title" wire:model="newFungsi.title" />
+                            <flux:textarea label="New Fungsi Description" wire:model="newFungsi.description" />
+                        </div>
+                        <flux:button type="button" variant="success" wire:click="addFungsi" icon="plus" />
+                    </div>
+                </flux:fieldset>
+
+                <flux:fieldset>
+                    <flux:heading size="lg" class="mb-4">Program Kerja</flux:heading>
+
+                    @foreach($programKerjas as $index => $programKerja)
+                        <div class="flex gap-4 items-start mb-4">
+                            <div class="flex-1 space-y-4">
+                                <flux:input label="Title" wire:model="programKerjas.{{ $index }}.title" />
+                                <flux:textarea label="Description" wire:model="programKerjas.{{ $index }}.description" />
+                            </div>
+                            <flux:button type="button" variant="danger" wire:click="removeProgramKerja({{ $index }})" icon="trash" />
+                        </div>
+                    @endforeach
+
+                    <div class="flex gap-4 items-start mb-4">
+                        <div class="flex-1 space-y-4">
+                            <flux:input label="New Program Kerja Title" wire:model="newProgramKerja.title" />
+                            <flux:textarea label="New Program Kerja Description" wire:model="newProgramKerja.description" />
+                        </div>
+                        <flux:button type="button" variant="success" wire:click="addProgramKerja" icon="plus" />
+                    </div>
+                </flux:fieldset>
+
+                <flux:fieldset>
+                    <flux:heading size="lg" class="mb-4">Agenda</flux:heading>
+
+                    @foreach($agendas as $index => $agenda)
+                        <div class="flex gap-4 items-start mb-4">
+                            <div class="flex-1 space-y-4">
+                                <flux:input label="Title" wire:model="agendas.{{ $index }}.title" />
+                                <flux:textarea label="Description" wire:model="agendas.{{ $index }}.description" />
+                            </div>
+                            <flux:button type="button" variant="danger" wire:click="removeAgenda({{ $index }})" icon="trash" />
+                        </div>
+                    @endforeach
+
+                    <div class="flex gap-4 items-start mb-4">
+                        <div class="flex-1 space-y-4">
+                            <flux:input label="New Agenda Title" wire:model="newAgenda.title" />
+                            <flux:textarea label="New Agenda Description" wire:model="newAgenda.description" />
+                        </div>
+                        <flux:button type="button" variant="success" wire:click="addAgenda" icon="plus" />
+                    </div>
+                </flux:fieldset>
+
+                <flux:fieldset>
+                    <flux:heading size="lg" class="mb-4">Members</flux:heading>
+
+                    @foreach($members as $index => $member)
+                        <div class="flex gap-4 items-start mb-4">
+                            <div class="flex-1 space-y-4">
+                                <flux:input label="Name" wire:model="members.{{ $index }}.name" />
+                                <flux:select label="Position" wire:model="members.{{ $index }}.position">
+                                    <option value="">Select Position</option>
+                                    @foreach(\App\Models\Member::getPositions() as $position)
+                                        <option value="{{ $position }}">{{ $position }}</option>
+                                    @endforeach
+                                </flux:select>
+                            </div>
+                            <flux:button type="button" variant="danger" wire:click="removeMember({{ $index }})" icon="trash" />
+                        </div>
+                    @endforeach
+
+                    <div class="flex gap-4 items-start mb-4">
+                        <div class="flex-1 space-y-4">
+                            <flux:input label="New Member Name" wire:model="newMember.name" />
+                            <flux:select label="New Member Position" wire:model="newMember.position">
+                                <option value="">Select Position</option>
+                                @foreach(\App\Models\Member::getPositions() as $position)
+                                    <option value="{{ $position }}">{{ $position }}</option>
+                                @endforeach
+                            </flux:select>
+                        </div>
+                        <flux:button type="button" variant="success" wire:click="addMember" icon="plus" />
                     </div>
                 </flux:fieldset>
 
