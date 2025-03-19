@@ -57,9 +57,9 @@
             <!-- Departemen Overview -->
             <div class="text-center mb-16">
                 @if($departemen->logo)
-                    <img class="h-32 w-auto mx-auto mb-8" src="{{ Storage::url($departemen->logo) }}" alt="HRD Logo">
+                    <img class="h-32 w-auto mx-auto mb-8" src="{{ Storage::url($departemen->logo) }}" alt="{{ $departemen->title }}">
                 @else
-                    <img class="h-32 w-auto mx-auto mb-8" src="{{ asset('images/hrd.png') }}" alt="HRD Logo">
+                    <img class="h-32 w-auto mx-auto mb-8" src="{{ asset('images/hrd.png') }}" alt="{{ $departemen->title }}">
                 @endif
                 <p class="text-lg text-gray-600 max-w-3xl mx-auto">
                     {{ $departemen->description }}
