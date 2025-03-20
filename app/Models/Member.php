@@ -19,7 +19,11 @@ class Member extends Model
 
     const POSITIONS = [
         'Kepala',
-        'Anggota'
+        'Staff 2022',
+        'Staff 2023',
+        'Staff 2024',
+        'Staff 2025',
+        'Staff 2026'
     ];
 
     public static function getPositions()
