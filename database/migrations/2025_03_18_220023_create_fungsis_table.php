@@ -14,7 +14,6 @@ return new class extends Migration
         Schema::create('fungsis', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->text('description');
             $table->string('fungsiable_type');
             $table->unsignedBigInteger('fungsiable_id');
             $table->timestamps();

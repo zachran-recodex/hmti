@@ -9,7 +9,6 @@ class Fungsi extends Model
 {
     protected $fillable = [
         'title',
-        'description',
         'fungsiable_id',
         'fungsiable_type'
     ];
