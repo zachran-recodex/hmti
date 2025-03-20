@@ -26,7 +26,7 @@ class ManageDepartemenBiro extends Component
     public $agendas = [];
     public $members = [];
 
-    public $newFungsi = ['title' => '', 'description' => ''];
+    public $newFungsi = ['title' => ''];
     public $newProgramKerja = ['title' => '', 'description' => ''];
     public $newAgenda = ['title' => '', 'description' => ''];
     public $newMember = ['name' => '', 'position' => ''];
@@ -34,7 +34,6 @@ class ManageDepartemenBiro extends Component
     // UI State Properties
     public $isEditing = false;
     public $showFormModal = false;
-    public $showDeleteModal = false;
 
     protected function rules()
     {
@@ -43,7 +42,6 @@ class ManageDepartemenBiro extends Component
             'description' => 'required|string',
             'temp_logo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:1024|dimensions:min_width=100,min_height=100',
             'fungsis.*.title' => 'required|string|max:255',
-            'fungsis.*.description' => 'required|string',
             'programKerjas.*.title' => 'required|string|max:255',
             'programKerjas.*.description' => 'required|string',
             'agendas.*.title' => 'required|string|max:255',
@@ -57,11 +55,10 @@ class ManageDepartemenBiro extends Component
     {
         $this->validate([
             'newFungsi.title' => 'required|string|max:255',
-            'newFungsi.description' => 'required|string',
         ]);
 
         $this->fungsis[] = $this->newFungsi;
-        $this->newFungsi = ['title' => '', 'description' => ''];
+        $this->newFungsi = ['title' => ''];
     }
 
     public function addProgramKerja()
@@ -133,7 +130,7 @@ class ManageDepartemenBiro extends Component
         $this->logo = $departemenBiro->logo;
 
         $this->fungsis = $departemenBiro->fungsis->map(function($fungsi) {
-            return ['title' => $fungsi->title, 'description' => $fungsi->description];
+            return ['title' => $fungsi->title];
         })->toArray();
 
         $this->programKerjas = $departemenBiro->programKerjas->map(function($programKerja) {
@@ -154,27 +151,6 @@ class ManageDepartemenBiro extends Component
     public function updated($propertyName)
     {
         $this->validateOnly($propertyName);
-    }
-
-    public function confirmDelete($id)
-    {
-        $this->departemenbiroId = $id;
-        $this->showDeleteModal = true;
-    }
-
-    public function delete()
-    {
-        $departemenBiro = DepartemenBiro::findOrFail($this->departemenbiroId);
-
-        if ($departemenBiro) {
-            if ($departemenBiro->logo && Storage::disk('public')->exists($departemenBiro->logo)) {
-                Storage::disk('public')->delete($departemenBiro->logo);
-            }
-
-            $departemenBiro->delete();
-            $this->notifySuccess('Departemen & Biro deleted successfully');
-            $this->showDeleteModal = false;
-        }
     }
 
     public function updatedTempLogo()
@@ -243,8 +219,7 @@ class ManageDepartemenBiro extends Component
             // Create Fungsis
             foreach ($this->fungsis as $fungsi) {
                 $departemenBiro->fungsis()->create([
-                    'title' => $fungsi['title'],
-                    'description' => $fungsi['description']
+                    'title' => $fungsi['title']
                 ]);
             }
 
