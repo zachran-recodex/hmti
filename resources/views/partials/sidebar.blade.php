@@ -55,23 +55,23 @@
 
         <flux:navlist.group heading="Community & Committee" expandable expanded="false">
             <flux:navlist.group heading="Community" expandable expanded="false">
-                <flux:navlist.item href="{{ route('community-committee.community.incoustic') }}" textWrap="true">Incoustic</flux:navlist.item>
-                <flux:navlist.item href="{{ route('community-committee.community.industrial-competition') }}" textWrap="true">Industrial Competition Community</flux:navlist.item>
-                <flux:navlist.item href="{{ route('community-committee.community.koma-creative') }}" textWrap="true">Koma Creative</flux:navlist.item>
-                <flux:navlist.item href="{{ route('community-committee.community.maroon-army') }}" textWrap="true">Maroon Army</flux:navlist.item>
-                <flux:navlist.item href="{{ route('community-committee.community.motor-telkom') }}" textWrap="true">Community Motor Telkom University</flux:navlist.item>
-                <flux:navlist.item href="{{ route('community-committee.community.tentor') }}" textWrap="true">Community of Tentor</flux:navlist.item>
-                <flux:navlist.item href="{{ route('community-committee.community.society') }}" textWrap="true">Society</flux:navlist.item>
+                <flux:navlist.item href="{{ route('community-committee.show', ['category' => 'community', 'slug' => 'incoustic']) }}">Incoustic</flux:navlist.item>
+                <flux:navlist.item href="{{ route('community-committee.show', ['category' => 'community', 'slug' => 'industrial-competition-community']) }}">Industrial Competition Community</flux:navlist.item>
+                <flux:navlist.item href="{{ route('community-committee.show', ['category' => 'community', 'slug' => 'koma-creative']) }}">Koma Creative</flux:navlist.item>
+                <flux:navlist.item href="{{ route('community-committee.show', ['category' => 'community', 'slug' => 'maroon-army']) }}">Maroon Army</flux:navlist.item>
+                <flux:navlist.item href="{{ route('community-committee.show', ['category' => 'community', 'slug' => 'community-motor-telkom-university']) }}">Community Motor Telkom University</flux:navlist.item>
+                <flux:navlist.item href="{{ route('community-committee.show', ['category' => 'community', 'slug' => 'community-of-tentor']) }}">Community of Tentor</flux:navlist.item>
+                <flux:navlist.item href="{{ route('community-committee.show', ['category' => 'community', 'slug' => 'society']) }}">Society</flux:navlist.item>
             </flux:navlist.group>
 
             <flux:navlist.group heading="Committee" expandable expanded="false">
-                <flux:navlist.item href="{{ route('community-committee.committee.invention') }}" textWrap="true">Invention</flux:navlist.item>
-                <flux:navlist.item href="{{ route('community-committee.committee.sehati') }}" textWrap="true">SEHATI</flux:navlist.item>
-                <flux:navlist.item href="{{ route('community-committee.committee.legion') }}" textWrap="true">LEGION</flux:navlist.item>
-                <flux:navlist.item href="{{ route('community-committee.committee.increase') }}" textWrap="true">Increase</flux:navlist.item>
-                <flux:navlist.item href="{{ route('community-committee.committee.inaugurasi') }}" textWrap="true">Inaugurasi</flux:navlist.item>
-                <flux:navlist.item href="{{ route('community-committee.committee.orations') }}" textWrap="true">ORATIONS</flux:navlist.item>
-                <flux:navlist.item href="{{ route('community-committee.committee.infade') }}" textWrap="true">INFADE</flux:navlist.item>
+                <flux:navlist.item href="{{ route('community-committee.show', ['category' => 'committee', 'slug' => 'invention']) }}">Invention</flux:navlist.item>
+                <flux:navlist.item href="{{ route('community-committee.show', ['category' => 'committee', 'slug' => 'sehati']) }}">SEHATI</flux:navlist.item>
+                <flux:navlist.item href="{{ route('community-committee.show', ['category' => 'committee', 'slug' => 'legion']) }}">LEGION</flux:navlist.item>
+                <flux:navlist.item href="{{ route('community-committee.show', ['category' => 'committee', 'slug' => 'increase']) }}">Increase</flux:navlist.item>
+                <flux:navlist.item href="{{ route('community-committee.show', ['category' => 'committee', 'slug' => 'inaugurasi']) }}">Inaugurasi</flux:navlist.item>
+                <flux:navlist.item href="{{ route('community-committee.show', ['category' => 'committee', 'slug' => 'orations']) }}">ORATIONS</flux:navlist.item>
+                <flux:navlist.item href="{{ route('community-committee.show', ['category' => 'committee', 'slug' => 'infade']) }}">INFADE</flux:navlist.item>
             </flux:navlist.group>
         </flux:navlist.group>
 

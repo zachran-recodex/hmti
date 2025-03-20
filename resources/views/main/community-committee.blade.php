@@ -18,7 +18,7 @@
 
     <link rel="canonical" href="{{ url()->current() }}">
 
-    <title>Inaugurasi | HMTI Telkom University</title>
+    <title>{{ $communityCommittee->title }} | HMTI Telkom University</title>
 @endsection
 
 <x-layouts.main>
@@ -39,42 +39,31 @@
         <div class="relative px-4 sm:px-6 lg:px-8">
             <div class="flex flex-col items-center">
                 <div class="mb-6 text-center">
-                    <flux:heading size="4xl" level="2" accent="disableDarkMode">Inaugurasi</flux:heading>
+                    <flux:heading size="4xl" level="2" accent="disableDarkMode">{{ $communityCommittee->title }}</flux:heading>
                 </div>
                 <flux:breadcrumbs>
                     <flux:breadcrumbs.item disableDarkMode="true" href="{{ route('home') }}">Home</flux:breadcrumbs.item>
                     <flux:breadcrumbs.item disableDarkMode="true">Community & Committee</flux:breadcrumbs.item>
-                    <flux:breadcrumbs.item disableDarkMode="true">Committee</flux:breadcrumbs.item>
-                    <flux:breadcrumbs.item disableDarkMode="true">Inaugurasi</flux:breadcrumbs.item>
+                    <flux:breadcrumbs.item disableDarkMode="true">{{ ucfirst($communityCommittee->category) }}</flux:breadcrumbs.item>
+                    <flux:breadcrumbs.item disableDarkMode="true">{{ $communityCommittee->title }}</flux:breadcrumbs.item>
                 </flux:breadcrumbs>
             </div>
         </div>
     </section>
 
-    <!-- Main Section -->
-    <section>
-
-        <div class="mx-auto py-8 sm:py-12 md:py-16">
-            <div class="px-4 sm:px-6 lg:px-8">
-                <div class="flex flex-col space-y-6">
-                    <flux:heading size="4xl" level="2">Tentang Kami</flux:heading>
-
-                    <div>
-                        <flux:subheading size="3xl">
-                            Profil Himpunan Mahasiswa Teknik Industri Telkom University
-                        </flux:subheading>
-
-                        <p class="text-lg text-gray-500">Himpunan Mahasiswa Teknik Informatika (HMTI) adalah organisasi mahasiswa yang bergerak di bidang teknologi informasi dan komunikasi. HMTI merupakan organisasi mahasiswa yang berada di bawah naungan Departemen Teknik Informatika Fakultas Teknik Universitas Telkom.</p>
-                    </div>
-
-                    <div>
-                        <flux:subheading size="3xl">
-                            Sejarah Himpunan Mahasiswa Teknik Industri Telkom University
-                        </flux:subheading>
-
-                        <p class="text-lg text-gray-500">Himpunan Mahasiswa Teknik Informatika (HMTI) adalah organisasi mahasiswa yang bergerak di bidang teknologi informasi dan komunikasi. HMTI merupakan organisasi mahasiswa yang berada di bawah naungan Departemen Teknik Informatika Fakultas Teknik Universitas Telkom.</p>
-                    </div>
-                </div>
+    <!-- Community & Committee -->
+    <section class="py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- Community & Committee Overview -->
+            <div class="text-center">
+                @if($communityCommittee->logo)
+                    <img class="h-32 w-auto mx-auto mb-8" src="{{ Storage::url($communityCommittee->logo) }}" alt="{{ $communityCommittee->title }}">
+                @else
+                    <img class="h-32 w-auto mx-auto mb-8" src="{{ asset('images/logo.png') }}" alt="{{ $communityCommittee->title }}">
+                @endif
+                <p class="text-lg text-gray-600 max-w-3xl mx-auto">
+                    {{ $communityCommittee->description }}
+                </p>
             </div>
         </div>
     </section>

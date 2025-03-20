@@ -28,27 +28,9 @@ Route::controller(MainController::class)->group(function () {
 
     // Community & Committee Routes
     Route::prefix('community-committee')->name('community-committee.')->group(function () {
-        // Community Routes
-        Route::prefix('community')->name('community.')->group(function () {
-            Route::get('incoustic', 'incoustic')->name('incoustic');
-            Route::get('industrial-competition-community', 'industrialCompetition')->name('industrial-competition');
-            Route::get('koma-creative', 'komaCreative')->name('koma-creative');
-            Route::get('maroon-army', 'maroonArmy')->name('maroon-army');
-            Route::get('community-motor-telkom-university', 'motorTelkom')->name('motor-telkom');
-            Route::get('community-of-tentor', 'tentor')->name('tentor');
-            Route::get('society', 'society')->name('society');
-        });
-
-        // Committee Routes
-        Route::prefix('committee')->name('committee.')->group(function () {
-            Route::get('invention', 'invention')->name('invention');
-            Route::get('sehati', 'sehati')->name('sehati');
-            Route::get('legion', 'legion')->name('legion');
-            Route::get('increase', 'increase')->name('increase');
-            Route::get('inaugurasi', 'inaugurasi')->name('inaugurasi');
-            Route::get('orations', 'orations')->name('orations');
-            Route::get('infade', 'infade')->name('infade');
-        });
+        Route::get('{category}/{slug}', 'showCommunityCommittee')
+            ->where('category', 'community|committee')
+            ->name('show');
     });
 
     // Sensecurrency Routes

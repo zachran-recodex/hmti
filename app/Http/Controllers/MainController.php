@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\CommunityCommittee;
 use App\Models\DepartemenBiro;
 
 class MainController extends Controller
@@ -70,74 +71,34 @@ class MainController extends Controller
     }
 
     ## Community & Committee
-    public function incoustic()
+    public function showCommunityCommittee($category, $slug)
     {
-        return view('main.community-committee.community.incoustic');
-    }
+        $titleMap = [
+            'incoustic' => 'Incoustic',
+            'industrial-competition-community' => 'Industrial Competition Community',
+            'koma-creative' => 'Koma Creative',
+            'maroon-army' => 'Maroon Army',
+            'community-motor-telkom-university' => 'Community Motor Telkom University',
+            'community-of-tentor' => 'Community of Tentor',
+            'society' => 'Society',
+            'invention' => 'Invention',
+            'sehati' => 'SEHATI',
+            'legion' => 'LEGION',
+            'increase' => 'Increase',
+            'inaugurasi' => 'Inaugurasi',
+            'orations' => 'ORATIONS',
+            'infade' => 'INFADE'
+        ];
 
-    public function industrialCompetition()
-    {
-        return view('main.community-committee.community.industrial-competition');
-    }
+        $title = $titleMap[$slug] ?? abort(404);
 
-    public function komaCreative()
-    {
-        return view('main.community-committee.community.koma-creative');
-    }
+        $communityCommittee = CommunityCommittee::where('title', $title)
+            ->where('category', ucfirst($category))
+            ->firstOrFail();
 
-    public function maroonArmy()
-    {
-        return view('main.community-committee.community.maroon-army');
-    }
-
-    public function motorTelkom()
-    {
-        return view('main.community-committee.community.motor-telkom');
-    }
-
-    public function tentor()
-    {
-        return view('main.community-committee.community.tentor');
-    }
-
-    public function society()
-    {
-        return view('main.community-committee.community.society');
-    }
-
-    public function invention()
-    {
-        return view('main.community-committee.committee.invention');
-    }
-
-    public function sehati()
-    {
-        return view('main.community-committee.committee.sehati');
-    }
-
-    public function legion()
-    {
-        return view('main.community-committee.committee.legion');
-    }
-
-    public function increase()
-    {
-        return view('main.community-committee.committee.increase');
-    }
-
-    public function inaugurasi()
-    {
-        return view('main.community-committee.committee.inaugurasi');
-    }
-
-    public function orations()
-    {
-        return view('main.community-committee.committee.orations');
-    }
-
-    public function infade()
-    {
-        return view('main.community-committee.committee.infade');
+        return view('main.community-committee', [
+            'communityCommittee' => $communityCommittee
+        ]);
     }
 
     ## Sensecurrency
