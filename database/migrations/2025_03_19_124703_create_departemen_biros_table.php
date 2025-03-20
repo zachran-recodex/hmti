@@ -16,6 +16,11 @@ return new class extends Migration
             $table->string('title');
             $table->string('logo');
             $table->text('description');
+            $table->enum('division', [
+                'Internal',
+                'PSTI',
+                'Eksternal'
+            ]);
             $table->timestamps();
         });
     }

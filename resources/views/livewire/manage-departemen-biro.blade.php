@@ -8,6 +8,7 @@
         <div class="overflow-x-auto">
             <flux:table hover striped>
                 <flux:table.columns>
+                    <flux:table.column>Divisi</flux:table.column>
                     <flux:table.column>Logo</flux:table.column>
                     <flux:table.column>Nama Departemen / Biro</flux:table.column>
                     <flux:table.column>Deskripsi</flux:table.column>
@@ -17,6 +18,11 @@
                 <flux:table.rows>
                     @foreach ($departemenBiros as $departemenBiro)
                         <flux:table.row>
+
+                            <flux:table.cell>
+                                {{ $departemenBiro->division }}
+                            </flux:table.cell>
+
                             <flux:table.cell>
                                 <img src="{{ $departemenBiro->logo ? Storage::url($departemenBiro->logo) : asset('images/placeholder.png') }}"
                                     alt="{{ $departemenBiro->title }}" class="h-auto w-12">

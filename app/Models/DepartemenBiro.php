@@ -13,7 +13,14 @@ class DepartemenBiro extends Model
     protected $fillable = [
         'title',
         'description',
-        'logo'
+        'logo',
+        'division'
+    ];
+
+    const DIVISION = [
+        'Internal',
+        'PSTI',
+        'Eksternal',
     ];
 
     public function fungsis(): MorphMany
