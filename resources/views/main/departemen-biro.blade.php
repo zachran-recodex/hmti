@@ -44,7 +44,7 @@
                 <flux:breadcrumbs>
                     <flux:breadcrumbs.item disableDarkMode="true" href="{{ route('home') }}">Home</flux:breadcrumbs.item>
                     <flux:breadcrumbs.item disableDarkMode="true">Departemen & Biro</flux:breadcrumbs.item>
-                    <flux:breadcrumbs.item disableDarkMode="true">Internal</flux:breadcrumbs.item>
+                    <flux:breadcrumbs.item disableDarkMode="true">{{ ucfirst($departemen->division) }}</flux:breadcrumbs.item>
                     <flux:breadcrumbs.item disableDarkMode="true">{{ $departemen->title }}</flux:breadcrumbs.item>
                 </flux:breadcrumbs>
             </div>
@@ -59,7 +59,7 @@
                 @if($departemen->logo)
                     <img class="h-32 w-auto mx-auto mb-8" src="{{ Storage::url($departemen->logo) }}" alt="{{ $departemen->title }}">
                 @else
-                    <img class="h-32 w-auto mx-auto mb-8" src="{{ asset('images/hrd.png') }}" alt="{{ $departemen->title }}">
+                    <img class="h-32 w-auto mx-auto mb-8" src="{{ asset('images/logo.png') }}" alt="{{ $departemen->title }}">
                 @endif
                 <p class="text-lg text-gray-600 max-w-3xl mx-auto">
                     {{ $departemen->description }}
@@ -112,37 +112,6 @@
                     @empty
                         <div class="col-span-2 text-center text-gray-500">
                             No agendas available
-                        </div>
-                    @endforelse
-                </div>
-            </div>
-
-            <!-- Departemen Structure -->
-            <div class="bg-white border border-zinc-200 rounded-lg shadow-lg p-8">
-                <flux:heading size="2xl" level="3" class="text-center mb-12">Struktur Departemen</flux:heading>
-
-                @php
-                    $kepala = $departemen->members->where('position', 'Kepala')->first();
-                @endphp
-
-                @if($kepala)
-                <div class="text-center mb-6">
-                    <img src="{{ asset('images/avatar.png') }}" alt="{{ $kepala->name }}" class="w-32 h-32 rounded-full mx-auto mb-4 object-cover">
-                    <h4 class="text-lg font-semibold">{{ $kepala->name }}</h4>
-                    <p class="text-gray-600">{{ $kepala->position }}</p>
-                </div>
-                @endif
-
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                    @forelse($departemen->members->where('position', '!=', 'Kepala') as $member)
-                        <div class="text-center">
-                            <img src="{{ asset('images/avatar.png') }}" alt="{{ $member->name }}" class="w-32 h-32 rounded-full mx-auto mb-4 object-cover">
-                            <h4 class="text-lg font-semibold">{{ $member->name }}</h4>
-                            <p class="text-gray-600">{{ $member->position }}</p>
-                        </div>
-                    @empty
-                        <div class="col-span-4 text-center text-gray-500">
-                            No members available
                         </div>
                     @endforelse
                 </div>

@@ -21,26 +21,9 @@ Route::controller(MainController::class)->group(function () {
 
     // Departemen & Biro Routes
     Route::prefix('departemen-biro')->name('departemen-biro.')->group(function () {
-        // Internal Routes
-        Route::prefix('internal')->name('internal.')->group(function () {
-            Route::get('departemen-human-resource', 'hrd')->name('hrd');
-            Route::get('departemen-kaderisasi', 'kaderisasi')->name('kaderisasi');
-            Route::get('departemen-kemahasiswaan', 'kemahasiswaan')->name('kemahasiswaan');
-        });
-
-        // PSTI Routes
-        Route::prefix('psti')->name('psti.')->group(function () {
-            Route::get('departemen-akademik', 'akademik')->name('akademik');
-            Route::get('departemen-generasi-bisnis', 'generasiBisnis')->name('generasi-bisnis');
-            Route::get('departemen-riset-kompetisi', 'risetKompetisi')->name('riset-kompetisi');
-        });
-
-        // External Routes
-        Route::prefix('external')->name('external.')->group(function () {
-            Route::get('departemen-komunikasi-informasi', 'kominfo')->name('kominfo');
-            Route::get('biro-dedikasi-masyarakat', 'dedikasiMasyarakat')->name('dedikasi-masyarakat');
-            Route::get('biro-public-relation', 'publicRelation')->name('public-relation');
-        });
+        Route::get('{division}/{slug}', 'showDepartemenBiro')
+            ->where('division', 'internal|psti|eksternal')
+            ->name('show');
     });
 
     // Community & Committee Routes

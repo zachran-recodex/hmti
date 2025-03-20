@@ -28,24 +28,41 @@
 
             <flux:navmenu>
                 <flux:navlist.group heading="Internal" expandable expanded="false">
-                    <flux:navlist.item href="{{ route('departemen-biro.internal.hrd') }}">Departemen Human Resource</flux:navlist.item>
-                    <flux:navlist.item href="{{ route('departemen-biro.internal.kaderisasi') }}">Departemen Kaderisasi</flux:navlist.item>
-                    <flux:navlist.item href="{{ route('departemen-biro.internal.kemahasiswaan') }}">Departemen Kemahasiswaan</flux:navlist.item>
+                    <flux:navlist.item href="{{ route('departemen-biro.show', ['division' => 'internal', 'slug' => 'departemen-human-resource']) }}">
+                        Departemen Human Resource
+                    </flux:navlist.item>
+                    <flux:navlist.item href="{{ route('departemen-biro.show', ['division' => 'internal', 'slug' => 'departemen-kaderisasi']) }}">
+                        Departemen Kaderisasi
+                    </flux:navlist.item>
+                    <flux:navlist.item href="{{ route('departemen-biro.show', ['division' => 'internal', 'slug' => 'departemen-kemahasiswaan']) }}">
+                        Departemen Kemahasiswaan
+                    </flux:navlist.item>
                 </flux:navlist.group>
 
                 <flux:navlist.group heading="PSTI" expandable expanded="false">
-                    <flux:navlist.item href="{{ route('departemen-biro.psti.akademik') }}">Departemen Akademik</flux:navlist.item>
-                    <flux:navlist.item href="{{ route('departemen-biro.psti.generasi-bisnis') }}">Departemen Generasi Bisnis</flux:navlist.item>
-                    <flux:navlist.item href="{{ route('departemen-biro.psti.riset-kompetisi') }}">Departemen Riset & Kompetisi</flux:navlist.item>
+                    <flux:navlist.item href="{{ route('departemen-biro.show', ['division' => 'psti', 'slug' => 'departemen-akademik']) }}">
+                        Departemen Akademik
+                    </flux:navlist.item>
+                    <flux:navlist.item href="{{ route('departemen-biro.show', ['division' => 'psti', 'slug' => 'departemen-generasi-bisnis']) }}">
+                        Departemen Generasi Bisnis
+                    </flux:navlist.item>
+                    <flux:navlist.item href="{{ route('departemen-biro.show', ['division' => 'psti', 'slug' => 'departemen-riset-kompetisi']) }}">
+                        Departemen Riset & Kompetisi
+                    </flux:navlist.item>
                 </flux:navlist.group>
 
-                <flux:navlist.group heading="External" expandable expanded="false">
-                    <flux:navlist.item href="{{ route('departemen-biro.external.kominfo') }}">Departemen Komunikasi & Informasi</flux:navlist.item>
-                    <flux:navlist.item href="{{ route('departemen-biro.external.dedikasi-masyarakat') }}">Biro Dedikasi Masyarakat</flux:navlist.item>
-                    <flux:navlist.item href="{{ route('departemen-biro.external.public-relation') }}">Bureau Public Relation</flux:navlist.item>
+                <flux:navlist.group heading="Eksternal" expandable expanded="false">
+                    <flux:navlist.item href="{{ route('departemen-biro.show', ['division' => 'eksternal', 'slug' => 'departemen-komunikasi-informasi']) }}">
+                        Departemen Komunikasi & Informasi
+                    </flux:navlist.item>
+                    <flux:navlist.item href="{{ route('departemen-biro.show', ['division' => 'eksternal', 'slug' => 'biro-dedikasi-masyarakat']) }}">
+                        Biro Dedikasi Masyarakat
+                    </flux:navlist.item>
+                    <flux:navlist.item href="{{ route('departemen-biro.show', ['division' => 'eksternal', 'slug' => 'biro-public-relation']) }}">
+                        Biro Public Relation
+                    </flux:navlist.item>
                 </flux:navlist.group>
             </flux:navmenu>
-
         </flux:dropdown>
         <flux:dropdown class="max-xl:hidden">
             <flux:navbar.item icon-trailing="chevron-down">Community & Committee</flux:navbar.item>

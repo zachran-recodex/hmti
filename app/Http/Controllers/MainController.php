@@ -43,101 +43,28 @@ class MainController extends Controller
     }
 
     ## Departemen & Biro
-    public function hrd()
+    public function showDepartemenBiro($division, $slug)
     {
+        $titleMap = [
+            'departemen-human-resource' => 'Departemen Human Resource',
+            'departemen-kaderisasi' => 'Departemen Kaderisasi',
+            'departemen-kemahasiswaan' => 'Departemen Kemahasiswaan',
+            'departemen-akademik' => 'Departemen Akademik',
+            'departemen-generasi-bisnis' => 'Departemen Generasi Bisnis',
+            'departemen-riset-kompetisi' => 'Departemen Riset & Kompetisi',
+            'departemen-komunikasi-informasi' => 'Departemen Komunikasi & Informasi',
+            'biro-dedikasi-masyarakat' => 'Biro Dedikasi Masyarakat',
+            'biro-public-relation' => 'Biro Public Relation'
+        ];
+
+        $title = $titleMap[$slug] ?? abort(404);
+
         $departemen = DepartemenBiro::with(['fungsis', 'programKerjas', 'agendas', 'members'])
-            ->where('title', 'Departemen Human Resource')
+            ->where('title', $title)
+            ->where('division', ucfirst($division))
             ->firstOrFail();
 
-        return view('main.departemen-biro.internal.hrd', [
-            'departemen' => $departemen
-        ]);
-    }
-
-    public function kaderisasi()
-    {
-        $departemen = DepartemenBiro::with(['fungsis', 'programKerjas', 'agendas', 'members'])
-            ->where('title', 'Departemen Kaderisasi')
-            ->firstOrFail();
-
-        return view('main.departemen-biro.internal.kaderisasi', [
-            'departemen' => $departemen
-        ]);
-    }
-
-    public function kemahasiswaan()
-    {
-        $departemen = DepartemenBiro::with(['fungsis', 'programKerjas', 'agendas', 'members'])
-            ->where('title', 'Departemen Kemahasiswaan')
-            ->firstOrFail();
-
-        return view('main.departemen-biro.internal.kemahasiswaan', [
-            'departemen' => $departemen
-        ]);
-    }
-
-    public function akademik()
-    {
-        $departemen = DepartemenBiro::with(['fungsis', 'programKerjas', 'agendas', 'members'])
-            ->where('title', 'Departemen Akademik')
-            ->firstOrFail();
-
-        return view('main.departemen-biro.psti.akademik', [
-            'departemen' => $departemen
-        ]);
-    }
-
-    public function generasiBisnis()
-    {
-        $departemen = DepartemenBiro::with(['fungsis', 'programKerjas', 'agendas', 'members'])
-            ->where('title', 'Departemen Generasi Bisnis')
-            ->firstOrFail();
-
-        return view('main.departemen-biro.psti.generasi-bisnis', [
-            'departemen' => $departemen
-        ]);
-    }
-
-    public function risetKompetisi()
-    {
-        $departemen = DepartemenBiro::with(['fungsis', 'programKerjas', 'agendas', 'members'])
-            ->where('title', 'Departemen Riset & Kompetisi')
-            ->firstOrFail();
-
-        return view('main.departemen-biro.psti.riset-kompetisi', [
-            'departemen' => $departemen
-        ]);
-    }
-
-    public function kominfo()
-    {
-        $departemen = DepartemenBiro::with(['fungsis', 'programKerjas', 'agendas', 'members'])
-            ->where('title', 'Departemen Komunikasi & Informasi')
-            ->firstOrFail();
-
-        return view('main.departemen-biro.external.kominfo', [
-            'departemen' => $departemen
-        ]);
-    }
-
-    public function dedikasiMasyarakat()
-    {
-        $departemen = DepartemenBiro::with(['fungsis', 'programKerjas', 'agendas', 'members'])
-            ->where('title', 'Biro Dedikasi Masyarakat')
-            ->firstOrFail();
-
-        return view('main.departemen-biro.external.dedikasi-masyarakat', [
-            'departemen' => $departemen
-        ]);
-    }
-
-    public function publicRelation()
-    {
-        $departemen = DepartemenBiro::with(['fungsis', 'programKerjas', 'agendas', 'members'])
-            ->where('title', 'Biro Public Relation')
-            ->firstOrFail();
-
-        return view('main.departemen-biro.external.public-relation', [
+        return view('main.departemen-biro', [
             'departemen' => $departemen
         ]);
     }
