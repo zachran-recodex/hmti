@@ -40,14 +40,14 @@
                 </flux:navlist.item>
             </flux:navlist.group>
 
-            <flux:navlist.group heading="External" expandable expanded="false">
-                <flux:navlist.item href="{{ route('departemen-biro.show', ['division' => 'external', 'slug' => 'departemen-komunikasi-informasi']) }}" textWrap="true">
+            <flux:navlist.group heading="Eksternal" expandable expanded="false">
+                <flux:navlist.item href="{{ route('departemen-biro.show', ['division' => 'eksternal', 'slug' => 'departemen-komunikasi-informasi']) }}" textWrap="true">
                     Departemen Komunikasi & Informasi
                 </flux:navlist.item>
-                <flux:navlist.item href="{{ route('departemen-biro.show', ['division' => 'external', 'slug' => 'biro-dedikasi-masyarakat']) }}" textWrap="true">
+                <flux:navlist.item href="{{ route('departemen-biro.show', ['division' => 'eksternal', 'slug' => 'biro-dedikasi-masyarakat']) }}" textWrap="true">
                     Biro Dedikasi Masyarakat
                 </flux:navlist.item>
-                <flux:navlist.item href="{{ route('departemen-biro.show', ['division' => 'external', 'slug' => 'biro-public-relation']) }}" textWrap="true">
+                <flux:navlist.item href="{{ route('departemen-biro.show', ['division' => 'eksternal', 'slug' => 'biro-public-relation']) }}" textWrap="true">
                     Biro Public Relation
                 </flux:navlist.item>
             </flux:navlist.group>
