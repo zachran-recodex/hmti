@@ -17,11 +17,16 @@ class DepartemenBiro extends Model
         'division'
     ];
 
-    const DIVISION = [
+    const DIVISIONS = [
         'Internal',
         'PSTI',
         'Eksternal',
     ];
+
+    public static function getDivisions()
+    {
+        return self::DIVISIONS;
+    }
 
     public function fungsis(): MorphMany
     {
