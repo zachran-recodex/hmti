@@ -58,9 +58,7 @@
                     Definisi
                 </flux:heading>
                 <p class="mt-4 text-lg text-gray-600 max-w-7xl mx-auto">
-                    HMTI Univesitas Telkom adalah sebuah organisasi yang beranggotakan dan mewadahi
-                    seluruh mahasiswa Prodi Teknik Industri dan Manajemen Rekayasa Fakultas Rekayasa
-                    Industri Universitas Telkom.
+                    {{ $tentang->definisi }}
                 </p>
             </div>
             <div class="text-center">
@@ -68,12 +66,7 @@
                     Kedudukan dan Peran
                 </flux:heading>
                 <p class="mt-4 text-lg text-gray-600 max-w-7xl mx-auto">
-                    HMTI Univesitas Telkom bersifat independen dan lembaga non-struktural. Fungsi HMTI
-                    di Telkom University adalah lembaga eksekutif dan organisasi yang bertugas untuk
-                    menampung aspirasi dari seluruh mahasiswa Teknik Industri dan Manajemen Rekayasa.
-                    Serta mengkoordinasikan dan merealisasikan segala kegiatan mahasiswa Teknik Industri.
-                    Selain itu, HMTI juga berperan untuk menciptakan kader-kader Teknik Industri yang
-                    pedulii dan berperan aktif dalam memajukkan Fakultas, Program Studi, dan Himpunan.
+                    {{ $tentang->kedudukan_peran }}
                 </p>
             </div>
         </div>
@@ -87,35 +80,21 @@
                 <div class="bg-white p-8 rounded-lg shadow-sm">
                     <flux:heading size="2xl" level="3" class="mb-6">Visi</flux:heading>
                     <p class="text-gray-600">
-                        Terwujudnya entitas HMTI Universitas Telkom yang memiliki siikap solutif, kredibel,
-                        dan dapat bersinergi dengan improvisasi dalam wadah yang ada di HMTI Universitas
-                        Telkom.
+                        {{ $tentang->visi }}
                     </p>
                 </div>
                 <!-- Mission -->
                 <div class="bg-white p-8 rounded-lg shadow-sm">
                     <flux:heading size="2xl" level="3" class="mb-6">Misi</flux:heading>
                     <ul class="space-y-4 text-gray-600">
-                        <li class="flex items-start">
-                            <span class="mr-2">1.</span>
-                            <span>
-                                Mengembangkan sumber daya entiitas HMTI Universitas Telkom dengan mengaplikasikan
-                                keilmuan teknik industri dan fungsi mahasiswa dalam kegiatan yang ada di HMTI
-                            </span>
-                        </li>
-                        <li class="flex items-start">
-                            <span class="mr-2">2.</span>
-                            <span>
-                                Mengembangkan koordinasi antar entitas guna memaksimalkan fasilitas yang telah ada di HMTI
-                            </span>
-                        </li>
-                        <li class="flex items-start">
-                            <span class="mr-2">3.</span>
-                            <span>
-                                Berkontribusi aktif sebagai jembatan untuk entitas HMTI Universitas Telkom dengan memperhatikan
-                                nilai-nilai yang ada di HMTI
-                            </span>
-                        </li>
+                        @foreach ($tentang->misi as $key => $item)
+                            <li class="flex items-start">
+                                <span class="mr-2">{{ $key + 1 }}.</span>
+                                <span>
+                                    {{ $item }}
+                                </span>
+                            </li>
+                        @endforeach
                     </ul>
                 </div>
             </div>
@@ -128,6 +107,15 @@
             <div class="text-center mb-12">
                 <flux:heading size="3xl" level="2">Struktural Organisasi</flux:heading>
                 <p class="mt-4 text-lg text-gray-600">BPH HMTI 2025/2026</p>
+            </div>
+
+            <!-- Organizational Structure Image -->
+            <div class="max-w-5xl mx-auto mb-12">
+                <img
+                    src="{{ Storage::url($tentang->gambar_stuktural)  }}"
+                    alt="Struktur Organisasi HMTI"
+                    class="w-full h-auto shadow-lg rounded-lg border border-gray-600"
+                >
             </div>
         </div>
     </section>

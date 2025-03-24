@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\CommunityCommittee;
+use App\Models\TentangKami;
 use App\Models\DepartemenBiro;
+use App\Models\CommunityCommittee;
 
 class MainController extends Controller
 {
@@ -15,7 +16,9 @@ class MainController extends Controller
     ## Profil
     public function tentangKami()
     {
-        return view('main.profil.tentang-kami');
+        $tentang = TentangKami::first();
+
+        return view('main.profil.tentang-kami', compact('tentang'));
     }
 
     public function adArt()

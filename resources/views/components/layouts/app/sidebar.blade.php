@@ -33,6 +33,8 @@
                     </flux:navlist.group>
                 @endif
 
+                <flux:navlist.item href="{{ route('dashboard.tentang-kami') }}" textWrap="true">Tentang Kami</flux:navlist.item>
+
                 <flux:navlist.item href="{{ route('dashboard.departemen-biro') }}" textWrap="true">Departemen & Biro</flux:navlist.item>
 
                 <flux:navlist.item href="{{ route('dashboard.community-committee') }}" textWrap="true">Community & Committee</flux:navlist.item>
