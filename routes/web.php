@@ -83,6 +83,8 @@ Route::middleware(['auth', 'can:access dashboard'])->group(function () {
 
         Route::get('tentang-kami', App\Livewire\ManageAbout::class)->name('tentang-kami');
 
+        Route::get('ad-art', App\Livewire\ManageADART::class)->name('ad-art');
+
         Route::view('departemen-biro', 'dashboard.departemen-biro')->name('departemen-biro');
 
         Route::view('community-committee', 'dashboard.community-committee')->name('community-committee');

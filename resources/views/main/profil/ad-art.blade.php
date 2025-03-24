@@ -64,31 +64,37 @@
             </div>
 
             <!-- PDF Viewer -->
-            <div class="bg-white rounded-lg shadow-lg overflow-hidden">
-                <div class="aspect-w-16 aspect-h-9">
-                    <iframe
-                        src="{{ asset('documents/ad-art.pdf') }}"
-                        class="w-full h-[800px]"
-                        type="application/pdf"
-                        frameborder="0"
-                    ></iframe>
-                </div>
-                <div class="p-4 border-t border-gray-200 bg-gray-50">
-                    <div class="flex justify-between items-center">
-                        <a
-                            href="{{ asset('documents/ad-art.pdf') }}"
-                            download
-                            class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-primary hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
-                        >
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
-                                <path fill-rule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clip-rule="evenodd" />
-                            </svg>
-                            Download PDF
-                        </a>
-                        <span class="text-sm text-gray-500">Format: PDF</span>
+            @if($adArt && $adArt->file_path)
+                <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+                    <div class="aspect-w-16 aspect-h-9">
+                        <iframe
+                            src="{{ Storage::url($adArt->file_path) }}"
+                            class="w-full h-[800px]"
+                            type="application/pdf"
+                            frameborder="0"
+                        ></iframe>
+                    </div>
+                    <div class="p-4 border-t border-gray-200 bg-gray-50">
+                        <div class="flex justify-between items-center">
+                            <a
+                                href="{{ Storage::url($adArt->file_path) }}"
+                                download
+                                class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-primary hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
+                            >
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clip-rule="evenodd" />
+                                </svg>
+                                Download PDF
+                            </a>
+                            <span class="text-sm text-gray-500">Format: PDF</span>
+                        </div>
                     </div>
                 </div>
-            </div>
+            @else
+                <div class="text-center py-12">
+                    <p class="text-gray-500">Dokumen AD/ART belum tersedia.</p>
+                </div>
+            @endif
         </div>
     </section>
 </x-layouts.main>

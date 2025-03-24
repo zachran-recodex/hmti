@@ -33,11 +33,16 @@
                     </flux:navlist.group>
                 @endif
 
-                <flux:navlist.item href="{{ route('dashboard.tentang-kami') }}" textWrap="true">Tentang Kami</flux:navlist.item>
+                <flux:navlist.group expandable heading="Profil">
+                    <flux:navlist.item :href="route('dashboard.tentang-kami')" :current="request()->routeIs('dashboard.tentang-kami')" wire:navigate textWrap="true">Tentang Kami</flux:navlist.item>
 
-                <flux:navlist.item href="{{ route('dashboard.departemen-biro') }}" textWrap="true">Departemen & Biro</flux:navlist.item>
+                    <flux:navlist.item :href="route('dashboard.ad-art')" :current="request()->routeIs('dashboard.ad-art')" wire:navigate textWrap="true">AD/ART</flux:navlist.item>
 
-                <flux:navlist.item href="{{ route('dashboard.community-committee') }}" textWrap="true">Community & Committee</flux:navlist.item>
+                </flux:navlist.group>
+
+                <flux:navlist.item :href="route('dashboard.departemen-biro')" :current="request()->routeIs('dashboard.departemen-biro')" wire:navigate textWrap="true">Departemen & Biro</flux:navlist.item>
+
+                <flux:navlist.item :href="route('dashboard.community-committee')" :current="request()->routeIs('dashboard.community-committee')" wire:navigate textWrap="true">Community & Committee</flux:navlist.item>
 
             </flux:navlist>
         </flux:sidebar>

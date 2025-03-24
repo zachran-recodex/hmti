@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AdArt;
 use App\Models\TentangKami;
 use App\Models\DepartemenBiro;
 use App\Models\CommunityCommittee;
@@ -23,7 +24,9 @@ class MainController extends Controller
 
     public function adArt()
     {
-        return view('main.profil.ad-art');
+        $adArt = AdArt::first();
+
+        return view('main.profil.ad-art', compact('adArt'));
     }
 
     public function panduanLogo()
