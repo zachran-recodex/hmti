@@ -72,11 +72,11 @@ Route::middleware(['auth', 'can:access dashboard'])->group(function () {
 
         Route::prefix('admin')->name('admin.')->group(function (){
 
-            Route::view('manage-user', 'dashboard.admin.user')
+            Route::get('manage-user', App\Livewire\Admin\ManageUsers::class)
                 ->name('user')
                 ->middleware('can:manage users');
 
-            Route::view('manage-role', 'dashboard.admin.role')
+            Route::get('manage-role', App\Livewire\Admin\ManageRoles::class)
                 ->name('role')
                 ->middleware('can:manage roles');
         });
@@ -85,9 +85,9 @@ Route::middleware(['auth', 'can:access dashboard'])->group(function () {
 
         Route::get('ad-art', App\Livewire\ManageADART::class)->name('ad-art');
 
-        Route::view('departemen-biro', 'dashboard.departemen-biro')->name('departemen-biro');
+        Route::get('departemen-biro', App\Livewire\ManageDepartemenBiro::class)->name('departemen-biro');
 
-        Route::view('community-committee', 'dashboard.community-committee')->name('community-committee');
+        Route::get('community-committee', App\Livewire\ManageCommunityCommittee::class)->name('community-committee');
     });
 
     Route::redirect('settings', 'settings/profil');
