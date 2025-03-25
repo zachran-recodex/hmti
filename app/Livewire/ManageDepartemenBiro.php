@@ -29,7 +29,7 @@ class ManageDepartemenBiro extends Component
     public $newFungsi = ['title' => ''];
     public $newProgramKerja = ['title' => '', 'description' => ''];
     public $newAgenda = ['title' => '', 'description' => ''];
-    public $newMember = ['name' => '', 'position' => ''];
+    public $newMember = ['name' => '', 'position' => '', 'temp_photo' => null];
 
     // UI State Properties
     public $isEditing = false;
@@ -48,6 +48,8 @@ class ManageDepartemenBiro extends Component
             'agendas.*.description' => 'required|string',
             'members.*.name' => 'required|string|max:255',
             'members.*.position' => 'required|string|in:' . implode(',', Member::getPositions()),
+            'members.*.temp_photo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:1024',
+            'newMember.temp_photo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:1024',
         ];
     }
 
@@ -88,10 +90,29 @@ class ManageDepartemenBiro extends Component
         $this->validate([
             'newMember.name' => 'required|string|max:255',
             'newMember.position' => 'required|string|in:' . implode(',', Member::getPositions()),
+            'newMember.temp_photo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:1024',
         ]);
 
-        $this->members[] = $this->newMember;
-        $this->newMember = ['name' => '', 'position' => ''];
+        $memberData = [
+            'name' => $this->newMember['name'],
+            'position' => $this->newMember['position'],
+            'temp_photo' => null
+        ];
+
+        if ($this->newMember['temp_photo']) {
+            $memberData['temp_photo'] = $this->newMember['temp_photo'];
+        }
+
+        $this->members[] = $memberData;
+        $this->newMember = ['name' => '', 'position' => '', 'temp_photo' => null];
+    }
+
+    private function handleMemberPhoto($photo)
+    {
+        if (!$photo) {
+            return null;
+        }
+        return $photo->store('members', 'public');
     }
 
     public function removeFungsi($index)
@@ -142,7 +163,7 @@ class ManageDepartemenBiro extends Component
         })->toArray();
 
         $this->members = $departemenBiro->members->map(function($member) {
-            return ['name' => $member->name, 'position' => $member->position];
+            return ['name' => $member->name, 'position' => $member->position, 'temp_photo' => null];
         })->toArray();
 
         $this->showFormModal = true;
@@ -241,10 +262,16 @@ class ManageDepartemenBiro extends Component
 
             // Create Members
             foreach ($this->members as $member) {
-                $departemenBiro->members()->create([
+                $memberData = [
                     'name' => $member['name'],
                     'position' => $member['position']
-                ]);
+                ];
+
+                if (isset($member['temp_photo'])) {
+                    $memberData['photo'] = $this->handleMemberPhoto($member['temp_photo']);
+                }
+
+                $departemenBiro->members()->create($memberData);
             }
 
             DB::commit();

@@ -126,6 +126,13 @@
                     <div class="mb-12">
                         @foreach($departemen->members->where('position', 'Kepala') as $kepala)
                             <div class="max-w-sm mx-auto bg-white border border-zinc-200 p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow text-center">
+                                @if($kepala->photo)
+                                    <img src="{{ Storage::url($kepala->photo) }}" alt="{{ $kepala->name }}"
+                                         class="w-32 h-32 mx-auto mb-4 rounded-full object-cover">
+                                @else
+                                    <img src="{{ asset('images/placeholder.png') }}" alt="{{ $kepala->name }}"
+                                         class="w-32 h-32 mx-auto mb-4 rounded-full object-cover">
+                                @endif
                                 <h4 class="text-2xl font-semibold mb-2">{{ $kepala->name }}</h4>
                                 <p class="text-gray-600">{{ $kepala->position }}</p>
                             </div>
@@ -137,6 +144,13 @@
                 <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
                     @forelse($departemen->members->where('position', '!=', 'Kepala') as $member)
                         <div class="bg-white border border-zinc-200 p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow text-center">
+                            @if($member->photo)
+                                <img src="{{ Storage::url($member->photo) }}" alt="{{ $member->name }}"
+                                     class="w-24 h-24 mx-auto mb-4 rounded-full object-cover">
+                            @else
+                                <img src="{{ asset('images/placeholder.png') }}" alt="{{ $member->name }}"
+                                     class="w-24 h-24 mx-auto mb-4 rounded-full object-cover">
+                            @endif
                             <h4 class="text-xl font-semibold mb-2">{{ $member->name }}</h4>
                             <p class="text-gray-600">{{ $member->position }}</p>
                         </div>

@@ -185,33 +185,40 @@
 
                                 {{-- Member --}}
                                 <flux:fieldset>
-
                                     @foreach($members as $index => $member)
-                                        <div class="flex gap-4 items-start mb-4">
-                                            <div class="flex-1 space-y-4">
-                                                <flux:input label="Nama" wire:model="members.{{ $index }}.name" />
-                                                <flux:select label="Jabatan" wire:model="members.{{ $index }}.position">
-                                                    <option value="">Pilih Jabatan</option>
-                                                    @foreach(\App\Models\Member::getPositions() as $position)
-                                                        <option value="{{ $position }}">{{ $position }}</option>
-                                                    @endforeach
-                                                </flux:select>
-                                            </div>
-                                        </div>
-                                        <flux:button type="button" variant="danger" wire:click="removeMember({{ $index }})" icon="trash" class="w-full mb-4">Hapus</flux:button>
-                                    @endforeach
-
                                     <div class="flex gap-4 items-start mb-4">
                                         <div class="flex-1 space-y-4">
-                                            <flux:input label="Nama Member Baru" wire:model="newMember.name" />
-                                            <flux:select label="Jabatan Member Baru" wire:model="newMember.position">
+                                            <flux:input label="Nama" wire:model="members.{{ $index }}.name" />
+                                            <flux:select label="Jabatan" wire:model="members.{{ $index }}.position">
                                                 <option value="">Pilih Jabatan</option>
                                                 @foreach(\App\Models\Member::getPositions() as $position)
                                                     <option value="{{ $position }}">{{ $position }}</option>
                                                 @endforeach
                                             </flux:select>
+                                            <flux:field>
+                                                <flux:label>Foto</flux:label>
+                                                <flux:input type="file" wire:model="members.{{ $index }}.temp_photo" accept="image/*" />
+                                            </flux:field>
                                         </div>
                                     </div>
+                                    <flux:button type="button" variant="danger" wire:click="removeMember({{ $index }})" icon="trash" class="w-full mb-4">Hapus</flux:button>
+                                @endforeach
+
+                                <div class="flex gap-4 items-start mb-4">
+                                    <div class="flex-1 space-y-4">
+                                        <flux:input label="Nama Member Baru" wire:model="newMember.name" />
+                                        <flux:select label="Jabatan Member Baru" wire:model="newMember.position">
+                                            <option value="">Pilih Jabatan</option>
+                                            @foreach(\App\Models\Member::getPositions() as $position)
+                                                <option value="{{ $position }}">{{ $position }}</option>
+                                            @endforeach
+                                        </flux:select>
+                                        <flux:field>
+                                            <flux:label>Foto Member Baru</flux:label>
+                                            <flux:input type="file" wire:model="newMember.temp_photo" accept="image/*" />
+                                        </flux:field>
+                                    </div>
+                                </div>
                                     <flux:button type="button" variant="success" wire:click="addMember" icon="plus" class="w-full">Tambah</flux:button>
                                 </flux:fieldset>
 

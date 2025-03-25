@@ -10,6 +10,7 @@ class Member extends Model
 
     protected $fillable = [
         'name',
+        'photo',
         'position',
         'memberable_id',
         'memberable_type'
