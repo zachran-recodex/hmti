@@ -11,15 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('member', function (Blueprint $table) {
+        Schema::create('ad_arts', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->enum('position', [
-                'Kepala',
-                'Anggota'
-            ]);
-            $table->string('memberable_type');
-            $table->unsignedBigInteger('memberable_id');
+            $table->string('file_path');
             $table->timestamps();
         });
     }
@@ -29,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('member');
+        Schema::dropIfExists('ad_arts');
     }
 };

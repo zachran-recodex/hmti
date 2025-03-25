@@ -8,8 +8,6 @@ use Illuminate\Database\Eloquent\Relations\MorphTo;
 class Member extends Model
 {
 
-    protected $table = 'member';
-
     protected $fillable = [
         'name',
         'position',

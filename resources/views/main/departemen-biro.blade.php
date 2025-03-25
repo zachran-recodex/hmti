@@ -116,6 +116,39 @@
                     @endforelse
                 </div>
             </div>
+
+            <!-- Members -->
+            <div>
+                <flux:heading size="2xl" level="3" class="text-center mb-12">Members</flux:heading>
+
+                <!-- Kepala Position -->
+                @if($departemen->members->where('position', 'Kepala')->isNotEmpty())
+                    <div class="mb-12">
+                        @foreach($departemen->members->where('position', 'Kepala') as $kepala)
+                            <div class="max-w-sm mx-auto bg-white border border-zinc-200 p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow text-center">
+                                <h4 class="text-2xl font-semibold mb-2">{{ $kepala->name }}</h4>
+                                <p class="text-gray-600">{{ $kepala->position }}</p>
+                            </div>
+                        @endforeach
+                    </div>
+                @endif
+
+                <!-- Other Members -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+                    @forelse($departemen->members->where('position', '!=', 'Kepala') as $member)
+                        <div class="bg-white border border-zinc-200 p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow text-center">
+                            <h4 class="text-xl font-semibold mb-2">{{ $member->name }}</h4>
+                            <p class="text-gray-600">{{ $member->position }}</p>
+                        </div>
+                    @empty
+                        @if($departemen->members->where('position', 'Kepala')->isEmpty())
+                            <div class="col-span-full text-center text-gray-500">
+                                No members available
+                            </div>
+                        @endif
+                    @endforelse
+                </div>
+            </div>
         </div>
     </section>
 </x-layouts.main>

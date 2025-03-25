@@ -7,8 +7,6 @@ use Illuminate\Database\Eloquent\Relations\MorphTo;
 
 class ProgramKerja extends Model
 {
-
-    protected $table = 'program_kerja';
     protected $fillable = [
         'title',
         'description',

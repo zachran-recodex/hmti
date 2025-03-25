@@ -11,12 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('program_kerja', function (Blueprint $table) {
+        Schema::create('community_committees', function (Blueprint $table) {
             $table->id();
             $table->string('title');
+            $table->string('logo');
             $table->text('description');
-            $table->string('program_kerjaable_type');
-            $table->unsignedBigInteger('program_kerjaable_id');
+            $table->enum('category', [
+                'Community',
+                'Committee'
+            ]);
             $table->timestamps();
         });
     }
@@ -26,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('program_kerja');
+        Schema::dropIfExists('community_committees');
     }
 };

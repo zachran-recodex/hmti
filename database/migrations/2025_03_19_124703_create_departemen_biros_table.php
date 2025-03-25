@@ -11,14 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('community_committee', function (Blueprint $table) {
+        Schema::create('departemen_biros', function (Blueprint $table) {
             $table->id();
             $table->string('title');
             $table->string('logo');
             $table->text('description');
-            $table->enum('category', [
-                'Community',
-                'Committee'
+            $table->enum('division', [
+                'Internal',
+                'PSTI',
+                'Eksternal'
             ]);
             $table->timestamps();
         });
@@ -29,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('community_committee');
+        Schema::dropIfExists('departemen_biros');
     }
 };

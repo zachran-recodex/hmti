@@ -7,9 +7,6 @@ use Illuminate\Database\Eloquent\Relations\MorphMany;
 
 class DepartemenBiro extends Model
 {
-
-    protected $table = 'departemen_biro';
-
     protected $fillable = [
         'title',
         'description',

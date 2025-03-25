@@ -11,9 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('ad_art', function (Blueprint $table) {
+        Schema::create('fungsis', function (Blueprint $table) {
             $table->id();
-            $table->string('file_path');
+            $table->string('title');
+            $table->string('fungsiable_type');
+            $table->unsignedBigInteger('fungsiable_id');
             $table->timestamps();
         });
     }
@@ -23,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('ad_art');
+        Schema::dropIfExists('fungsis');
     }
 };

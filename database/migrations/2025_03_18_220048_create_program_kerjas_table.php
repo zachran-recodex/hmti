@@ -11,11 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('fungsi', function (Blueprint $table) {
+        Schema::create('program_kerjas', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->string('fungsiable_type');
-            $table->unsignedBigInteger('fungsiable_id');
+            $table->text('description');
+            $table->string('program_kerjaable_type');
+            $table->unsignedBigInteger('program_kerjaable_id');
             $table->timestamps();
         });
     }
@@ -25,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('fungsi');
+        Schema::dropIfExists('program_kerjas');
     }
 };

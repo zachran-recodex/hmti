@@ -6,9 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class CommunityCommittee extends Model
 {
-
-    protected $table = 'community_committee';
-
     protected $fillable = [
         'title',
         'description',

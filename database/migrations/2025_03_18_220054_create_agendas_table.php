@@ -11,13 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('tentang_kami', function (Blueprint $table) {
+        Schema::create('agendas', function (Blueprint $table) {
             $table->id();
-            $table->text('definisi');
-            $table->text('kedudukan_peran');
-            $table->text('visi');
-            $table->json('misi');
-            $table->string('gambar_stuktural');
+            $table->string('title');
+            $table->text('description');
+            $table->string('agendaable_type');
+            $table->unsignedBigInteger('agendaable_id');
             $table->timestamps();
         });
     }
@@ -27,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('tentang_kami');
+        Schema::dropIfExists('agendas');
     }
 };

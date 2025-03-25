@@ -7,8 +7,6 @@ use Illuminate\Database\Eloquent\Relations\MorphTo;
 
 class Fungsi extends Model
 {
-
-    protected $table = 'fungsi';
     protected $fillable = [
         'title',
         'fungsiable_id',
