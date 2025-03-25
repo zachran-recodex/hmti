@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Relations\MorphTo;
 
 class Agenda extends Model
 {
+
+    protected $table = 'agenda';
     protected $fillable = [
         'title',
         'description',

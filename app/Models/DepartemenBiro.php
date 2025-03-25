@@ -4,11 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class DepartemenBiro extends Model
 {
-    use HasFactory;
+
+    protected $table = 'departemen_biro';
 
     protected $fillable = [
         'title',

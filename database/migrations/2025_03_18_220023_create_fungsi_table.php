@@ -11,13 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('tentang_kamis', function (Blueprint $table) {
+        Schema::create('fungsi', function (Blueprint $table) {
             $table->id();
-            $table->text('definisi');
-            $table->text('kedudukan_peran');
-            $table->text('visi');
-            $table->json('misi');
-            $table->string('gambar_stuktural');
+            $table->string('title');
+            $table->string('fungsiable_type');
+            $table->unsignedBigInteger('fungsiable_id');
             $table->timestamps();
         });
     }
@@ -27,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('tentang_kamis');
+        Schema::dropIfExists('fungsi');
     }
 };

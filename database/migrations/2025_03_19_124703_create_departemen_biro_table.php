@@ -11,15 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('members', function (Blueprint $table) {
+        Schema::create('departemen_biro', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->enum('position', [
-                'Kepala',
-                'Anggota'
+            $table->string('title');
+            $table->string('logo');
+            $table->text('description');
+            $table->enum('division', [
+                'Internal',
+                'PSTI',
+                'Eksternal'
             ]);
-            $table->string('memberable_type');
-            $table->unsignedBigInteger('memberable_id');
             $table->timestamps();
         });
     }
@@ -29,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('members');
+        Schema::dropIfExists('departemen_biro');
     }
 };

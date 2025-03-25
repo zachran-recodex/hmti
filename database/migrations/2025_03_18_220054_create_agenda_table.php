@@ -11,11 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('fungsis', function (Blueprint $table) {
+        Schema::create('agenda', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->string('fungsiable_type');
-            $table->unsignedBigInteger('fungsiable_id');
+            $table->text('description');
+            $table->string('agendaable_type');
+            $table->unsignedBigInteger('agendaable_id');
             $table->timestamps();
         });
     }
@@ -25,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('fungsis');
+        Schema::dropIfExists('agenda');
     }
 };
