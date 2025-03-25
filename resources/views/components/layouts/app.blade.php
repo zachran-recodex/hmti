@@ -8,7 +8,12 @@
             <flux:sidebar.toggle class="lg:hidden" icon="x-mark" />
 
             <a href="{{ route('dashboard') }}" class="mr-5 flex items-center space-x-2" wire:navigate>
-                <x-app-logo class="size-8" href="#"></x-app-logo>
+                <div class="flex aspect-square size-8 items-center justify-center">
+                    <img src="{{ asset('images/logo_hmti.jpg') }}" alt="HMTI Logo" class="h-8 w-8 rounded-md">
+                </div>
+                <div class="ml-1 grid flex-1 text-left text-sm">
+                    <span class="mb-0.5 truncate leading-none font-semibold">HMTI Telkom University</span>
+                </div>
             </a>
 
             <flux:navlist variant="outline">
