@@ -15,6 +15,7 @@ class DatabaseSeeder extends Seeder
             UsersRolesAndPermissionsSeeder::class,
             DepartemenBiroSeeder::class,
             CommunityCommitteeSeeder::class,
+            TentangKamiSeeder::class,
         ]);
     }
 }

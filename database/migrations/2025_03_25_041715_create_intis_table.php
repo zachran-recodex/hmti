@@ -11,9 +11,17 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('ad_arts', function (Blueprint $table) {
+        Schema::create('intis', function (Blueprint $table) {
             $table->id();
-            $table->string('file_path');
+            $table->string('name');
+            $table->string('photo');
+            $table->enum('position', [
+                'Ketua Himpunan',
+                'Wakil Ketua Himpunan',
+                'Sekretaris Jenderal',
+                'Sekretaris',
+                'Bendahara',
+            ]);
             $table->timestamps();
         });
     }
@@ -23,6 +31,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('ad_arts');
+        Schema::dropIfExists('intis');
     }
 };

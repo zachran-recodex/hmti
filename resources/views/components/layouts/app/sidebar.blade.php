@@ -36,6 +36,8 @@
                 <flux:navlist.group expandable heading="Profil">
                     <flux:navlist.item :href="route('dashboard.tentang-kami')" :current="request()->routeIs('dashboard.tentang-kami')" wire:navigate textWrap="true">Tentang Kami</flux:navlist.item>
 
+                    <flux:navlist.item :href="route('dashboard.inti')" :current="request()->routeIs('dashboard.inti')" wire:navigate textWrap="true">Inti</flux:navlist.item>
+
                     <flux:navlist.item :href="route('dashboard.ad-art')" :current="request()->routeIs('dashboard.ad-art')" wire:navigate textWrap="true">AD/ART</flux:navlist.item>
 
                 </flux:navlist.group>

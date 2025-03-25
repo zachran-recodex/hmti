@@ -83,6 +83,8 @@ Route::middleware(['auth', 'can:access dashboard'])->group(function () {
 
         Route::get('tentang-kami', App\Livewire\ManageTentangKami::class)->name('tentang-kami');
 
+        Route::get('inti', App\Livewire\ManageInti::class)->name('inti');
+
         Route::get('ad-art', App\Livewire\ManageADART::class)->name('ad-art');
 
         Route::get('departemen-biro', App\Livewire\ManageDepartemenBiro::class)->name('departemen-biro');

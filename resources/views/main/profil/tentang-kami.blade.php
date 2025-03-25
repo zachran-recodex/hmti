@@ -127,96 +127,51 @@
             <div class="mb-16">
                 <flux:heading size="2xl" level="3" class="text-center mb-12">Inti</flux:heading>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8 pb-8">
+                    @foreach($intis->take(2) as $inti)
                     <div class="text-center">
                         <div class="relative w-48 h-48 mx-auto mb-4">
-                            <img src="{{ asset('images/placeholder-person.jpg') }}" alt="Ketua HMTI" class="rounded-full w-full h-full object-cover shadow-lg">
+                            <img src="{{ Storage::url($inti->photo) }}" alt="{{ $inti->position }}" class="rounded-full w-full h-full object-cover shadow-lg">
                         </div>
-                        <h4 class="text-xl font-semibold mb-1">Nama Ketua</h4>
-                        <p class="text-primary font-medium">Ketua HMTI</p>
+                        <h4 class="text-xl font-semibold mb-1">{{ $inti->name }}</h4>
+                        <p class="text-primary font-medium">{{ $inti->position }}</p>
                     </div>
-                    <div class="text-center">
-                        <div class="relative w-48 h-48 mx-auto mb-4">
-                            <img src="{{ asset('images/placeholder-person.jpg') }}" alt="Wakil Ketua HMTI" class="rounded-full w-full h-full object-cover shadow-lg">
-                        </div>
-                        <h4 class="text-xl font-semibold mb-1">Nama Wakil</h4>
-                        <p class="text-primary font-medium">Wakil Ketua HMTI</p>
-                    </div>
+                    @endforeach
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    @foreach($intis->skip(2) as $inti)
                     <div class="text-center">
                         <div class="relative w-48 h-48 mx-auto mb-4">
-                            <img src="{{ asset('images/placeholder-person.jpg') }}" alt="Wakil Ketua HMTI" class="rounded-full w-full h-full object-cover shadow-lg">
+                            <img src="{{ Storage::url($inti->photo) }}" alt="{{ $inti->position }}" class="rounded-full w-full h-full object-cover shadow-lg">
                         </div>
-                        <h4 class="text-xl font-semibold mb-1">Nama Sekjen</h4>
-                        <p class="text-primary font-medium">Sekretaris Jenderal HMTI</p>
-                    </div>
-                    <div class="text-center">
-                        <div class="relative w-48 h-48 mx-auto mb-4">
-                            <img src="{{ asset('images/placeholder-person.jpg') }}" alt="Sekretaris HMTI" class="rounded-full w-full h-full object-cover shadow-lg">
-                        </div>
-                        <h4 class="text-xl font-semibold mb-1">Nama Sekretaris</h4>
-                        <p class="text-primary font-medium">Sekretaris HMTI</p>
-                    </div>
-                    <div class="text-center">
-                        <div class="relative w-48 h-48 mx-auto mb-4">
-                            <img src="{{ asset('images/placeholder-person.jpg') }}" alt="Bendahara HMTI" class="rounded-full w-full h-full object-cover shadow-lg">
-                        </div>
-                        <h4 class="text-xl font-semibold mb-1">Nama Bendahara</h4>
-                        <p class="text-primary font-medium">Bendahara HMTI</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Kepala Internal -->
-            <div class="mb-16">
-                <flux:heading size="2xl" level="3" class="text-center mb-12">Internal</flux:heading>
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    <!-- Cards -->
-                    @foreach(['Human Resource', 'Kaderisasi', 'Kemahasiswaan'] as $internal)
-                    <div class="bg-white p-6 rounded-lg shadow-sm text-center">
-                        <div class="relative w-32 h-32 mx-auto mb-4">
-                            <img src="{{ asset('images/placeholder-person.jpg') }}" alt="Kadep {{ $internal }}" class="rounded-full w-full h-full object-cover shadow-md">
-                        </div>
-                        <h4 class="text-lg font-semibold mb-1">Nama Kadep</h4>
-                        <p class="text-primary font-medium">Kepala Departemen {{ $internal }}</p>
+                        <h4 class="text-xl font-semibold mb-1">{{ $inti->name }}</h4>
+                        <p class="text-primary font-medium">{{ $inti->position }}</p>
                     </div>
                     @endforeach
                 </div>
             </div>
 
-            <!-- Kepala PSTI -->
-            <div class="mb-16">
-                <flux:heading size="2xl" level="3" class="text-center mb-12">PSTI</flux:heading>
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    <!-- Cards -->
-                    @foreach(['Akademik', 'Generasi Bisnis', 'Riset dan Kompetisi'] as $psti)
-                    <div class="bg-white p-6 rounded-lg shadow-sm text-center">
-                        <div class="relative w-32 h-32 mx-auto mb-4">
-                            <img src="{{ asset('images/placeholder-person.jpg') }}" alt="Kadep {{ $psti }}" class="rounded-full w-full h-full object-cover shadow-md">
-                        </div>
-                        <h4 class="text-lg font-semibold mb-1">Nama Kadep</h4>
-                        <p class="text-primary font-medium">Kepala Departemen {{ $psti }}</p>
+            @foreach($divisions as $division)
+                @if($departemenBiros->has($division))
+                <div class="mb-16">
+                    <flux:heading size="2xl" level="3" class="text-center mb-12">{{ $division }}</flux:heading>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                        @foreach($departemenBiros[$division] as $departemenBiro)
+                            @foreach($departemenBiro->members as $member)
+                            <div class="bg-white p-6 rounded-lg shadow-sm text-center">
+                                <div class="relative w-32 h-32 mx-auto mb-4">
+                                    <img src="{{ asset('images/placeholder-person.jpg') }}"
+                                        alt="Kepala {{ $departemenBiro->title }}"
+                                        class="rounded-full w-full h-full object-cover shadow-md">
+                                </div>
+                                <h4 class="text-lg font-semibold mb-1">{{ $member->name }}</h4>
+                                <p class="text-primary font-medium">Kepala {{ $departemenBiro->title }}</p>
+                            </div>
+                            @endforeach
+                        @endforeach
                     </div>
-                    @endforeach
                 </div>
-            </div>
-
-            <!-- Kepala Eksternal -->
-            <div>
-                <flux:heading size="2xl" level="3" class="text-center mb-12">Eksternal</flux:heading>
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    <!-- Biro cards -->
-                    @foreach(['Komunikasi dan Informasi', 'Dedikasi Masyarakat', 'Public Relation'] as $biro)
-                    <div class="bg-white p-6 rounded-lg shadow-sm text-center">
-                        <div class="relative w-32 h-32 mx-auto mb-4">
-                            <img src="{{ asset('images/placeholder-person.jpg') }}" alt="Kabiro {{ $biro }}" class="rounded-full w-full h-full object-cover shadow-md">
-                        </div>
-                        <h4 class="text-lg font-semibold mb-1">Nama Kabiro</h4>
-                        <p class="text-primary font-medium">Kepala {{ $biro }}</p>
-                    </div>
-                    @endforeach
-                </div>
-            </div>
+                @endif
+            @endforeach
         </div>
     </section>
 </x-layouts.main>

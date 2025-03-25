@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\AdArt;
 use App\Models\TentangKami;
+use App\Models\Inti;
 use App\Models\DepartemenBiro;
 use App\Models\CommunityCommittee;
 
@@ -18,8 +19,19 @@ class MainController extends Controller
     public function tentangKami()
     {
         $tentang = TentangKami::first();
+        $intis = Inti::orderByRaw("FIELD(position, 
+            'Ketua Himpunan',
+            'Wakil Ketua Himpunan', 
+            'Sekretaris Jenderal',
+            'Sekretaris',
+            'Bendahara'
+        )")->get();
+        $divisions = DepartemenBiro::getDivisions();
+        $departemenBiros = DepartemenBiro::with(['members' => function($query) {
+            $query->where('position', 'Kepala');
+        }])->get()->groupBy('division');
 
-        return view('main.profil.tentang-kami', compact('tentang'));
+        return view('main.profil.tentang-kami', compact('tentang', 'intis', 'divisions', 'departemenBiros'));
     }
 
     public function adArt()
