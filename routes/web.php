@@ -81,7 +81,7 @@ Route::middleware(['auth', 'can:access dashboard'])->group(function () {
                 ->middleware('can:manage roles');
         });
 
-        Route::get('tentang-kami', App\Livewire\ManageAbout::class)->name('tentang-kami');
+        Route::get('tentang-kami', App\Livewire\ManageTentangKami::class)->name('tentang-kami');
 
         Route::get('ad-art', App\Livewire\ManageADART::class)->name('ad-art');
 

@@ -1,18 +1,18 @@
 <flux:container class="space-y-6">
     <!-- Page Header -->
     <div class="sm:flex sm:items-center sm:justify-between">
-        <flux:heading size="xl" class="font-bold!">Manage About</flux:heading>
+        <flux:heading size="xl" class="font-bold!">Manage Tentang Kami</flux:heading>
 
         <flux:breadcrumbs>
             <flux:breadcrumbs.item href="{{ route('dashboard') }}" separator="slash">Dashboard</flux:breadcrumbs.item>
-            <flux:breadcrumbs.item separator="slash">Manage About</flux:breadcrumbs.item>
+            <flux:breadcrumbs.item separator="slash">Manage Tentang Kami</flux:breadcrumbs.item>
         </flux:breadcrumbs>
     </div>
 
     <flux:card>
         <flux:card.header>
             <flux:heading size="lg" class="font-semibold">
-                About Page Content
+                Tentang Kami Page Content
             </flux:heading>
         </flux:card.header>
         <flux:card.body>

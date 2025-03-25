@@ -9,7 +9,7 @@ use Livewire\WithFileUploads;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
-class ManageAbout extends Component
+class ManageTentangKami extends Component
 {
     use WithNotification, WithFileUploads;
 
@@ -102,6 +102,6 @@ class ManageAbout extends Component
 
     public function render()
     {
-        return view('livewire.manage-about');
+        return view('livewire.manage-tentang-kami');
     }
 }
