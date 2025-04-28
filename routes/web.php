@@ -92,9 +92,9 @@ Route::middleware(['auth', 'can:access dashboard'])->group(function () {
         Route::get('community-committee', App\Livewire\ManageCommunityCommittee::class)->name('community-committee');
     });
 
-    Route::redirect('settings', 'settings/profil');
+    Route::redirect('settings', 'settings/profile');
 
-    Volt::route('settings/profil', 'settings.profil')->name('settings.profil');
+    Volt::route('settings/profile', 'settings.profile')->name('settings.profile');
     Volt::route('settings/password', 'settings.password')->name('settings.password');
     Volt::route('settings/appearance', 'settings.appearance')->name('settings.appearance');
 });
