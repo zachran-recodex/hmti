@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('community_committees', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->string('logo');
+            $table->string('logo')->nullable();
             $table->text('description');
             $table->enum('category', [
                 'Community',
