@@ -41,7 +41,13 @@
                             <flux:table.row>
 
                                 <flux:table.cell>
-                                    <img src="{{ Storage::url($communityCommittee->logo) }}" alt="{{ $communityCommittee->title }}" class="h-auto w-12 object-cover rounded">
+                                    @if ($communityCommittee->logo)
+                                        <img src="{{ Storage::url($communityCommittee->logo) }}" alt="{{ $communityCommittee->title }}" class="h-auto w-12 object-cover rounded" />
+                                    @else
+                                        <div class="w-12 h-12 rounded-lg bg-zinc-200 dark:bg-zinc-700 flex items-center justify-center">
+                                            <flux:icon name="user" class="w-6 h-6 text-zinc-500 dark:text-zinc-400" />
+                                        </div>
+                                    @endif
                                 </flux:table.cell>
 
                                 <flux:table.cell>
