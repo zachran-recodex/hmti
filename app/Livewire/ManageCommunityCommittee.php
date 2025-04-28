@@ -4,7 +4,6 @@ namespace App\Livewire;
 
 use Livewire\Component;
 use App\WithNotification;
-use Livewire\WithPagination;
 use Livewire\WithFileUploads;
 use App\Models\CommunityCommittee;
 use Illuminate\Support\Facades\DB;
@@ -12,7 +11,7 @@ use Illuminate\Support\Facades\Storage;
 
 class ManageCommunityCommittee extends Component
 {
-    use WithNotification, WithFileUploads, WithPagination;
+    use WithNotification, WithFileUploads;
 
     // Form Properties
     public $communityCommitteeId;
@@ -182,7 +181,7 @@ class ManageCommunityCommittee extends Component
     public function render()
     {
         $communityCommittees = CommunityCommittee::orderBy($this->sortField, $this->sortDirection)
-            ->paginate(10);
+            ->get();
 
         return view('livewire.manage-community-committee', [
             'communityCommittees' => $communityCommittees,
