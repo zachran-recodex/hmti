@@ -1,21 +1,21 @@
 <flux:container class="space-y-6">
     <!-- Page Header -->
     <div class="sm:flex sm:items-center sm:justify-between">
-        <flux:heading size="xl" class="font-bold!">Manage Core Team</flux:heading>
+        <flux:heading size="xl" class="font-bold!">Inti</flux:heading>
 
         <flux:breadcrumbs>
             <flux:breadcrumbs.item href="{{ route('dashboard') }}" separator="slash">Dashboard</flux:breadcrumbs.item>
-            <flux:breadcrumbs.item separator="slash">Manage Core Team</flux:breadcrumbs.item>
+            <flux:breadcrumbs.item separator="slash">Inti</flux:breadcrumbs.item>
         </flux:breadcrumbs>
     </div>
 
     <flux:card>
         <flux:card.header class="flex justify-between items-center">
-            <flux:input class="w-64!" icon="magnifying-glass" wire:model.live.debounce.300ms="searchTerm" placeholder="Search core team..." />
+            <flux:input class="w-64!" icon="magnifying-glass" wire:model.live.debounce.300ms="searchTerm" placeholder="Cari anggota inti..." />
 
             <flux:modal.trigger name="form">
                 <flux:button type="button" variant="primary" class="w-fit" icon="plus">
-                    Add New
+                    Tambah
                 </flux:button>
             </flux:modal.trigger>
         </flux:card.header>
@@ -24,21 +24,27 @@
             <div class="overflow-x-auto">
                 <flux:table hover striped>
                     <flux:table.columns>
-                        <flux:table.column>Photo</flux:table.column>
+                        <flux:table.column>Foto</flux:table.column>
                         <flux:table.column sortable wire:click="sortBy('name')" :direction="$sortField === 'name' ? $sortDirection : null">
-                            Name
+                            Nama
                         </flux:table.column>
                         <flux:table.column sortable wire:click="sortBy('position')" :direction="$sortField === 'position' ? $sortDirection : null">
-                            Position
+                            Posisi
                         </flux:table.column>
-                        <flux:table.column>Actions</flux:table.column>
+                        <flux:table.column>Aksi</flux:table.column>
                     </flux:table.columns>
 
                     <flux:table.rows>
                         @forelse ($intis as $inti)
                             <flux:table.row>
                                 <flux:table.cell>
-                                    <img src="{{ Storage::url($inti->photo) }}" alt="{{ $inti->name }}" class="w-16 h-16 object-cover rounded-full">
+                                    @if ($inti->photo)
+                                        <img src="{{ Storage::url($inti->photo) }}" alt="{{ $inti->name }}" class="w-16 h-16 object-cover rounded-full" />
+                                    @else
+                                        <div class="w-16 h-16 rounded-lg bg-zinc-200 dark:bg-zinc-700 flex items-center justify-center">
+                                            <flux:icon name="user" class="w-8 h-8 text-zinc-500 dark:text-zinc-400" />
+                                        </div>
+                                    @endif
                                 </flux:table.cell>
                                 <flux:table.cell>
                                     {{ $inti->name }}
@@ -65,9 +71,9 @@
                                 <flux:table.cell colspan="4" class="text-center">
                                     <div class="flex flex-col items-center justify-center">
                                         <flux:icon.users class="size-12 mb-2" />
-                                        <flux:heading size="lg">No core team members found</flux:heading>
+                                        <flux:heading size="lg">Tidak ada data anggota inti</flux:heading>
                                         <flux:subheading>
-                                            Start by creating a new core team member.
+                                            Mulai menambahkan anggota inti dengan menekan tombol "Tambah"
                                         </flux:subheading>
                                     </div>
                                 </flux:table.cell>
@@ -85,7 +91,7 @@
         <flux:modal name="form" class="w-7xl">
             <div class="space-y-6">
                 <flux:heading size="lg" class="font-semibold mb-6">
-                    {{ $isEditing ? 'Edit Core Team Member' : 'Add New Core Team Member' }}
+                    {{ $isEditing ? 'Edit Inti' : 'Tambahkan Inti' }}
                 </flux:heading>
 
                 <form wire:submit.prevent="save" class="flex flex-col space-y-6">
@@ -94,9 +100,9 @@
                             <flux:input label="Name" wire:model="name" />
 
                             <div>
-                                <flux:label>Position</flux:label>
+                                <flux:label>Posisi</flux:label>
                                 <flux:select wire:model="position">
-                                    <option value="">Select Position</option>
+                                    <option value="">Pilih Posisi</option>
                                     @foreach ($positions as $position)
                                         <option value="{{ $position }}">{{ $position }}</option>
                                     @endforeach
@@ -104,7 +110,7 @@
                             </div>
 
                             <div>
-                                <flux:label>Photo</flux:label>
+                                <flux:label>Foto</flux:label>
                                 <flux:input type="file" wire:model="tempPhoto" accept="image/*" />
                                 @if ($tempPhoto)
                                     <img src="{{ $tempPhoto->temporaryUrl() }}" class="mt-2 w-32 h-32 object-cover rounded">
@@ -118,7 +124,7 @@
                     <div class="flex">
                         <flux:spacer />
                         <flux:button type="submit" variant="primary" class="w-fit">
-                            {{ $isEditing ? 'Update' : 'Create' }}
+                            {{ $isEditing ? 'Update' : 'Simpan' }}
                         </flux:button>
                     </div>
                 </form>
@@ -128,16 +134,16 @@
         <flux:modal name="delete" class="min-w-[22rem]">
             <div class="space-y-6">
                 <div>
-                    <flux:heading size="lg">Delete core team member?</flux:heading>
+                    <flux:heading size="lg">Hapus Inti?</flux:heading>
                     <flux:subheading>
-                        <p>Are you sure you want to delete this core team member?</p>
-                        <p>This action cannot be undone.</p>
+                        <p>Apakah anda ingin menghapus Inti?</p>
+                        <p>Tindakan ini tidak dapat dibatalkan.</p>
                     </flux:subheading>
                 </div>
 
                 <div class="flex gap-2">
                     <flux:spacer />
-                    <flux:button variant="danger" wire:click="delete">Delete</flux:button>
+                    <flux:button variant="danger" wire:click="delete">Hapus</flux:button>
                 </div>
             </div>
         </flux:modal>
