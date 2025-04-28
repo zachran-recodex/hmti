@@ -27,7 +27,7 @@
                 <flux:navlist.item icon="home" :href="route('dashboard')" :current="request()->routeIs('dashboard')" wire:navigate>Dashboard</flux:navlist.item>
 
                 @if(auth()->user()->hasRole(['admin', 'super-admin']))
-                    <flux:navlist.group expandable heading="Admin">
+                    <flux:navlist.group heading="Admin" class="grid">
                         @can('manage users')
                             <flux:navlist.item icon="users" :href="route('dashboard.admin.user')" :current="request()->routeIs('dashboard.admin.user')" wire:navigate>Manage User</flux:navlist.item>
                         @endcan
@@ -38,7 +38,7 @@
                     </flux:navlist.group>
                 @endif
 
-                <flux:navlist.group expandable heading="Profil">
+                <flux:navlist.group heading="Profil" class="grid">
                     <flux:navlist.item :href="route('dashboard.tentang-kami')" :current="request()->routeIs('dashboard.tentang-kami')" wire:navigate textWrap="true">Tentang Kami</flux:navlist.item>
 
                     <flux:navlist.item :href="route('dashboard.inti')" :current="request()->routeIs('dashboard.inti')" wire:navigate textWrap="true">Inti</flux:navlist.item>
@@ -47,9 +47,11 @@
 
                 </flux:navlist.group>
 
-                <flux:navlist.item :href="route('dashboard.departemen-biro')" :current="request()->routeIs('dashboard.departemen-biro')" wire:navigate textWrap="true">Departemen & Biro</flux:navlist.item>
+                <flux:navlist.group heading="Struktur Organisasi" class="grid">
+                    <flux:navlist.item :href="route('dashboard.departemen-biro')" :current="request()->routeIs('dashboard.departemen-biro')" wire:navigate textWrap="true">Departemen & Biro</flux:navlist.item>
 
-                <flux:navlist.item :href="route('dashboard.community-committee')" :current="request()->routeIs('dashboard.community-committee')" wire:navigate textWrap="true">Community & Committee</flux:navlist.item>
+                    <flux:navlist.item :href="route('dashboard.community-committee')" :current="request()->routeIs('dashboard.community-committee')" wire:navigate textWrap="true">Community & Committee</flux:navlist.item>
+                </flux:navlist.group>
 
             </flux:navlist>
         </flux:sidebar>
