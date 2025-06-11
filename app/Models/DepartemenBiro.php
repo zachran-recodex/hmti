@@ -3,45 +3,90 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\MorphMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class DepartemenBiro extends Model
 {
+    /**
+     * The attributes that are mass assignable.
+     */
     protected $fillable = [
-        'title',
-        'description',
+        'nama',
         'logo',
-        'division'
+        'deskripsi',
+        'divisi',
     ];
 
-    const DIVISIONS = [
-        'Internal',
-        'PSTI',
-        'Eksternal',
+    /**
+     * The attributes that should be cast.
+     */
+    protected $casts = [
+        'divisi' => 'string',
     ];
 
-    public static function getDivisions()
+    /**
+     * Get the fungsi for the departemen biro.
+     */
+    public function fungsis(): HasMany
     {
-        return self::DIVISIONS;
+        return $this->hasMany(Fungsi::class);
     }
 
-    public function fungsis(): MorphMany
+    /**
+     * Get the program kerja for the departemen biro.
+     */
+    public function programKerjas(): HasMany
     {
-        return $this->morphMany(Fungsi::class, 'fungsiable');
+        return $this->hasMany(ProgramKerja::class);
     }
 
-    public function programKerjas(): MorphMany
+    /**
+     * Get the agenda for the departemen biro.
+     */
+    public function agendas(): HasMany
     {
-        return $this->morphMany(ProgramKerja::class, 'program_kerjaable');
+        return $this->hasMany(Agenda::class);
     }
 
-    public function agendas(): MorphMany
+    /**
+     * Get the anggota for the departemen biro.
+     */
+    public function anggotas(): HasMany
     {
-        return $this->morphMany(Agenda::class, 'agendaable');
+        return $this->hasMany(Anggota::class);
     }
 
-    public function members(): MorphMany
+    /**
+     * Get current members (anggota yang masih aktif).
+     */
+    public function currentAnggota(): HasMany
     {
-        return $this->morphMany(Member::class, 'memberable');
+        return $this->hasMany(Anggota::class)
+            ->whereNull('tahun_selesai')
+            ->orWhere('tahun_selesai', '>=', now()->year);
+    }
+
+    /**
+     * Get kepala departemen (head of department).
+     */
+    public function kepala(): HasMany
+    {
+        return $this->anggotas()->where('jabatan', 'Kepala');
+    }
+
+    /**
+     * Get staff members.
+     */
+    public function staff(): HasMany
+    {
+        return $this->anggotas()->where('jabatan', 'Staff');
+    }
+
+    /**
+     * Scope a query to only include specific divisi.
+     */
+    public function scopeDivisi($query, $divisi)
+    {
+        return $query->where('divisi', $divisi);
     }
 }

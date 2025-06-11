@@ -3,19 +3,41 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\MorphTo;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class ProgramKerja extends Model
 {
+    /**
+     * The attributes that are mass assignable.
+     */
     protected $fillable = [
-        'title',
-        'description',
-        'program_kerjaable_id',
-        'program_kerjaable_type'
+        'judul',
+        'deskripsi',
+        'departemen_biro_id',
     ];
 
-    public function programKerjaable(): MorphTo
+    /**
+     * Get the departemen biro that owns the program kerja.
+     */
+    public function departemenBiro(): BelongsTo
     {
-        return $this->morphTo();
+        return $this->belongsTo(DepartemenBiro::class);
+    }
+
+    /**
+     * Scope a query to only include program kerja from specific departemen biro.
+     */
+    public function scopeByDepartemen($query, $departemenBiroId)
+    {
+        return $query->where('departemen_biro_id', $departemenBiroId);
+    }
+
+    /**
+     * Scope a query to search program kerja by title or description.
+     */
+    public function scopeSearch($query, $term)
+    {
+        return $query->where('judul', 'like', "%{$term}%")
+            ->orWhere('deskripsi', 'like', "%{$term}%");
     }
 }

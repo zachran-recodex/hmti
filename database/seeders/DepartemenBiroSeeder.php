@@ -14,58 +14,58 @@ class DepartemenBiroSeeder extends Seeder
     {
         $departemenBiros = [
             [
-                'title' => 'Departemen Human Resource',
+                'nama' => 'Departemen Human Resource',
                 'logo' => 'departemen-pendidikan.png',
-                'description' => 'Departemen yang bertanggung jawab atas pengembangan pendidikan mahasiswa HMTI',
-                'division' => 'Internal'
+                'deskripsi' => 'Departemen yang bertanggung jawab atas pengembangan pendidikan mahasiswa HMTI',
+                'divisi' => 'Internal'
             ],
             [
-                'title' => 'Departemen Kaderisasi',
+                'nama' => 'Departemen Kaderisasi',
                 'logo' => 'departemen-kominfo.png',
-                'description' => 'Departemen yang mengelola komunikasi dan informasi HMTI',
-                'division' => 'Internal'
+                'deskripsi' => 'Departemen yang mengelola komunikasi dan informasi HMTI',
+                'divisi' => 'Internal'
             ],
             [
-                'title' => 'Departemen Kemahasiswaan',
+                'nama' => 'Departemen Kemahasiswaan',
                 'logo' => 'biro-administrasi.png',
-                'description' => 'Biro yang menangani administrasi dan kesekretariatan HMTI',
-                'division' => 'Internal'
+                'deskripsi' => 'Biro yang menangani administrasi dan kesekretariatan HMTI',
+                'divisi' => 'Internal'
             ],
             [
-                'title' => 'Departemen Akademik',
+                'nama' => 'Departemen Akademik',
                 'logo' => 'departemen-pendidikan.png',
-                'description' => 'Departemen yang bertanggung jawab atas pengembangan pendidikan mahasiswa HMTI',
-                'division' => 'PSTI'
+                'deskripsi' => 'Departemen yang bertanggung jawab atas pengembangan pendidikan mahasiswa HMTI',
+                'divisi' => 'PSTI'
             ],
             [
-                'title' => 'Departemen Generasi Bisnis',
+                'nama' => 'Departemen Generasi Bisnis',
                 'logo' => 'departemen-kominfo.png',
-                'description' => 'Departemen yang mengelola komunikasi dan informasi HMTI',
-                'division' => 'PSTI'
+                'deskripsi' => 'Departemen yang mengelola komunikasi dan informasi HMTI',
+                'divisi' => 'PSTI'
             ],
             [
-                'title' => 'Departemen Riset & Kompetisi',
+                'nama' => 'Departemen Riset & Kompetisi',
                 'logo' => 'biro-administrasi.png',
-                'description' => 'Biro yang menangani administrasi dan kesekretariatan HMTI',
-                'division' => 'PSTI'
+                'deskripsi' => 'Biro yang menangani administrasi dan kesekretariatan HMTI',
+                'divisi' => 'PSTI'
             ],
             [
-                'title' => 'Departemen Komunikasi & Informasi',
+                'nama' => 'Departemen Komunikasi & Informasi',
                 'logo' => 'departemen-pendidikan.png',
-                'description' => 'Departemen yang bertanggung jawab atas pengembangan pendidikan mahasiswa HMTI',
-                'division' => 'Eksternal'
+                'deskripsi' => 'Departemen yang bertanggung jawab atas pengembangan pendidikan mahasiswa HMTI',
+                'divisi' => 'Eksternal'
             ],
             [
-                'title' => 'Biro Dedikasi Masyarakatt',
+                'nama' => 'Biro Dedikasi Masyarakatt',
                 'logo' => 'departemen-kominfo.png',
-                'description' => 'Departemen yang mengelola komunikasi dan informasi HMTI',
-                'division' => 'Eksternal'
+                'deskripsi' => 'Departemen yang mengelola komunikasi dan informasi HMTI',
+                'divisi' => 'Eksternal'
             ],
             [
-                'title' => 'Biro Public Relation',
+                'nama' => 'Biro Public Relation',
                 'logo' => 'biro-administrasi.png',
-                'description' => 'Biro yang menangani administrasi dan kesekretariatan HMTI',
-                'division' => 'Eksternal'
+                'deskripsi' => 'Biro yang menangani administrasi dan kesekretariatan HMTI',
+                'divisi' => 'Eksternal'
             ],
         ];
 

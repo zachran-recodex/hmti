@@ -13,15 +13,14 @@ return new class extends Migration
     {
         Schema::create('departemen_biros', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
-            $table->string('logo');
-            $table->text('description');
-            $table->enum('division', [
-                'Internal',
-                'PSTI',
-                'Eksternal'
-            ]);
+            $table->string('nama');
+            $table->string('logo')->nullable();
+            $table->text('deskripsi')->nullable();
+            $table->enum('divisi', ['Internal', 'PSTI', 'Eksternal']);
             $table->timestamps();
+
+            // Index untuk pencarian berdasarkan divisi
+            $table->index('divisi');
         });
     }
 

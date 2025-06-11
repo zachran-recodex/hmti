@@ -13,11 +13,14 @@ return new class extends Migration
     {
         Schema::create('agendas', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
-            $table->text('description');
-            $table->string('agendaable_type');
-            $table->unsignedBigInteger('agendaable_id');
+            $table->string('judul');
+            $table->text('deskripsi')->nullable();
+            $table->foreignId('departemen_biro_id')->constrained('departemen_biros')->onDelete('cascade');
             $table->timestamps();
+
+            // Index untuk foreign key dan pencarian
+            $table->index('departemen_biro_id');
+            $table->index('judul');
         });
     }
 

@@ -11,14 +11,20 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('fungsis', function (Blueprint $table) {
+        Schema::create('anggotas', function (Blueprint $table) {
             $table->id();
-            $table->string('judul');
+            $table->string('nama');
+            $table->enum('jabatan', ['Kepala', 'Staff']);
+            $table->string('foto')->nullable();
+            $table->year('tahun_mulai')->default(2022);
+            $table->year('tahun_selesai')->nullable();
             $table->foreignId('departemen_biro_id')->constrained('departemen_biros')->onDelete('cascade');
             $table->timestamps();
 
-            // Index untuk foreign key
+            // Index untuk foreign key dan pencarian
             $table->index('departemen_biro_id');
+            $table->index('jabatan');
+            $table->index(['tahun_mulai', 'tahun_selesai']);
         });
     }
 
@@ -27,6 +33,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('fungsis');
+        Schema::dropIfExists('anggotas');
     }
 };
