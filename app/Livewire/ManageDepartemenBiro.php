@@ -2,297 +2,498 @@
 
 namespace App\Livewire;
 
-use App\Models\Member;
-use Livewire\Component;
 use App\WithNotification;
-use Livewire\WithFileUploads;
 use App\Models\DepartemenBiro;
-use Illuminate\Support\Facades\DB;
+use App\Models\Fungsi;
+use App\Models\ProgramKerja;
+use App\Models\Agenda;
+use App\Models\Anggota;
+use Livewire\Component;
+use Livewire\WithFileUploads;
+use Livewire\WithPagination;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Validation\Rule;
 
 class ManageDepartemenBiro extends Component
 {
-    use WithNotification, WithFileUploads;
+    use WithFileUploads, WithPagination, WithNotification;
 
-    // Form Properties
-    public $departemenbiroId;
-    public $title;
-    public $description;
-    public $logo;
-    public $temp_logo;
-    public $logoPreview;
-    public $fungsis = [];
-    public $programKerjas = [];
-    public $agendas = [];
-    public $members = [];
+    // Main DepartemenBiro properties
+    public $selectedDepartemen = null;
+    public $nama = '';
+    public $logo = null;
+    public $logoPath = '';
+    public $deskripsi = '';
+    public $divisi = '';
 
-    public $newFungsi = ['title' => ''];
-    public $newProgramKerja = ['title' => '', 'description' => ''];
-    public $newAgenda = ['title' => '', 'description' => ''];
-    public $newMember = ['name' => '', 'position' => '', 'temp_photo' => null];
+    // Related entity properties
+    public $activeTab = 'fungsi';
+    public $showModal = false;
+    public $modalType = '';
+    public $editingId = null;
 
-    // UI State Properties
-    public $isEditing = false;
-    public $showFormModal = false;
+    // Fungsi properties
+    public $fungsiJudul = '';
 
-    protected function rules()
+    // Program Kerja properties
+    public $programKerjaJudul = '';
+    public $programKerjaDeskripsi = '';
+
+    // Agenda properties
+    public $agendaJudul = '';
+    public $agendaDeskripsi = '';
+
+    // Anggota properties
+    public $anggotaNama = '';
+    public $anggotaJabatan = '';
+    public $anggotaFoto = null;
+    public $anggotaFotoPath = '';
+    public $anggotaTahunMulai = '';
+    public $anggotaTahunSelesai = '';
+
+    // Search and filter
+    public $search = '';
+    public $filterDivisi = '';
+    
+    // Sorting
+    public $sortField = 'nama';
+    public $sortDirection = 'asc';
+    
+    // Delete confirmation
+    public $selectedForDelete = null;
+
+    protected $queryString = ['search', 'filterDivisi', 'sortField', 'sortDirection'];
+
+    public function mount()
+    {
+        $this->anggotaTahunMulai = now()->year;
+    }
+
+    // Validation Rules
+    protected function getDepartemenRules()
     {
         return [
-            'title' => 'required|string|max:255|unique:departemen_biros,title,' . $this->departemenbiroId,
-            'description' => 'required|string',
-            'temp_logo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:1024|dimensions:min_width=100,min_height=100',
-            'fungsis.*.title' => 'required|string|max:255',
-            'programKerjas.*.title' => 'required|string|max:255',
-            'programKerjas.*.description' => 'required|string',
-            'agendas.*.title' => 'required|string|max:255',
-            'agendas.*.description' => 'required|string',
-            'members.*.name' => 'required|string|max:255',
-            'members.*.position' => 'required|string|in:' . implode(',', Member::getPositions()),
-            'members.*.temp_photo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:1024',
-            'newMember.temp_photo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:1024',
+            'nama' => 'required|string|max:255',
+            'logo' => 'nullable|image|max:2048',
+            'deskripsi' => 'nullable|string',
+            'divisi' => ['required', Rule::in(['Internal', 'PSTI', 'Eksternal'])],
         ];
     }
 
-    public function addFungsi()
+    protected function getFungsiRules()
     {
-        $this->validate([
-            'newFungsi.title' => 'required|string|max:255',
-        ]);
-
-        $this->fungsis[] = $this->newFungsi;
-        $this->newFungsi = ['title' => ''];
+        return [
+            'fungsiJudul' => 'required|string|max:255',
+        ];
     }
 
-    public function addProgramKerja()
+    protected function getProgramKerjaRules()
     {
-        $this->validate([
-            'newProgramKerja.title' => 'required|string|max:255',
-            'newProgramKerja.description' => 'required|string',
-        ]);
-
-        $this->programKerjas[] = $this->newProgramKerja;
-        $this->newProgramKerja = ['title' => '', 'description' => ''];
+        return [
+            'programKerjaJudul' => 'required|string|max:255',
+            'programKerjaDeskripsi' => 'nullable|string',
+        ];
     }
 
-    public function addAgenda()
+    protected function getAgendaRules()
     {
-        $this->validate([
-            'newAgenda.title' => 'required|string|max:255',
-            'newAgenda.description' => 'required|string',
-        ]);
-
-        $this->agendas[] = $this->newAgenda;
-        $this->newAgenda = ['title' => '', 'description' => ''];
+        return [
+            'agendaJudul' => 'required|string|max:255',
+            'agendaDeskripsi' => 'nullable|string',
+        ];
     }
 
-    public function addMember()
+    protected function getAnggotaRules()
     {
-        $this->validate([
-            'newMember.name' => 'required|string|max:255',
-            'newMember.position' => 'required|string|in:' . implode(',', Member::getPositions()),
-            'newMember.temp_photo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:1024',
-        ]);
+        return [
+            'anggotaNama' => 'required|string|max:255',
+            'anggotaJabatan' => ['required', Rule::in(['Kepala', 'Staff'])],
+            'anggotaFoto' => 'nullable|image|max:2048',
+            'anggotaTahunMulai' => 'required|integer|min:2020|max:' . (now()->year + 5),
+            'anggotaTahunSelesai' => 'nullable|integer|min:' . $this->anggotaTahunMulai . '|max:' . (now()->year + 10),
+        ];
+    }
 
-        $memberData = [
-            'name' => $this->newMember['name'],
-            'position' => $this->newMember['position'],
-            'temp_photo' => null
+    // Main DepartemenBiro CRUD Operations
+    public function createDepartemen()
+    {
+        $this->resetDepartemenForm();
+        $this->showModal = true;
+        $this->modalType = 'create-departemen';
+    }
+    
+    public function confirmDelete($id)
+    {
+        $this->selectedForDelete = $id;
+    }
+
+    public function editDepartemen($id)
+    {
+        $departemen = DepartemenBiro::findOrFail($id);
+        $this->editingId = $id;
+        $this->nama = $departemen->nama;
+        $this->logoPath = $departemen->logo;
+        $this->deskripsi = $departemen->deskripsi;
+        $this->divisi = $departemen->divisi;
+
+        $this->showModal = true;
+        $this->modalType = 'edit-departemen';
+    }
+
+    public function saveDepartemen()
+    {
+        $this->validate($this->getDepartemenRules());
+
+        $data = [
+            'nama' => $this->nama,
+            'deskripsi' => $this->deskripsi,
+            'divisi' => $this->divisi,
         ];
 
-        if ($this->newMember['temp_photo']) {
-            $memberData['temp_photo'] = $this->newMember['temp_photo'];
-        }
-
-        $this->members[] = $memberData;
-        $this->newMember = ['name' => '', 'position' => '', 'temp_photo' => null];
-    }
-
-    private function handleMemberPhoto($photo)
-    {
-        if (!$photo) {
-            return null;
-        }
-        return $photo->store('members', 'public');
-    }
-
-    public function removeFungsi($index)
-    {
-        unset($this->fungsis[$index]);
-        $this->fungsis = array_values($this->fungsis);
-    }
-
-    public function removeProgramKerja($index)
-    {
-        unset($this->programKerjas[$index]);
-        $this->programKerjas = array_values($this->programKerjas);
-    }
-
-    public function removeAgenda($index)
-    {
-        unset($this->agendas[$index]);
-        $this->agendas = array_values($this->agendas);
-    }
-
-    public function removeMember($index)
-    {
-        unset($this->members[$index]);
-        $this->members = array_values($this->members);
-    }
-
-    public function edit($id)
-    {
-        $departemenBiro = DepartemenBiro::with(['fungsis', 'programKerjas', 'agendas', 'members'])
-            ->findOrFail($id);
-
-        $this->isEditing = true;
-        $this->departemenbiroId = $id;
-        $this->title = $departemenBiro->title;
-        $this->description = $departemenBiro->description;
-        $this->logo = $departemenBiro->logo;
-
-        $this->fungsis = $departemenBiro->fungsis->map(function($fungsi) {
-            return ['title' => $fungsi->title];
-        })->toArray();
-
-        $this->programKerjas = $departemenBiro->programKerjas->map(function($programKerja) {
-            return ['title' => $programKerja->title, 'description' => $programKerja->description];
-        })->toArray();
-
-        $this->agendas = $departemenBiro->agendas->map(function($agenda) {
-            return ['title' => $agenda->title, 'description' => $agenda->description];
-        })->toArray();
-
-        $this->members = $departemenBiro->members->map(function($member) {
-            return ['name' => $member->name, 'position' => $member->position, 'temp_photo' => null];
-        })->toArray();
-
-        $this->showFormModal = true;
-    }
-
-    public function updated($propertyName)
-    {
-        $this->validateOnly($propertyName);
-    }
-
-    public function updatedTempLogo()
-    {
-        try {
-            if ($this->temp_logo) {
-                $this->logoPreview = $this->temp_logo->temporaryUrl();
+        // Handle logo upload
+        if ($this->logo) {
+            // Delete old logo if editing
+            if ($this->editingId && $this->logoPath) {
+                Storage::disk('public')->delete($this->logoPath);
             }
-        } catch (\Exception $e) {
-            // Handle the error if needed
+
+            $data['logo'] = $this->logo->store('departemen-logos', 'public');
+        }
+
+        if ($this->editingId) {
+            DepartemenBiro::find($this->editingId)->update($data);
+            session()->flash('message', 'Departemen berhasil diperbarui!');
+        } else {
+            DepartemenBiro::create($data);
+            session()->flash('message', 'Departemen berhasil dibuat!');
+        }
+
+        $this->closeModal();
+    }
+
+    public function deleteDepartemen($id)
+    {
+        $departemen = DepartemenBiro::findOrFail($id);
+
+        // Delete logo file
+        if ($departemen->logo) {
+            Storage::disk('public')->delete($departemen->logo);
+        }
+
+        $departemen->delete();
+        session()->flash('message', 'Departemen berhasil dihapus!');
+
+        // Reset selected departemen if it was deleted
+        if ($this->selectedDepartemen && $this->selectedDepartemen->id === $id) {
+            $this->selectedDepartemen = null;
         }
     }
 
-    public function resetForm()
+    public function selectDepartemen($id)
     {
-        $this->reset([
-            'departemenbiroId', 'title', 'description', 'temp_logo', 'logoPreview',
-            'fungsis', 'programKerjas', 'agendas', 'members',
-            'newFungsi', 'newProgramKerja', 'newAgenda', 'newMember'
-        ]);
-        $this->resetValidation();
+        $this->selectedDepartemen = DepartemenBiro::with(['fungsis', 'programKerjas', 'agendas', 'anggotas'])->findOrFail($id);
+        $this->activeTab = 'fungsi';
     }
 
-    private function handleLogoUpload()
+    // Related Entity CRUD Operations
+    public function createRelatedEntity($type)
     {
-        if (!$this->temp_logo) {
-            return null;
+        if (!$this->selectedDepartemen) {
+            session()->flash('error', 'Pilih departemen terlebih dahulu!');
+            return;
         }
 
-        return $this->temp_logo->store('departemenBiros', 'public');
+        $this->resetRelatedForm($type);
+        $this->showModal = true;
+        $this->modalType = "create-{$type}";
     }
 
-    private function deleteOldLogo($departemenBiro)
+    public function editRelatedEntity($type, $id)
     {
-        if ($departemenBiro->logo && Storage::disk('public')->exists($departemenBiro->logo)) {
-            Storage::disk('public')->delete($departemenBiro->logo);
+        $this->editingId = $id;
+
+        switch ($type) {
+            case 'fungsi':
+                $entity = Fungsi::findOrFail($id);
+                $this->fungsiJudul = $entity->judul;
+                break;
+
+            case 'program-kerja':
+                $entity = ProgramKerja::findOrFail($id);
+                $this->programKerjaJudul = $entity->judul;
+                $this->programKerjaDeskripsi = $entity->deskripsi;
+                break;
+
+            case 'agenda':
+                $entity = Agenda::findOrFail($id);
+                $this->agendaJudul = $entity->judul;
+                $this->agendaDeskripsi = $entity->deskripsi;
+                break;
+
+            case 'anggota':
+                $entity = Anggota::findOrFail($id);
+                $this->anggotaNama = $entity->nama;
+                $this->anggotaJabatan = $entity->jabatan;
+                $this->anggotaFotoPath = $entity->foto;
+                $this->anggotaTahunMulai = $entity->tahun_mulai;
+                $this->anggotaTahunSelesai = $entity->tahun_selesai;
+                break;
+        }
+
+        $this->showModal = true;
+        $this->modalType = "edit-{$type}";
+    }
+
+    public function saveRelatedEntity($type)
+    {
+        switch ($type) {
+            case 'fungsi':
+                $this->saveFungsi();
+                break;
+            case 'program-kerja':
+                $this->saveProgramKerja();
+                break;
+            case 'agenda':
+                $this->saveAgenda();
+                break;
+            case 'anggota':
+                $this->saveAnggota();
+                break;
         }
     }
 
-    public function save()
+    private function saveFungsi()
     {
-        $this->validate();
+        $this->validate($this->getFungsiRules());
 
-        try {
-            DB::beginTransaction();
+        $data = [
+            'judul' => $this->fungsiJudul,
+            'departemen_biro_id' => $this->selectedDepartemen->id,
+        ];
 
-            $logoPath = $this->handleLogoUpload();
-            $departemenBiro = DepartemenBiro::findOrFail($this->departemenbiroId);
+        if ($this->editingId) {
+            Fungsi::find($this->editingId)->update($data);
+            session()->flash('message', 'Fungsi berhasil diperbarui!');
+        } else {
+            Fungsi::create($data);
+            session()->flash('message', 'Fungsi berhasil ditambahkan!');
+        }
 
-            if ($this->temp_logo) {
-                $this->deleteOldLogo($departemenBiro);
+        $this->refreshSelectedDepartemen();
+        $this->closeModal();
+    }
+
+    private function saveProgramKerja()
+    {
+        $this->validate($this->getProgramKerjaRules());
+
+        $data = [
+            'judul' => $this->programKerjaJudul,
+            'deskripsi' => $this->programKerjaDeskripsi,
+            'departemen_biro_id' => $this->selectedDepartemen->id,
+        ];
+
+        if ($this->editingId) {
+            ProgramKerja::find($this->editingId)->update($data);
+            session()->flash('message', 'Program Kerja berhasil diperbarui!');
+        } else {
+            ProgramKerja::create($data);
+            session()->flash('message', 'Program Kerja berhasil ditambahkan!');
+        }
+
+        $this->refreshSelectedDepartemen();
+        $this->closeModal();
+    }
+
+    private function saveAgenda()
+    {
+        $this->validate($this->getAgendaRules());
+
+        $data = [
+            'judul' => $this->agendaJudul,
+            'deskripsi' => $this->agendaDeskripsi,
+            'departemen_biro_id' => $this->selectedDepartemen->id,
+        ];
+
+        if ($this->editingId) {
+            Agenda::find($this->editingId)->update($data);
+            session()->flash('message', 'Agenda berhasil diperbarui!');
+        } else {
+            Agenda::create($data);
+            session()->flash('message', 'Agenda berhasil ditambahkan!');
+        }
+
+        $this->refreshSelectedDepartemen();
+        $this->closeModal();
+    }
+
+    private function saveAnggota()
+    {
+        $this->validate($this->getAnggotaRules());
+
+        $data = [
+            'nama' => $this->anggotaNama,
+            'jabatan' => $this->anggotaJabatan,
+            'tahun_mulai' => $this->anggotaTahunMulai,
+            'tahun_selesai' => $this->anggotaTahunSelesai,
+            'departemen_biro_id' => $this->selectedDepartemen->id,
+        ];
+
+        // Handle foto upload
+        if ($this->anggotaFoto) {
+            // Delete old foto if editing
+            if ($this->editingId && $this->anggotaFotoPath) {
+                Storage::disk('public')->delete($this->anggotaFotoPath);
             }
 
-            $departemenBiro->update([
-                'title' => $this->title,
-                'description' => $this->description,
-                'logo' => $logoPath ?? $this->logo,
-            ]);
+            $data['foto'] = $this->anggotaFoto->store('anggota-fotos', 'public');
+        }
 
-            // Delete existing relationships
-            $departemenBiro->fungsis()->delete();
-            $departemenBiro->programKerjas()->delete();
-            $departemenBiro->agendas()->delete();
-            $departemenBiro->members()->delete();
+        if ($this->editingId) {
+            Anggota::find($this->editingId)->update($data);
+            session()->flash('message', 'Anggota berhasil diperbarui!');
+        } else {
+            Anggota::create($data);
+            session()->flash('message', 'Anggota berhasil ditambahkan!');
+        }
 
-            // Create Fungsis
-            foreach ($this->fungsis as $fungsi) {
-                $departemenBiro->fungsis()->create([
-                    'title' => $fungsi['title']
-                ]);
-            }
+        $this->refreshSelectedDepartemen();
+        $this->closeModal();
+    }
 
-            // Create Program Kerjas
-            foreach ($this->programKerjas as $programKerja) {
-                $departemenBiro->programKerjas()->create([
-                    'title' => $programKerja['title'],
-                    'description' => $programKerja['description']
-                ]);
-            }
+    public function deleteRelatedEntity($type, $id)
+    {
+        switch ($type) {
+            case 'fungsi':
+                Fungsi::findOrFail($id)->delete();
+                session()->flash('message', 'Fungsi berhasil dihapus!');
+                break;
 
-            // Create Agendas
-            foreach ($this->agendas as $agenda) {
-                $departemenBiro->agendas()->create([
-                    'title' => $agenda['title'],
-                    'description' => $agenda['description']
-                ]);
-            }
+            case 'program-kerja':
+                ProgramKerja::findOrFail($id)->delete();
+                session()->flash('message', 'Program Kerja berhasil dihapus!');
+                break;
 
-            // Create Members
-            foreach ($this->members as $member) {
-                $memberData = [
-                    'name' => $member['name'],
-                    'position' => $member['position']
-                ];
+            case 'agenda':
+                Agenda::findOrFail($id)->delete();
+                session()->flash('message', 'Agenda berhasil dihapus!');
+                break;
 
-                if (isset($member['temp_photo'])) {
-                    $memberData['photo'] = $this->handleMemberPhoto($member['temp_photo']);
+            case 'anggota':
+                $anggota = Anggota::findOrFail($id);
+                if ($anggota->foto) {
+                    Storage::disk('public')->delete($anggota->foto);
                 }
-
-                $departemenBiro->members()->create($memberData);
-            }
-
-            DB::commit();
-
-            $this->notifySuccess('Updated successfully');
-            $this->resetForm();
-            $this->showFormModal = false;
-
-        } catch (\Exception $e) {
-            DB::rollBack();
-            $this->notifyError('Error: ' . $e->getMessage());
+                $anggota->delete();
+                session()->flash('message', 'Anggota berhasil dihapus!');
+                break;
         }
+
+        $this->refreshSelectedDepartemen();
+    }
+
+    // Utility Methods
+    public function setActiveTab($tab)
+    {
+        $this->activeTab = $tab;
+    }
+
+    public function closeModal()
+    {
+        $this->showModal = false;
+        $this->modalType = '';
+        $this->editingId = null;
+        $this->resetDepartemenForm();
+        $this->resetAllRelatedForms();
+    }
+
+    private function resetDepartemenForm()
+    {
+        $this->nama = '';
+        $this->logo = null;
+        $this->logoPath = '';
+        $this->deskripsi = '';
+        $this->divisi = '';
+    }
+
+    private function resetRelatedForm($type)
+    {
+        switch ($type) {
+            case 'fungsi':
+                $this->fungsiJudul = '';
+                break;
+            case 'program-kerja':
+                $this->programKerjaJudul = '';
+                $this->programKerjaDeskripsi = '';
+                break;
+            case 'agenda':
+                $this->agendaJudul = '';
+                $this->agendaDeskripsi = '';
+                break;
+            case 'anggota':
+                $this->anggotaNama = '';
+                $this->anggotaJabatan = '';
+                $this->anggotaFoto = null;
+                $this->anggotaFotoPath = '';
+                $this->anggotaTahunMulai = now()->year;
+                $this->anggotaTahunSelesai = '';
+                break;
+        }
+    }
+
+    private function resetAllRelatedForms()
+    {
+        $this->resetRelatedForm('fungsi');
+        $this->resetRelatedForm('program-kerja');
+        $this->resetRelatedForm('agenda');
+        $this->resetRelatedForm('anggota');
+    }
+
+    private function refreshSelectedDepartemen()
+    {
+        if ($this->selectedDepartemen) {
+            $this->selectedDepartemen = DepartemenBiro::with(['fungsis', 'programKerjas', 'agendas', 'anggotas'])
+                ->find($this->selectedDepartemen->id);
+        }
+    }
+
+    public function sortBy($field)
+    {
+        if ($this->sortField === $field) {
+            $this->sortDirection = $this->sortDirection === 'asc' ? 'desc' : 'asc';
+        } else {
+            $this->sortField = $field;
+            $this->sortDirection = 'asc';
+        }
+        
+        $this->resetPage();
+    }
+
+    public function clearFilters()
+    {
+        $this->search = '';
+        $this->filterDivisi = '';
+        $this->resetPage();
     }
 
     public function render()
     {
-        $departemenBiros = DepartemenBiro::orderBy('created_at', 'desc')
-            ->get();
+        $departemenBiros = DepartemenBiro::query()
+            ->withCount(['anggotas', 'fungsis', 'programKerjas', 'agendas'])
+            ->when($this->search, function ($query) {
+                $query->where('nama', 'like', '%' . $this->search . '%')
+                    ->orWhere('deskripsi', 'like', '%' . $this->search . '%');
+            })
+            ->when($this->filterDivisi, function ($query) {
+                $query->where('divisi', $this->filterDivisi);
+            })
+            ->orderBy($this->sortField, $this->sortDirection)
+            ->paginate(10);
 
         return view('livewire.manage-departemen-biro', [
-            'departemenBiros' => $departemenBiros
+            'departemenBiros' => $departemenBiros,
+            'divisiOptions' => ['Internal', 'PSTI', 'Eksternal'],
+            'jabatanOptions' => ['Kepala', 'Staff'],
         ]);
     }
 }

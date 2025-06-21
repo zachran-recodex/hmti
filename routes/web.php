@@ -94,7 +94,7 @@ Route::middleware(['auth', 'can:access dashboard'])->group(function () {
 
     Route::redirect('settings', 'settings/profil');
 
-    Volt::route('settings/profil', 'settings.profil')->name('settings.profil');
+    Volt::route('settings/profil', 'settings.profile')->name('settings.profil');
     Volt::route('settings/password', 'settings.password')->name('settings.password');
     Volt::route('settings/appearance', 'settings.appearance')->name('settings.appearance');
 });
